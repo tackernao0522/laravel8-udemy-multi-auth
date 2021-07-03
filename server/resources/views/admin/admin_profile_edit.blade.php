@@ -16,7 +16,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col">
-                        <form novalidate="">
+                        <form method="POST" action="{{ route('admin.profile.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -45,13 +45,13 @@
                                             <div class="form-group">
                                                 <h5>プロフィール画像 <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="file" name="profile_photo_path" class="form-control" required="" id="image">
+                                                    <input type="file" name="profile_photo_path" class="form-control" id="image">
                                                 </div>
                                             </div>
                                         </div> <!-- end cold md 6 -->
 
                                         <div class="col-md-6">
-                                            <img id="showImage" src="{{ (!empty($editData->profile_photo_path)) ? url('upload/admin_images/' . $editData->profile_photo_path) : url('upload/no_image.jpg') }}" style="width: 100px; height: 100px">
+                                            <img id="showImage" src="{{ (!empty($editData->profile_photo_path)) ? Storage::disk('s3')->url("admin-profile/{$editData->profile_photo_path}") : url('upload/no_image.jpg') }}" style="width: 100px; height: 100px">
                                         </div> <!-- end cold md 6 -->
                                     </div> <!-- end row -->
 

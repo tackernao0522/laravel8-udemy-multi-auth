@@ -14,7 +14,7 @@
                     <a href="{{ route('admin.profile.edit') }}" class="btn btn-rounded btn-success">プロフィール編集</a>
                 </div>
                 <div class="widget-user-image" style="margin-top: 60px">
-                    <img class="rounded-circle" src="{{ (!empty($adminData->profile_photo_path)) ? url('upload/admin_images/' . $adminData->profile_photo_path) : url('upload/no_image.jpg') }}" alt="User Avatar">
+                    <img class="rounded-circle" src="{{ (!empty($adminData->profile_photo_path)) ? Storage::disk('s3')->url("admin-profile/{$adminData->profile_photo_path}") : url('upload/no_image.jpg') }}" alt="User Avatar">
                 </div>
                 <div class="box-footer" style="margin-top: 60px">
                     <div class="row">
