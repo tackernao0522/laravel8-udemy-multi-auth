@@ -40,7 +40,12 @@ class AdminProfileController extends Controller
 
         $data->save();
 
-        return redirect()->route('admin.profile');
+        $nofification = array(
+            'message' => '管理者プロフィールを更新しました。',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.profile')->with($nofification);
     }
 
     private function saveImage(UploadedFile $file): string
