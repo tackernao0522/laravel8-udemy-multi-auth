@@ -5,9 +5,9 @@
                 <a class="nav-link" href="javascript:void(0)">FAQ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Purchase Now</a>
+                <a class="nav-link" href="https://taka-project.work">www.demofun</a>
             </li>
         </ul>
     </div>
-    &copy; 2020 <a href="#">Psd to Html Expert</a>. All Rights Reserved.
+    &copy; 2020 <a href="#">Easy Shop</a>. All Rights Reserved.
 </footer>
