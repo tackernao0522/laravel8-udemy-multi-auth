@@ -11,7 +11,7 @@
                 <div class="widget-user-header bg-black">
                     <h3 class="widget-user-username">管理者名：{{ $adminData->name }}</h3>
                     <h6 class="widget-user-desc">管理者Email：{{ $adminData->email }}</h6>
-                    <a href="" class="btn btn-rounded btn-success">プロフィール編集</a>
+                    <a href="{{ route('admin.profile.edit') }}" class="btn btn-rounded btn-success">プロフィール編集</a>
                 </div>
                 <div class="widget-user-image" style="margin-top: 60px">
                     <img class="rounded-circle" src="{{ (!empty($adminData->profile_photo_path)) ? url('upload/admin_images/' . $adminData->profile_photo_path) : url('upload/no_image.jpg') }}" alt="User Avatar">
