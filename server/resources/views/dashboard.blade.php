@@ -8,9 +8,9 @@
                 <img class="card-img-top" style="border-radius: 50%" src="{{ (!empty($editData->profile_photo_path)) ? Storage::disk('s3')->url("user-profile/{$editData->profile_photo_path}") : url('upload/no_image.jpg') }}" alt="プロフィール画像" height="100%" width="100%"><br><br>
                 <ul class="list-group list-group-flush">
                     <a href="" class="btn btn-primary btn-sm btn-block">Home</a>
-                    <a href="" class="btn btn-primary btn-sm btn-block">プロフィール更新</a>
+                    <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">プロフィール更新</a>
                     <a href="" class="btn btn-primary btn-sm btn-block">パスワード変更</a>
-                    <a href="" class="btn btn-danger btn-sm btn-block">ログアウト</a>
+                    <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">ログアウト</a>
                 </ul>
             </div> <!-- end col-md-2 -->
 

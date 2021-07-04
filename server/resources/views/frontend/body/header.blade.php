@@ -11,7 +11,7 @@
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
                         @auth
-                        <li><a href="{{ route('login') }}"><i class="icon fa fa-user"></i>ユーザープロフィール</a></li>
+                        <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>ユーザープロフィール</a></li>
                         @else
                         <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>ログイン/新規登録</a></li>
                         @endauth
