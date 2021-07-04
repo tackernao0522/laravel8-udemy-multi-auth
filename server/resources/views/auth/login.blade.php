@@ -47,30 +47,56 @@
 
                 <!-- create a new account -->
                 <div class="col-md-6 col-sm-6 create-new-account">
-                    <h4 class="checkout-subtitle">Create a new account</h4>
+                    <h4 class="checkout-subtitle">新規ユーザー登録</h4>
                     <p class="text title-tag-line">Create your new account.</p>
-                    <form class="register-form outer-top-xs" role="form">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail2">
+                            <label class="info-title" for="exampleInputEmail1">ユーザー名 <span>*</span></label>
+                            <input type="text" id="name" name="name" class="form-control unicase-form-control text-input" value="{{ old('name') }}">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+                            <label class="info-title" for="exampleInputEmail2">メールアドレス <span>*</span></label>
+                            <input type="email" id="email" name="email" class="form-control unicase-form-control text-input" value="{{ old('email') }}">
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+                            <label class="info-title" for="exampleInputEmail1">電話番号 <span>*</span></label>
+                            <input type="text" id="phone" name="phone" class="form-control unicase-form-control text-input" value="{{ old('phone') }}">
+                            @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+                            <label class="info-title" for="exampleInputEmail1">パスワード <span>*</span></label>
+                            <input type="password" id="password" name="password" class="form-control unicase-form-control text-input">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">Confirm Password <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+                            <label class="info-title" for="exampleInputEmail1">パスワード(確認) <span>*</span></label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control unicase-form-control text-input">
+                            @error('password_confirmation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
+                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button">新規登録</button>
                     </form>
 
 

@@ -123,6 +123,7 @@ return [
         'brand_image' => 'ブランドロゴ',
         'oldpassword' => '現在のパスワード',
         'password' => 'パスワード',
+        'phone' => '電話番号',
     ],
 
 ];
