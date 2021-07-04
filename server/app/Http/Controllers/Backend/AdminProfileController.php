@@ -7,6 +7,8 @@ use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 
@@ -46,6 +48,33 @@ class AdminProfileController extends Controller
         );
 
         return redirect()->route('admin.profile')->with($nofification);
+    }
+
+    public function adminChangePassword()
+    {
+        return view('admin.admin_change_password');
+    }
+
+    public function AdminUpdateChangePassword(Request $request)
+    {
+        $validateData = $request->validate([
+            'oldpassword' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $hashedPassword = Admin::find(1)->password;
+
+        if (Hash::check($request->oldpassword, $hashedPassword)) {
+            $admin = Admin::find(1);
+            $admin->password = Hash::make($request->password);
+            $admin->save();
+            Auth::logout();
+
+            return redirect()->route('admin.logout');
+        } else {
+            return redirect()->back()
+                ->with('error', '現在のパスワードが一致しません。');
+        }
     }
 
     private function saveImage(UploadedFile $file): string
