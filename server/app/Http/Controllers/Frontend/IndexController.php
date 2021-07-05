@@ -58,6 +58,14 @@ class IndexController extends Controller
         return redirect()->route('dashboard')->with($nofification);
     }
 
+    public function userChangePassword()
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        return view('frontend.profile.change_password', compact('user'));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();

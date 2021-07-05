@@ -20,42 +20,33 @@
 
             <div class="col-md-6">
                 <div class="card">
-                    <h3 class="text-center"><span class="text-danger">Hi.... </span><strong>{{ Auth::user()->name }}</strong> Update Your Profile</h3>
+                    <h3 class="text-center"><span class="text-danger">パスワードの変更 </span><strong></strong></h3>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('user.profile.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">ユーザー名 <span> </span></label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
-                                @error('name')
+                                <label class="info-title" for="exampleInputEmail2">現在のパスワード <span class="text-danger">* </span></label>
+                                <input type="password" id="current_password" name="oldpassword" class="form-control">
+                                @error('oldpassword')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">メールアドレス <span> </span></label>
-                                <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}">
-                                @error('email')
+                                <label class="info-title" for="exampleInputEmail2">新しいパスワード <span class="text-danger">* </span></label>
+                                <input type="password" id="password" name="password" class="form-control">
+                                @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">電話番号 <span> </span></label>
-                                <input type="text" name="phone" class="form-control" value="{{ old('phone', $user->phone) }}">
-                                @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">プロフィール画像 <span> </span></label>
-                                <input type="file" name="profile_photo_path" class="form-control">
-                                @error('profile_photo_path')
+                                <label class="info-title" for="exampleInputEmail2">新しいパスワード(確認) <span class="text-danger">* </span></label>
+                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
