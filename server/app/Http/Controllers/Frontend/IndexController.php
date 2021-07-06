@@ -66,6 +66,32 @@ class IndexController extends Controller
         return view('frontend.profile.change_password', compact('user'));
     }
 
+    public function userPasswordUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'oldpassword' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+
+        if (Hash::check($request->oldpassword, $hashedPassword)) {
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->password);
+            $user->save();
+            Auth::logout();
+
+            return redirect()->route('user.logout');
+        } else {
+            $nofification = array(
+                'message' => '現在のパスワードが一致しません。',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()
+                ->with($nofification);
+        }
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
