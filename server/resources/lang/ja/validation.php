@@ -119,7 +119,7 @@ return [
     'attributes' => [
         'date' => '作成日',
         'category_name' => 'カテゴリー名',
-        'brand_name' => 'ブランド名',
+        'brand_name_ja' => 'ブランド名',
         'brand_image' => 'ブランドロゴ',
         'oldpassword' => '現在のパスワード',
         'password' => 'パスワード',
