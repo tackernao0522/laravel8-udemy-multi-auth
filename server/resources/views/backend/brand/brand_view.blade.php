@@ -31,7 +31,7 @@
                                         <td>{{ $item->brand_name_en }}</td>
                                         <td><img src="{{ Storage::disk('s3')->url("brands/{$item->brand_image}") }}" style="height:40px; width:70px"></td>
                                         <td>
-                                            <a href="{{ url('brand/edit/'.$item->id) }}" class="btn btn-info">編集</a>
+                                            <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info">編集</a>
                                             <a href="{{ url('brand/delete/'.$item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger">削除</a>
                                         </td>
                                     </tr>
