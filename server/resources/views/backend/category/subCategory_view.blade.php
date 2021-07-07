@@ -27,12 +27,13 @@
                                 <tbody>
                                     @foreach($subCategories as $item)
                                     <tr>
-                                        <td>{{ $item->category_id }}</td>
+                                        <td>{{ $item->category->category_name_ja }}</td>
+                                        {{-- <td>{{ $item['category']['category_name_ja'] }}</td> --}}
                                         <td>{{ $item->subCategory_name_ja }}</td>
                                         <td>{{ $item->subCategory_name_en }}</td>
                                         <td>
                                             <a href="{{ route('subCategory.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{-- route('subCategory.delete', $item->id) --}}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('subCategory.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
