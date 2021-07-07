@@ -116,4 +116,37 @@ class SubCategoryController extends Controller
 
         return json_encode($subCat);
     }
+
+    public function subSubCategoryStore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+            'subCategory_id' => 'required',
+            'subSubCategory_name_ja' => 'required|unique:sub_sub_categories',
+            'subSubCategory_name_en' => 'required|unique:sub_sub_categories',
+        ], [
+            'category_id.required' => 'メインカテゴリーを選択してください。(Please select Any option.)',
+            'subCategory_id.required' => 'サブカテゴリーを選択してください。(Please select Any option.)',
+            'subSubCategory_name_en.required' => 'Input G-ChildCategory English Name.',
+            'subSubCategory_name_en.unique' => 'The G-ChildCategory name ja has already been taken.',
+        ]);
+
+        SubSubCategory::insert([
+            'category_id' => $request->category_id,
+            'subCategory_id' => $request->subCategory_id,
+            'subSubCategory_name_ja' => $request->subSubCategory_name_ja,
+            'subSubCategory_name_en' => $request->subSubCategory_name_en,
+            'subSubCategory_slug_ja' => str_replace(' ', '-', $request->subSubCategory_name_ja),
+            'subSubCategory_slug_en' => strtolower(str_replace(' ', '-', $request->subSubCategory_name_en)),
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => '孫カテゴリーを作成しました。(G-ChildCategory Inserted Successfully)',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
 }

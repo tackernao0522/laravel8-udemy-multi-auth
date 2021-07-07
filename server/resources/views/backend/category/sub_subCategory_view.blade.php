@@ -58,7 +58,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('subCategoy.store') }}">
+                            <form method="POST" action="{{ route('subSubCategoy.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>メインカテゴリー <span class="text-danger">*</span></h5>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>G-childCategory English <span class="text-danger">*</span></h5>
+                                    <h5>G-ChildCategory English <span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" name="subSubCategory_name_en" class="form-control" value="{{ old('subSubCategory_name_en') }}">
                                         @error('subSubCategory_name_en')
@@ -127,7 +127,7 @@
             var category_id = $(this).val();
             if (category_id) {
                 $.ajax({
-                    url: "{{  url('/category/subCategory/ajax') }}/" + category_id,
+                    url: "{{ url('/category/subCategory/ajax') }}/" + category_id,
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
