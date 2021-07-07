@@ -10,7 +10,7 @@
             <div class="col-8">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">カテゴリーリスト</h3>
+                        <h3 class="box-title">サブカテゴリーリスト</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -18,21 +18,22 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>カテゴリーアイコン (Icon)</th>
-                                        <th>カテゴリー名 (日本語)</th>
-                                        <th>Category (English)</th>
+                                        <th>カテゴリー名</th>
+                                        <th>サブカテゴリー名 (日本語)</th>
+                                        <th>SubCategory (English)</th>
                                         <th>編集／削除</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $item)
+                                    @foreach($subSubCategories as $item)
                                     <tr>
-                                        <td><span><i class="{{ $item->category_icon }}"></i></span></td>
-                                        <td>{{ $item->category_name_ja }}</td>
-                                        <td>{{ $item->category_name_en }}</td>
+                                        <td>{{ $item->category->category_name_ja }}</td>
+                                        {{-- <td>{{ $item['category']['category_name_ja'] }}</td> --}}
+                                        <td>{{ $item->subCategory_name_ja }}</td>
+                                        <td>{{ $item->subCategory_name_en }}</td>
                                         <td width="30%">
-                                            <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('category.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('subCategory.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('subCategory.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -50,36 +51,41 @@
             <div class="col-4">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">カテゴリー作成</h3>
+                        <h3 class="box-title">サブカテゴリー作成</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('categoy.store') }}">
+                            <form method="POST" action="{{ route('subCategoy.store') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <h5>カテゴリー名 <span class="text-danger">*</span></h5>
+                                    <h5>メインカテゴリー <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="category_name_ja" class="form-control" value="{{ old('category_name_ja') }}">
-                                        @error('category_name_ja')
+                                        <select name="category_id" class="form-control">
+                                            <option value="" selected="" disabled="">メインカテゴリー</option>
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected': '' }}>{{ $category->category_name_ja }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('category_id')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>Category Name (English) <span class="text-danger">*</span></h5>
+                                    <h5>サブカテゴリー名 <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"name="category_name_en" class="form-control"  value="{{ old('category_name_en') }}">
-                                        @error('category_name_en')
+                                        <input type="text" name="subCategory_name_ja" class="form-control" value="{{ old('subCategory_name_ja') }}">
+                                        @error('subCategory_name_ja')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>カテゴリーアイコン(Icon) <span class="text-danger">*</span></h5>
+                                    <h5>SubCategory English <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"name="category_icon" class="form-control"  value="{{ old('category_icon') }}">
-                                        @error('category_icon')
+                                        <input type="text" name="subCategory_name_en" class="form-control" value="{{ old('subCategory_name_en') }}">
+                                        @error('subCategory_name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
