@@ -35,13 +35,6 @@ class BrandController extends Controller
         ]);
 
         $fileName = $this->saveImage($request->file('brand_image'));
-        // $brand->brand_image = $fileName;
-
-        // $brand = new Brand();
-        // $brand->brand_name = $request->brand_name;
-        // $brand->brand_image = $fileName;
-        // $brand->created_at = Carbon::now();
-        // $brand->save();
 
         Brand::insert([
             'brand_name_ja' => $request->brand_name_ja,
@@ -99,6 +92,21 @@ class BrandController extends Controller
         );
 
         return redirect()->route('all.brand')
+            ->with($notification);
+    }
+
+    public function brandDelete($id)
+    {
+        $brand = Brand::find($id);
+        Storage::disk('s3')->delete('/brands/' . $brand->brand_image);
+        $brand->delete();
+
+        $notification = array(
+            'message' => 'ブランド：' . $brand->brand_name_ja . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
             ->with($notification);
     }
 
