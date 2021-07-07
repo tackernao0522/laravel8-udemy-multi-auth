@@ -31,8 +31,8 @@
                                         <td>{{ $item->category_name_ja }}</td>
                                         <td>{{ $item->category_name_en }}</td>
                                         <td>
-                                            <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('category.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{-- route('category.edit', $item->id) --}}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{-- route('category.delete', $item->id) --}}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -55,7 +55,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('brand.store') }}">
+                            <form method="POST" action="{{ route('categoy.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>カテゴリー名 <span class="text-danger">*</span></h5>

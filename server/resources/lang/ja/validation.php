@@ -124,6 +124,7 @@ return [
         'oldpassword' => '現在のパスワード',
         'password' => 'パスワード',
         'phone' => '電話番号',
+        'category_name_ja' => 'カテゴリー名',
     ],
 
 ];

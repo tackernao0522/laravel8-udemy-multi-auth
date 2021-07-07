@@ -22,7 +22,6 @@ class BrandController extends Controller
 
     public function brandStore(Request $request)
     {
-
         $validatedData = $request->validate([
             'brand_name_ja' => 'required|unique:brands',
             'brand_name_en' => 'required|unique:brands',
@@ -46,7 +45,7 @@ class BrandController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'ブランドを作成しました。(Brand Inserred Successfully)',
+            'message' => 'ブランドを作成しました。(Brand Inserted Successfully)',
             'alert-type' => 'success',
         );
 
