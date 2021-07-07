@@ -46,4 +46,53 @@ class CategoryController extends Controller
         return redirect()->back()
             ->with($notification);
     }
+
+    public function categoryEdit($id)
+    {
+        $category = Category::findOrFail($id);
+
+        return view('backend.category.category_edit', compact('category'));
+    }
+
+    public function categoryUpdate(Request $request, $id)
+    {
+        $category = Category::find($id);
+        $validatedData = $request->validate([
+            'category_name_ja' => 'required',
+            'category_name_en' => 'required',
+            'category_icon' => 'required',
+        ], [
+            'category_name_en.required' => 'Input Category English Name.',
+            'category_icon.required' => 'カテゴリーアイコンは必須です。(Input Category Icon.)',
+        ]);
+
+        $category->category_name_ja = $request->category_name_ja;
+        $category->category_name_en = $request->category_name_en;
+        $category->category_slug_ja = str_replace(' ', '-', $request->category_name_ja);
+        $category->category_slug_en = strtolower(str_replace(' ', '-', $request->category_name_en));
+        $category->category_icon = $request->category_icon;
+        $category->save();
+
+        $notification = array(
+            'message' => 'カテゴリーID：' . $category->id . 'を更新しました(Category Updated Successfully)。',
+            'alert-type' => 'info',
+        );
+
+        return redirect()->route('all.category')
+            ->with($notification);
+    }
+
+    public function categoryDelete($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+
+        $notification = array(
+            'message' => 'カテゴリー：' . $category->category_name_ja . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
 }
