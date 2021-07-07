@@ -32,7 +32,7 @@
                                         <td>{{ $item->subCategory_name_en }}</td>
                                         <td>
                                             <a href="{{ route('subCategory.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('subCategory.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{-- route('subCategory.delete', $item->id) --}}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -55,19 +55,20 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{-- route('subCategoy.store') --}}">
+                            <form method="POST" action="{{ route('subCategoy.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>メインカテゴリー <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <select name="select" id="select" required="" class="form-control">
-                                            <option value="">Select Main Category</option>
-                                            <option value="1">India</option>
-                                            <option value="2">USA</option>
-                                            <option value="3">UK</option>
-                                            <option value="4">Canada</option>
-                                            <option value="5">Dubai</option>
+                                        <select name="category_id" class="form-control">
+                                            <option value="" selected="" disabled="">メインカテゴリー</option>
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected': '' }}>{{ $category->category_name_ja }}</option>
+                                            @endforeach
                                         </select>
+                                        @error('category_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -80,10 +81,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>SubCategory Name (English) <span class="text-danger">*</span></h5>
+                                    <h5>SubCategory English <span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" name="subCategory_name_en" class="form-control" value="{{ old('subCategory_name_en') }}">
-                                        @error('category_name_en')
+                                        @error('subCategory_name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

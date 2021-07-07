@@ -125,6 +125,8 @@ return [
         'password' => 'パスワード',
         'phone' => '電話番号',
         'category_name_ja' => 'カテゴリー名',
+        'subCategory_name_ja' => 'サブカテゴリー名',
+        'category_id' => 'メインカテゴリー',
     ],
 
 ];
