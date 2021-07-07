@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 
 class SubCategoryController extends Controller
 {
@@ -97,5 +98,14 @@ class SubCategoryController extends Controller
 
         return redirect()->back()
             ->with($notification);
+    }
+
+    // That for SUB SUB->SUBCATEGORY
+    public function subSubCategoryView()
+    {
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+        $subSubCategories = SubSubCategory::latest()->get();
+
+        return view('backend.category.sub_subCategory_view', compact('subSubCategories', 'categories'));
     }
 }
