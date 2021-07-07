@@ -67,7 +67,7 @@ Route::prefix('brand')->group(function() {
 // Admin Category All Routes
 Route::prefix('category')->group(function() {
     Route::get('/view', [CategoryController::class, 'categoryView'])->name('all.category');
-    Route::post('/store', [CategoryController::class, 'brandStore'])->name('brand.store');
+    Route::post('/store', [CategoryController::class, 'categoryStore'])->name('categoy.store');
     Route::get('/edit/{id}', [CategoryController::class, 'brandEdit'])->name('brand.edit');
     Route::post('/update/{id}', [CategoryController::class, 'brandUpdate'])->name('brand.update');
     Route::get('/delete/{id}', [CategoryController::class, 'brandDelete'])->name('brand.delete');
