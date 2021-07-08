@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 
 class CategoryController extends Controller
 {
@@ -84,8 +86,16 @@ class CategoryController extends Controller
 
     public function categoryDelete($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->delete();
+        if (SubCategory::where('category_id', $category->id)->first()) {
+            $subCategory = SubCategory::where('category_id', $category->id)->first();
+            $subCategory->delete();
+        }
+        if (SubSubCategory::where('category_id', $category->id)->first()) {
+            $subSubCategory = SubSubCategory::where('category_id', $category->id)->first();
+            $subSubCategory->delete();
+        }
 
         $notification = array(
             'message' => 'カテゴリー：' . $category->category_name_ja . 'を削除しました。',
