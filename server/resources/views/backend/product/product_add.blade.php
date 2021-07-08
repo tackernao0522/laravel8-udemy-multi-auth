@@ -1,6 +1,9 @@
 @extends('admin.admin_master')
 
 @section('admin')
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <div class="container-full">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -304,7 +307,7 @@
                                             <div class="form-group">
                                                 <h5>Long Description En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                <textarea id="editor2" name="long_descp_en" rows="10" cols="80">Long Description English.</textarea>
+                                                    <textarea id="editor2" name="long_descp_en" rows="10" cols="80">Long Description English.</textarea>
                                                 </div>
                                             </div>
                                         </div> <!-- end col md 6 -->
@@ -362,4 +365,46 @@
     </section>
     <!-- /.content -->
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="category_id"]').on('change', function() {
+            var category_id = $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/category/subCategory/ajax') }}/" + category_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="subCategory_id"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="subCategory_id"]').append('<option value="' + value.id + '">' + value.subCategory_name_ja + '</option>');
+                        });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+
+        $('select[name="subCategory_id"]').on('change', function() {
+            var subCategory_id = $(this).val();
+            if (subCategory_id) {
+                $.ajax({
+                    url: "{{ url('/category/sub-subCategory/ajax') }}/" + subCategory_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="subSubCategory_id"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="subSubCategory_id"]').append('<option value="' + value.id + '">' + value.subSubCategory_name_ja + '</option>');
+                        });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
+</script>
 @endsection

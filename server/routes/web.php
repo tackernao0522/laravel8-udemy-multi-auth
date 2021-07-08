@@ -84,6 +84,7 @@ Route::prefix('category')->group(function () {
     // Admin SubsubCategory All Routes
     Route::get('/sub/sub/view', [SubCategoryController::class, 'subSubCategoryView'])->name('all.subSubCategory');
     Route::get('/subCategory/ajax/{category_id}', [SubCategoryController::class, 'getSubCategory']);
+    Route::get('/sub-subCategory/ajax/{subCategory_id}', [SubCategoryController::class, 'getSubSubCategory']);
     Route::post('/sub/sub/store', [SubCategoryController::class, 'subSubCategoryStore'])->name('subSubCategoy.store');
     Route::get('/sub/sub/edit/{id}', [SubCategoryController::class, 'subSubCategoryEdit'])->name('subSubCategory.edit');
     Route::post('/sub/sub/update/{id}', [SubCategoryController::class, 'subSubCategoryUpdate'])->name('subSubCategory.update');
