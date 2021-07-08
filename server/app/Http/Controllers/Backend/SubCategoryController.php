@@ -78,7 +78,7 @@ class SubCategoryController extends Controller
         $subCategory->save();
 
         $notification = array(
-            'message' => 'カテゴリーID：' . $subCategory->id . 'を更新しました(SubCategory Updated Successfully)。',
+            'message' => 'サブカテゴリーID：' . $subCategory->id . 'を更新しました(SubCategory Updated Successfully)。',
             'alert-type' => 'info',
         );
 
@@ -147,6 +147,46 @@ class SubCategoryController extends Controller
         );
 
         return redirect()->back()
+            ->with($notification);
+    }
+
+    public function subSubCategoryEdit($id)
+    {
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+        $subCategories = SubCategory::orderBy('subCategory_name_ja', 'ASC')->get();
+        $subSubCategory = SubSubCategory::findOrFail($id);
+
+        return view('backend.category.subSubCategory_edit', compact('categories', 'subCategories', 'subSubCategory'));
+    }
+
+    public function subSubCategoryUpdate(Request $request, $id)
+    {
+        $subSubCategory = SubSubCategory::findOrFail($id);
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+            'subCategory_id' => 'required',
+            'subSubCategory_name_ja' => 'required',
+            'subSubCategory_name_en' => 'required',
+        ], [
+            'category_id.required' => 'メインカテゴリーを選択してください。(Please select Any option.)',
+            'subCategory_id.required' => 'サブカテゴリーを選択してください。(Please select Any option.)',
+            'subSubCategory_name_en.required' => 'Input G-ChildCategory English Name.',
+        ]);
+
+        $subSubCategory->category_id = $request->category_id;
+        $subSubCategory->subCategory_id = $request->subCategory_id;
+        $subSubCategory->subSubCategory_name_ja = $request->subSubCategory_name_ja;
+        $subSubCategory->subSubCategory_name_en = $request->subSubCategory_name_en;
+        $subSubCategory->subSubCategory_slug_ja = str_replace(' ', '-', $request->subSubCategory_name_ja);
+        $subSubCategory->subSubCategory_slug_en = strtolower(str_replace(' ', '-', $request->subSubCategory_name_en));
+        $subSubCategory->save();
+
+        $notification = array(
+            'message' => '孫カテゴリーID：' . $subSubCategory->id . 'を更新しました(G-ChildCategory Updated Successfully)。',
+            'alert-type' => 'info',
+        );
+
+        return redirect()->route('all.subSubCategory')
             ->with($notification);
     }
 }
