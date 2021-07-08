@@ -90,6 +90,10 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::findOrFail($id);
         $subCategory->delete();
+        if (SubSubCategory::where('subCategory_id', $subCategory->id)->first()) {
+            $subSubCategory = SubSubCategory::where('subCategory_id', $subCategory->id)->first();
+            $subSubCategory->delete();
+        }
 
         $notification = array(
             'message' => 'サブカテゴリー：' . $subCategory->subCategory_name_ja . 'を削除しました。',
@@ -122,13 +126,12 @@ class SubCategoryController extends Controller
         $validatedData = $request->validate([
             'category_id' => 'required',
             'subCategory_id' => 'required',
-            'subSubCategory_name_ja' => 'required|unique:sub_sub_categories',
-            'subSubCategory_name_en' => 'required|unique:sub_sub_categories',
+            'subSubCategory_name_ja' => 'required',
+            'subSubCategory_name_en' => 'required',
         ], [
             'category_id.required' => 'メインカテゴリーを選択してください。(Please select Any option.)',
             'subCategory_id.required' => 'サブカテゴリーを選択してください。(Please select Any option.)',
             'subSubCategory_name_en.required' => 'Input G-ChildCategory English Name.',
-            'subSubCategory_name_en.unique' => 'The G-ChildCategory name ja has already been taken.',
         ]);
 
         SubSubCategory::insert([
@@ -187,6 +190,20 @@ class SubCategoryController extends Controller
         );
 
         return redirect()->route('all.subSubCategory')
+            ->with($notification);
+    }
+
+    public function subSubCategoryDelete($id)
+    {
+        $subSubCategory = SubSubCategory::findOrFail($id);
+        $subSubCategory->delete();
+
+        $notification = array(
+            'message' => '孫カテゴリー：' . $subSubCategory->subSubCategory_name_ja . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
             ->with($notification);
     }
 }
