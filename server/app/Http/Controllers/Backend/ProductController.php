@@ -107,6 +107,23 @@ class ProductController extends Controller
         return view('backend.product.product_view', compact('products'));
     }
 
+    public function productEdit($id)
+    {
+        $categories = Category::latest()->get();
+        $brands = Brand::latest()->get();
+        $subCategories = SubCategory::latest()->get();
+        $subSubCategories = SubSubCategory::latest()->get();
+        $product = Product::findOrFail($id);
+
+        return view('backend.product.product_edit', compact(
+            'categories',
+            'brands',
+            'subCategories',
+            'subSubCategories',
+            'product'
+        ));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
