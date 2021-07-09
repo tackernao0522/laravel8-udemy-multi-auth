@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\Brand;
+use App\Models\MultiImg;
 
 class ProductController extends Controller
 {
@@ -27,9 +28,20 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request)
     {
+        $validatedData = $request->validate([
+            // 'brand_name_ja' => 'required|unique:brands',
+            // 'brand_name_en' => 'required|unique:brands',
+            'product_thambnail' => 'required|mimes:jpg,jpeg,png',
+        ], [
+            // 'brand_name_en.required' => 'Input Brand English Name',
+            // 'brand_name_en.unique' => 'The brand name ja has already been taken.',
+            'product_thambnail.required' => 'メインサムネイルは必須です。(Input Brand Image.)',
+            'product_thambnail.mimes' => 'メインサムネイルにはjpg, jpeg, pngのうちいずれかの形式のファイルを指定してください。(The Product thambnail must be a file of type: jpg, jpeg, png.)',
+        ]);
+
         $fileName = $this->saveImage($request->file('product_thambnail'));
 
-        Product::insert([
+        $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
             'subCategory_id' => $request->subCategory_id,
@@ -60,6 +72,24 @@ class ProductController extends Controller
             'status' => 1,
             'created_at' => Carbon::now(),
         ]);
+
+        $images = $request->file('multi_img');
+
+        foreach ($images as $img) {
+            $tempPath2 = $this->makeTempPath();
+            Image::make($img)->resize(917, 1000)->save($tempPath2);
+
+            $filePath2 = Storage::disk('s3')
+                ->putFile('products/multi-image', new File($tempPath2));
+
+            $multiImageName = basename($filePath2);
+
+            MultiImg::insert([
+                'product_id' => $product_id,
+                'photo_name' => $multiImageName,
+                'created_at' => Carbon::now(),
+            ]);
+        }
 
         $notification = array(
             'message' => '商品を登録しました。(Product Inserted Successfully)',
