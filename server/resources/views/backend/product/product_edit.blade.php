@@ -101,7 +101,7 @@
                                             <div class="form-group">
                                                 <h5>商品名<span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_name_ja" class="form-control" value="{{ old('product_name_ja') }}" required="">
+                                                    <input type="text" name="product_name_ja" class="form-control" value="{{ old('product_name_ja', $product->product_name_ja) }}" required="">
                                                     @error('product_name_ja')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -113,7 +113,7 @@
                                             <div class="form-group">
                                                 <h5>Product Name English<span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_name_en" class="form-control" value="{{ old('product_name_en') }}" required="">
+                                                    <input type="text" name="product_name_en" class="form-control" value="{{ old('product_name_en', $product->product_name_en) }}" required="">
                                                     @error('product_name_en')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -128,7 +128,7 @@
                                             <div class="form-group">
                                                 <h5>商品コード <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_code" class="form-control" value="{{ old('product_code') }}" required="">
+                                                    <input type="text" name="product_code" class="form-control" value="{{ old('product_code', $product->product_code) }}" required="">
                                                     @error('product_code')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -140,7 +140,7 @@
                                             <div class="form-group">
                                                 <h5>在庫数 <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_qty" class="form-control" value="{{ old('product_qty') }}" required="">
+                                                    <input type="text" name="product_qty" class="form-control" value="{{ old('product_qty', $product->product_qty) }}" required="">
                                                     @error('product_qty')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -152,7 +152,7 @@
                                             <div class="form-group">
                                                 <h5>商品タグ <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_tags_ja" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_tags_ja" class="form-control" value="{{ old('product_tags_ja', $product->product_tags_ja) }}" data-role="tagsinput" required="">
                                                     @error('product_tags_ja')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -167,7 +167,7 @@
                                             <div class="form-group">
                                                 <h5>Product Tags En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_tags_en" class="form-control" value="{{ old('product_tags_en', $product->product_tags_en) }}" data-role="tagsinput" required="">
                                                     @error('product_tags_en')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -179,7 +179,7 @@
                                             <div class="form-group">
                                                 <h5>サイズ <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_size_ja" class="form-control" value="Small,Midium,Large" data-role="tagsinput">
+                                                    <input type="text" name="product_size_ja" class="form-control" value="{{ old('product_size_ja', $product->product_size_ja) }}" data-role="tagsinput">
                                                     @error('product_size_ja')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -191,7 +191,7 @@
                                             <div class="form-group">
                                                 <h5>Product Size En <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_size_en" class="form-control" value="Small,Midium,Large" data-role="tagsinput">
+                                                    <input type="text" name="product_size_en" class="form-control" value="{{ old('product_size_en', $product->product_size_en) }}" data-role="tagsinput">
                                                     @error('product_size_en')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -202,82 +202,58 @@
 
                                     <div class="row">
                                         <!-- start 5th row  -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <h5>カラー <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_ja" class="form-control" value="red,Black,Amet" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_color_ja" class="form-control" value="{{ old('product_color_ja', $product->product_color_ja) }}" data-role="tagsinput" required="">
                                                     @error('product_color_ja')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 6 -->
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <h5>Product Color En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_en" class="form-control" value="red,Black,Amet" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_color_en" class="form-control" value="{{ old('product_color_en', $product->product_color_en) }}" data-role="tagsinput" required="">
                                                     @error('product_color_en')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 6 -->
 
-                                        <div class="col-md-4">
+
+                                    </div> <!-- end 5th row  -->
+
+                                    <div class="row">
+                                        <!-- start 6th row  -->
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <h5>価格 <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" required="">
+                                                    <input type="text" name="selling_price" class="form-control" value="{{ old('selling_price', number_format($product->selling_price)) }}" required="">
                                                     @error('selling_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div> <!-- end col md 4 -->
-                                    </div> <!-- end 5th row  -->
+                                        </div> <!-- end col md 6 -->
 
-                                    <div class="row">
-                                        <!-- start 6th row  -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <h5>割引価格 <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control">
+                                                    <input type="text" name="discount_price" class="form-control" value="{{ old('discount_price', number_format($product->discount_price)) }}">
                                                     @error('discount_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div> <!-- end col md 4 -->
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <h5>メインサムネイル <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)" required="">
-                                                    @error('product_thambnail')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                    <img src="" id="mainThmb" alt="">
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col md 4 -->
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <h5>マルチ画像 <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" required="">
-                                                    @error('multi_img')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                    <div class="row" id="preview_img"></div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 6 -->
                                     </div> <!-- end 6th row  -->
 
                                     <div class="row">
@@ -286,7 +262,7 @@
                                             <div class="form-group">
                                                 <h5>商品説明(小見出し) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea name="short_descp_ja" id="textarea" class="form-control" required placeholder="Textarea text">{{ old('short_descp_ja') }}</textarea>
+                                                    <textarea name="short_descp_ja" id="textarea" class="form-control" required placeholder="Textarea text">{!! nl2br(e( old('short_descp_ja', $product->short_descp_ja) )) !!}</textarea>
                                                 </div>
                                             </div>
                                         </div> <!-- end col md 6 -->
@@ -295,7 +271,7 @@
                                             <div class="form-group">
                                                 <h5>Short Description En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea name="short_descp_en" id="textarea" class="form-control" required placeholder="Textarea text">{{ old('short_descp_en') }}</textarea>
+                                                    <textarea name="short_descp_en" id="textarea" class="form-control" required placeholder="Textarea text">{!! nl2br(e( old('short_descp_en', $product->short_descp_en) )) !!}</textarea>
                                                 </div>
                                             </div>
                                         </div> <!-- end col md 6 -->
@@ -307,7 +283,7 @@
                                             <div class="form-group">
                                                 <h5>商品説明(メイン) <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea id="editor1" name="long_descp_ja" rows="10" cols="80" required="">商品説明(メイン)</textarea>
+                                                    <textarea id="editor1" name="long_descp_ja" rows="10" cols="80" required="">{!! nl2br(e( old('long_descp_ja', $product->long_descp_ja) )) !!}</textarea>
                                                 </div>
                                             </div>
                                         </div> <!-- end col md 6 -->
@@ -316,7 +292,7 @@
                                             <div class="form-group">
                                                 <h5>Long Description En <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea id="editor2" name="long_descp_en" rows="10" cols="80" required="">Long Description English.</textarea>
+                                                    <textarea id="editor2" name="long_descp_en" rows="10" cols="80" required="">{!! nl2br(e( old('long_descp_en', $product->long_descp_en) )) !!}</textarea>
                                                 </div>
                                             </div>
                                         </div> <!-- end col md 6 -->
@@ -327,14 +303,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-
                                                 <div class="controls">
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_2" name="hot_deals" value="1">
+                                                        <input type="checkbox" id="checkbox_2" name="hot_deals" value="1" {{ old('hot_deals', $product->hot_deals) == 1 ? 'checked' : ''}}>
                                                         <label for="checkbox_2">お得情報</label>
                                                     </fieldset>
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_3" name="featured" value="1">
+                                                        <input type="checkbox" id="checkbox_3" name="featured" value="1" {{ old('featured', $product->featured) == 1 ? 'checked' : ''}}>
                                                         <label for="checkbox_3">おすすめ商品</label>
                                                     </fieldset>
                                                 </div>
@@ -345,11 +320,11 @@
                                             <div class="form-group">
                                                 <div class="controls">
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_4" name="special_offer" value="1">
+                                                        <input type="checkbox" id="checkbox_4" name="special_offer" value="1" {{ old('special_offer', $product->special_offer) == 1 ? 'checked' : ''}}>
                                                         <label for="checkbox_4">特別セール</label>
                                                     </fieldset>
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_5" name="special_deals" value="1">
+                                                        <input type="checkbox" id="checkbox_5" name="special_deals" value="1" {{ old('special_deals', $product->special_deals) == 1 ? 'checked' : ''}}>
                                                         <label for="checkbox_5">特別割引</label>
                                                     </fieldset>
                                                 </div>
@@ -458,3 +433,25 @@
     });
 </script>
 @endsection
+
+{{-- <div class="form-group">
+    <h5>メインサムネイル <span class="text-danger">*</span></h5>
+    <div class="controls">
+        <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)" required="">
+        @error('product_thambnail')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        <img src="" id="mainThmb" alt="">
+    </div>
+</div> --}}
+
+{{-- <div class="form-group">
+    <h5>マルチ画像 <span class="text-danger">*</span></h5>
+    <div class="controls">
+        <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" required="">
+        @error('multi_img')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        <div class="row" id="preview_img"></div>
+    </div>
+</div> --}}
