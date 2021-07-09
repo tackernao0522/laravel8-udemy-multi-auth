@@ -35,8 +35,8 @@ class CreateProductsTable extends Migration
             $table->string('discount_price')->nullable();
             $table->string('short_descp_ja');
             $table->string('short_descp_en');
-            $table->string('long_descp_ja');
-            $table->string('long_descp_en');
+            $table->text('long_descp_ja');
+            $table->text('long_descp_en');
             $table->string('product_thambnail');
             $table->bigInteger('hot_deals')->nullable()->unsigned();
             $table->bigInteger('featured')->nullable()->unsigned();
