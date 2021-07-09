@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <h5>Brand Name (English) <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"name="brand_name_en" class="form-control"  value="{{ old('brand_name_en') }}">
+                                        <input type="text" name="brand_name_en" class="form-control" value="{{ old('brand_name_en') }}">
                                         @error('brand_name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror

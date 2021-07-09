@@ -96,8 +96,15 @@ class ProductController extends Controller
             'alert-type' => 'success',
         );
 
-        return redirect()->back()
+        return redirect()->route('manage-product')
             ->with($notification);
+    }
+
+    public function manageProduct()
+    {
+        $products = Product::latest()->get();
+
+        return view('backend.product.product_view', compact('products'));
     }
 
     private function saveImage(UploadedFile $file): string
