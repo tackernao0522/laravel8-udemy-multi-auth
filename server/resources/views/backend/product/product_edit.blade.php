@@ -17,8 +17,9 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col">
-                        <form method="POST" action="{{ route('product-store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('product-update') }}">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $product->id }}">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row">
@@ -235,7 +236,7 @@
                                             <div class="form-group">
                                                 <h5>価格 <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="selling_price" class="form-control" value="{{ old('selling_price', number_format($product->selling_price)) }}" required="">
+                                                    <input type="text" name="selling_price" class="form-control" value="{{ old('selling_price', $product->selling_price) }}" required="">
                                                     @error('selling_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -247,7 +248,7 @@
                                             <div class="form-group">
                                                 <h5>割引価格 <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="discount_price" class="form-control" value="{{ old('discount_price', number_format($product->discount_price)) }}">
+                                                    <input type="text" name="discount_price" class="form-control" value="{{ old('discount_price', $product->discount_price) }}">
                                                     @error('discount_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -320,7 +321,7 @@
                                             <div class="form-group">
                                                 <div class="controls">
                                                     <fieldset>
-                                                        <input type="checkbox" id="checkbox_4" name="special_offer" value="1" {{ old('special_offer', $product->special_offer) == 1 ? 'checked' : ''}}>
+                                                        <input type="checkbox" id="checkbox_4" name="spacial_offer" value="1" {{ old('spacial_offer', $product->spacial_offer) == 1 ? 'checked' : ''}}>
                                                         <label for="checkbox_4">特別セール</label>
                                                     </fieldset>
                                                     <fieldset>
