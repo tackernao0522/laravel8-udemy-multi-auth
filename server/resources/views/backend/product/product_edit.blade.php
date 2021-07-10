@@ -367,7 +367,7 @@
                                     <img src="{{ Storage::disk('s3')->url("products/multi-image/{$img->photo_name}") }}" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <a href="" class="btn btn-sm btn-danger" id="delete" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
+                                            <a href="" class="btn btn-sm btn-danger" onclick="return confirm('削除してよろしいですか？')" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
                                         </h5>
                                         <div class="form-group">
                                             <label class="form-control-label">画像更新 <span class="tx-danger">*</span></label>
@@ -375,7 +375,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--  end col md 3		 -->
+                            </div><!--  end col md 3 -->
                             @endforeach
                         </div>
                         <div class="text-xs-right" style="margin-left: 40px">
@@ -387,6 +387,40 @@
             </div>
         </div> <!-- // end row  -->
     </section> <!-- End Multiple Image Update Area -->
+
+    <!-- Start Thambnaile Image Update Area -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box bt-3 border-info">
+                    <div class="box-header">
+                        <h4 class="box-title">サムネイル画像 <strong>更新</strong></h4>
+                    </div>
+                    <form method="POST" action="{{ route('update-product-thambnail', $product->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row row-sm mt-3 ml-3 mr-3">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" class="card-img-top">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label class="form-control-label">サムネイル更新 <span class="tx-danger">*</span></label>
+                                            <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)">
+                                            <img src="" id="mainThmb" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--  end col md 3 -->
+                        </div>
+                        <div class="text-xs-right" style="margin-left: 40px">
+                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="サムネイル更新">
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- // end row  -->
+    </section> <!-- End Thambnail Image Update Area -->
 </div>
 
 <script type="text/javascript">
@@ -472,14 +506,3 @@
     });
 </script>
 @endsection
-
-{{-- <div class="form-group">
-    <h5>メインサムネイル <span class="text-danger">*</span></h5>
-    <div class="controls">
-        <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)" required="">
-        @error('product_thambnail')
-        <span class="text-danger">{{ $message }}</span>
-@enderror
-<img src="" id="mainThmb" alt="">
-</div>
-</div> --}}
