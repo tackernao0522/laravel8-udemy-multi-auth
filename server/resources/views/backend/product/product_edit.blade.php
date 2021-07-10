@@ -358,7 +358,8 @@
                     <div class="box-header">
                         <h4 class="box-title">マルチ画像 <strong>更新</strong></h4>
                     </div>
-                    <form method="" action="" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('update-product-image') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="row row-sm mt-3 ml-3 mr-3">
                             @foreach($multiImgs as $img)
                             <div class="col-md-3">
@@ -368,12 +369,10 @@
                                         <h5 class="card-title">
                                             <a href="" class="btn btn-sm btn-danger" id="delete" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
                                         </h5>
-                                        <p class="card-text">
                                         <div class="form-group">
                                             <label class="form-control-label">画像更新 <span class="tx-danger">*</span></label>
-                                            <input class="form-control" type="file" name="multi_img[ $img->id ]">
+                                            <input class="form-control" type="file" name="multi_img[{{$img->id}}]">
                                         </div>
-                                        </p>
                                     </div>
                                 </div>
                             </div><!--  end col md 3		 -->
@@ -387,7 +386,7 @@
                 </div>
             </div>
         </div> <!-- // end row  -->
-    </section>
+    </section> <!-- End Multiple Image Update Area -->
 </div>
 
 <script type="text/javascript">
