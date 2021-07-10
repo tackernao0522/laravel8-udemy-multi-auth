@@ -201,6 +201,37 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function thambnailImageUpdate(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $validatedData = $request->validate([
+            // 'brand_name_ja' => 'required|unique:brands',
+            // 'brand_name_en' => 'required|unique:brands',
+            'product_thambnail' => 'mimes:jpg,jpeg,png',
+        ], [
+            // 'brand_name_en.required' => 'Input Brand English Name',
+            // 'brand_name_en.unique' => 'The brand name ja has already been taken.',
+            // 'product_thambnail.required' => 'メインサムネイルは必須です。(Input Brand Image.)',
+            'product_thambnail.mimes' => 'メインサムネイルにはjpg, jpeg, pngのうちいずれかの形式のファイルを指定してください。(The Product thambnail must be a file of type: jpg, jpeg, png.)',
+        ]);
+
+        if ($request->has('product_thambnail')) {
+            Storage::disk('s3')->delete('/products/thambnail/' . $product->product_thambnail);
+            $product->delete();
+            $fileName = $this->saveImage($request->file('product_thambnail'));
+            $product->product_thambnail = $fileName;
+            $product->updated_at = Carbon::now();
+            $product->save();
+        }
+
+        $notification = array(
+            'message' => 'サムネイルを更新しました。(Thambnail Image Updated Successfully)',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
