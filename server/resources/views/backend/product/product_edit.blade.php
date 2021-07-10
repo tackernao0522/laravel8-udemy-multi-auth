@@ -349,6 +349,45 @@
         <!-- /.box -->
     </section>
     <!-- /.content -->
+
+    <!-- Start Multiple Image Update Area -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box bt-3 border-info">
+                    <div class="box-header">
+                        <h4 class="box-title">マルチ画像 <strong>更新</strong></h4>
+                    </div>
+                    <form method="" action="" enctype="multipart/form-data">
+                        <div class="row row-sm mt-3 ml-3 mr-3">
+                            @foreach($multiImgs as $img)
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="{{ Storage::disk('s3')->url("products/multi-image/{$img->photo_name}") }}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="" class="btn btn-sm btn-danger" id="delete" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
+                                        </h5>
+                                        <p class="card-text">
+                                        <div class="form-group">
+                                            <label class="form-control-label">画像更新 <span class="tx-danger">*</span></label>
+                                            <input class="form-control" type="file" name="multi_img[ $img->id ]">
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div><!--  end col md 3		 -->
+                            @endforeach
+                        </div>
+                        <div class="text-xs-right" style="margin-left: 40px">
+                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="画像更新">
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- // end row  -->
+    </section>
 </div>
 
 <script type="text/javascript">
@@ -441,18 +480,7 @@
         <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)" required="">
         @error('product_thambnail')
         <span class="text-danger">{{ $message }}</span>
-        @enderror
-        <img src="" id="mainThmb" alt="">
-    </div>
-</div> --}}
-
-{{-- <div class="form-group">
-    <h5>マルチ画像 <span class="text-danger">*</span></h5>
-    <div class="controls">
-        <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" required="">
-        @error('multi_img')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-        <div class="row" id="preview_img"></div>
-    </div>
+@enderror
+<img src="" id="mainThmb" alt="">
+</div>
 </div> --}}

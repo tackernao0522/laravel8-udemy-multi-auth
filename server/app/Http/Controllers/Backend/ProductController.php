@@ -109,6 +109,7 @@ class ProductController extends Controller
 
     public function productEdit($id)
     {
+        $multiImgs = MultiImg::where('product_id', $id)->get();
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
         $subCategories = SubCategory::latest()->get();
@@ -120,7 +121,8 @@ class ProductController extends Controller
             'brands',
             'subCategories',
             'subSubCategories',
-            'product'
+            'product',
+            'multiImgs',
         ));
     }
 
