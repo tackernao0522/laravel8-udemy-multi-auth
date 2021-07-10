@@ -124,6 +124,49 @@ class ProductController extends Controller
         ));
     }
 
+    public function productDataUpdate(Request $request)
+    {
+        $product_id = $request->id;
+
+        Product::findOrFail($product_id)->update([
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'subCategory_id' => $request->subCategory_id,
+            'subSubCategory_id' => $request->subSubCategory_id,
+            'product_name_ja' => $request->product_name_ja,
+            'product_name_en' => $request->product_name_en,
+            'product_slug_ja' => str_replace(' ', '-', $request->product_name_ja),
+            'product_slug_en' => strtolower(str_replace(' ', '-', $request->product_name_en)),
+            'product_code' => $request->product_code,
+            'product_qty' => $request->product_qty,
+            'product_tags_ja' => $request->product_tags_ja,
+            'product_tags_en' => $request->product_tags_en,
+            'product_size_ja' => $request->product_size_ja,
+            'product_size_en' => $request->product_size_en,
+            'product_color_ja' => $request->product_color_ja,
+            'product_color_en' => $request->product_color_en,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
+            'short_descp_ja' => $request->short_descp_ja,
+            'short_descp_en' => $request->short_descp_en,
+            'long_descp_ja' => $request->long_descp_ja,
+            'long_descp_en' => $request->long_descp_en,
+            'hot_deals' => $request->hot_deals,
+            'featured' => $request->featured,
+            'spacial_offer' => $request->spacial_offer,
+            'special_deals' => $request->special_deals,
+            'status' => 1,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => '商品ID：' . $product_id . 'を更新しました。(Product Updated Without Image Successfully)',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('manage-product')->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
