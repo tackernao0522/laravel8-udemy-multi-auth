@@ -273,6 +273,27 @@ class ProductController extends Controller
             ->with($notification);
     }
 
+    public function productDelete($id)
+    {
+        $product = Product::findOrFail($id);
+        Storage::disk('s3')->delete('/products/thambnail/' . $product->product_thambnail);
+        $product->delete();
+
+        $images = MultiImg::where('product_id', $id)->get();
+        foreach ($images as $image) {
+            Storage::disk('s3')->delete('/products/multi-image/' . $image->photo_name);
+            MultiImg::where('product_id', $id)->delete();
+        }
+
+        $notification = array(
+            'message' => '商品を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
 
     private function saveImage(UploadedFile $file): string
     {
