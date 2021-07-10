@@ -367,7 +367,7 @@
                                     <img src="{{ Storage::disk('s3')->url("products/multi-image/{$img->photo_name}") }}" class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <a href="" class="btn btn-sm btn-danger" onclick="return confirm('削除してよろしいですか？')" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
+                                            <a href="{{ route('product.multiImg.delete', $img->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('削除してよろしいですか？')" title="削除(Delete Data)"><i class="fa fa-trash"></i> </a>
                                         </h5>
                                         <div class="form-group">
                                             <label class="form-control-label">画像更新 <span class="tx-danger">*</span></label>

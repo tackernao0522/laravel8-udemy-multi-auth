@@ -232,6 +232,21 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function multiImageDelete($id)
+    {
+        $multiImg = MultiImg::findOrFail($id);
+        Storage::disk('s3')->delete('/products/multi-image/' . $multiImg->photo_name);
+        $multiImg->delete();
+
+        $notification = array(
+            'message' => 'マルチ画像ID：' . $multiImg->id . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
