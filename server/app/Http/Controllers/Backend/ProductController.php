@@ -158,7 +158,7 @@ class ProductController extends Controller
             'spacial_offer' => $request->spacial_offer,
             'special_deals' => $request->special_deals,
             'status' => 1,
-            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -167,6 +167,38 @@ class ProductController extends Controller
         );
 
         return redirect()->route('manage-product')->with($notification);
+    }
+
+    public function multiImageUpdate(Request $request)
+    {
+        $imgs = $request->multi_img;
+
+        if ($imgs) {
+            foreach ($imgs as $id => $img) {
+                $imgDel = MultiImg::findOrFail($id);
+                Storage::disk('s3')->delete('products/multi-image/' . $imgDel->photo_name);
+                $imgDel->delete();
+
+                $tempPath2 = $this->makeTempPath();
+                Image::make($img)->resize(917, 1000)->save($tempPath2);
+
+                $filePath2 = Storage::disk('s3')
+                    ->putFile('products/multi-image', new File($tempPath2));
+
+                $multiImageName = basename($filePath2);
+
+                $imgDel->photo_name = $multiImageName;
+                $imgDel->updated_at = Carbon::now();
+                $imgDel->save();
+            }
+        }
+
+        $notification = array(
+            'message' => '画像を更新しました。(Product Image Updated Successfully)',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
     }
 
     private function saveImage(UploadedFile $file): string
