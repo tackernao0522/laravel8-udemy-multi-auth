@@ -247,6 +247,33 @@ class ProductController extends Controller
             ->with($notification);
     }
 
+    public function productInactive($id)
+    {
+        Product::findOrFail($id)->update(['status' => 0]);
+
+        $notification = array(
+            'message' => '販売停止しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+    public function productActive($id)
+    {
+        Product::findOrFail($id)->update(['status' => 1]);
+
+        $notification = array(
+            'message' => '販売開始しました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
