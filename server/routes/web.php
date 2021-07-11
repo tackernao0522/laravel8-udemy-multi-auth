@@ -111,7 +111,7 @@ Route::prefix('product')->group(function () {
 Route::prefix('slider')->group(function () {
     Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider');
     Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store');
-    Route::get('/edit/{id}', [SliderController::class, 'brandEdit'])->name('brand.edit');
-    Route::post('/update/{id}', [SliderController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/edit/{id}', [SliderController::class, 'sliderEdit'])->name('slider.edit');
+    Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update');
     Route::get('/delete/{id}', [SliderController::class, 'brandDelete'])->name('brand.delete');
 });
