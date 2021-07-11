@@ -89,6 +89,21 @@ class SliderController extends Controller
             ->with($notification);
     }
 
+    public function sliderDelete($id)
+    {
+        $slider = Slider::findOrFail($id);
+        Storage::disk('s3')->delete('/sliders/' . $slider->slider_img);
+        $slider->delete();
+
+        $notification = array(
+            'message' => 'スライダーID：' . $slider->id . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();

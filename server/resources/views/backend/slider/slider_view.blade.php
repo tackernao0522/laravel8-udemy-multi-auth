@@ -36,7 +36,13 @@
                                             {{ $item->title }}
                                             @endif
                                         </td>
-                                        <td>{{ $item->description }}</td>
+                                        <td>
+                                            @if($item->description == NULL)
+                                            <span class="badge badge-pill badge-danger">No Description</span>
+                                            @else
+                                            {{ $item->description }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($item->status == 1)
                                             <span class="badge badge-pill badge-success">アクティブ</span>
@@ -46,7 +52,7 @@
                                         </td>
                                         <td width="30%">
                                             <a href="{{ route('slider.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('brand.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('slider.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                             @if($item->status == 1)
                                             <a href="{{ route('product.inactive', $item->id) }}" class="btn btn-danger" title="非アクティブ"><i class="fa fa-arrow-down"></i></a>
                                             @else
