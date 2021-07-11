@@ -104,6 +104,32 @@ class SliderController extends Controller
             ->with($notification);
     }
 
+    public function sliderInactive($id)
+    {
+        Slider::findOrFail($id)->update(['status' => 0]);
+
+        $notification = array(
+            'message' => '非アクティブにしました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+    public function sliderActive($id)
+    {
+        Slider::findOrFail($id)->update(['status' => 1]);
+
+        $notification = array(
+            'message' => 'アクティブにしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
