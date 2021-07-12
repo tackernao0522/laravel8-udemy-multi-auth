@@ -67,7 +67,7 @@
                         <form>
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
-                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
+                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">@if(session()->get('language') == 'english') Categories @else カテゴリー @endif<b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li class="menu-header">Computer</li>
                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
@@ -94,7 +94,7 @@
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                                 <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">$</span><span class="value">600.00</span> </span> </div>
+                                <div class="total-price-basket"> <span class="lbl">@if(session()->get('language') == 'english') cart @else カート @endif -</span> <span class="total-price"> <span class="sign">¥</span><span class="value">600.00</span> </span> </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
@@ -115,9 +115,9 @@
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
+                                    <div class="pull-right"> <span class="text">@if(session()->get('language') == 'english') Sub Total @else 小計 @endif :</span><span class='price'>$600.00</span> </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">@if(session()->get('language') == 'english') Checkout @else チェックアウト @endif</a>
                                 </div>
                                 <!-- /.cart-total-->
 
@@ -151,7 +151,7 @@
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                                <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">@if(session()->get('language') == 'english') Top @else トップ @endif</a> </li>
 
                                 <!-- Get Category Table Data -->
                                 @php
@@ -159,7 +159,7 @@
                                 @endphp
 
                                 @foreach($categories as $category)
-                                <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $category->category_name_ja }}</a>
+                                <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">@if(session()->get('language') == 'english') {{ $category->category_name_en }} @else {{ $category->category_name_ja }} @endif</a>
                                     <ul class="dropdown-menu container">
                                         <li>
                                             <div class="yamm-content ">
@@ -171,7 +171,7 @@
 
                                                     @foreach($subCategories as $subCategory)
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title">{{ $subCategory->subCategory_name_ja }}</h2>
+                                                        <h2 class="title">@if(session()->get('language') == 'english') {{ $subCategory->subCategory_name_en }} @else {{ $subCategory->subCategory_name_ja }} @endif</h2>
 
                                                         <!-- Get SubSubCategory Table Data -->
                                                         @php
@@ -180,7 +180,7 @@
 
                                                         @foreach($subSubCategories as $subSubCategory)
                                                         <ul class="links">
-                                                            <li><a href="#">{{ $subSubCategory->subSubCategory_name_ja }}</a></li>
+                                                            <li><a href="#">@if(session()->get('language') == 'english') {{ $subSubCategory->subSubCategory_name_en }} @else {{ $subSubCategory->subSubCategory_name_ja }} @endif</a></li>
                                                         </ul>
                                                         @endforeach
                                                         <!-- end SubSubCategoy Foreach -->
@@ -198,7 +198,7 @@
                                 </li>
                                 @endforeach
                                 <!-- end Category Foreach -->
-                                <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                                <li class="dropdown  navbar-right special-menu"> <a href="#">@if(session()->get('language') == 'english') Todays offer @else 今日の特別セール @endif</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>
