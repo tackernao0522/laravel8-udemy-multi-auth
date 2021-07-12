@@ -953,7 +953,7 @@
                                                 <!-- /.product-image -->
 
                                                 <div class="product-info text-left">
-                                                    <h3 class="name"><a href="detail.html">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
+                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
 

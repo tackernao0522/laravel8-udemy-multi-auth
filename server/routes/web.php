@@ -122,3 +122,6 @@ Route::post('/user/password/update', [IndexController::class, 'userPasswordUpdat
 // Multi Language All Routes
 Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
 Route::get('/language/japanese', [LanguageController::class, 'japanese'])->name('japanese.language');
+
+// Frontend Product Details Page url
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);

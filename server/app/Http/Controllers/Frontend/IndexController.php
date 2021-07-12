@@ -99,6 +99,13 @@ class IndexController extends Controller
         }
     }
 
+    public function productDetails($id, $slug)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('frontend.product.product_details', compact('product'));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
