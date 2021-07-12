@@ -937,7 +937,18 @@
                                                     <div class="image"> <a href="detail.html"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
                                                     <!-- /.image -->
 
-                                                    <div class="tag new"><span>new</span></div>
+                                                    @php
+                                                    $amount = $product->selling_price - $product->discount_price;
+                                                    $discount = ($amount / $product->selling_price) * 100;
+                                                    @endphp
+
+                                                    <div>
+                                                        @if ($product->discount_price == NULL)
+                                                        <div class="tag new"><span>new</span></div>
+                                                        @else
+                                                        <div class="tag hot"><span>{{ round($discount) }}%</span></div>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                                 <!-- /.product-image -->
 
@@ -945,7 +956,12 @@
                                                     <h3 class="name"><a href="detail.html">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
-                                                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+
+                                                    @if ($product->discount_price == NULL)
+                                                    <div class="product-price"> <span class="price">¥ {{ number_format($product->selling_price) }}</span></span></div>
+                                                    @else
+                                                    <div class="product-price"> <span class="price">¥ {{ number_format($product->discount_price) }}</span> <span class="price-before-discount">¥ {{ number_format($product->selling_price) }}</span> </div>
+                                                    @endif
                                                     <!-- /.product-price -->
 
                                                 </div>
@@ -1042,7 +1058,7 @@
                         @endforeach
                         <!-- end category foreach -->
                     </div>
-                    <!-- /.tab-content -->Ï
+                    <!-- /.tab-content -->
                 </div>
                 <!-- /.scroll-tabs -->
                 <!-- ============================================== SCROLL TABS : END ============================================== -->
@@ -1090,7 +1106,6 @@
                                         <div class="description"></div>
                                         <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
                                         <!-- /.product-price -->
-
                                     </div>
                                     <!-- /.product-info -->
                                     <div class="cart clearfix animate-effect">
