@@ -154,6 +154,10 @@
                                 <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">@if(session()->get('language') == 'english') Top @else トップ @endif</a> </li>
 
                                 <!-- Get Category Table Data -->
+                                @php
+                                $categories = App\Models\Category::orderBy('category_name_ja','ASC')->get();
+                                @endphp
+
                                 @foreach($categories as $category)
                                 <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">@if(session()->get('language') == 'english') {{ $category->category_name_en }} @else {{ $category->category_name_ja }} @endif</a>
                                     <ul class="dropdown-menu container">
