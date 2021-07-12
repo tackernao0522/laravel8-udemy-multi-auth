@@ -11,12 +11,15 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Category;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+
+        return view('frontend.index', compact('categories'));
     }
 
     public function userLogout()
