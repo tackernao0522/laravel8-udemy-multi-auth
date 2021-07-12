@@ -841,12 +841,12 @@
 
                 <div id="hero">
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-                        <div class="item" style="background-image: url({{ asset('frontend/assets/images/sliders/01.jpg') }});">
+                        @foreach($sliders as $slider)
+                        <div class="item" style="background-image: url({{ Storage::disk('s3')->url("sliders/{$slider->slider_img}") }}">
                             <div class="container-fluid">
                                 <div class="caption bg-color vertical-center text-left">
-                                    <div class="slider-header fadeInDown-1">Top Brands</div>
-                                    <div class="big-text fadeInDown-1"> New Collections </div>
-                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
+                                    <div class="big-text fadeInDown-1"> {{ $slider->title }} </div>
+                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{ $slider->description }}</span> </div>
                                     <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                                 </div>
                                 <!-- /.caption -->
@@ -854,21 +854,7 @@
                             <!-- /.container-fluid -->
                         </div>
                         <!-- /.item -->
-
-                        <div class="item" style="background-image: url({{ asset('frontend/assets/images/sliders/02.jpg') }});">
-                            <div class="container-fluid">
-                                <div class="caption bg-color vertical-center text-left">
-                                    <div class="slider-header fadeInDown-1">Spring 2016</div>
-                                    <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
-                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
-                                </div>
-                                <!-- /.caption -->
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /.item -->
-
+                        @endforeach
                     </div>
                     <!-- /.owl-carousel -->
                 </div>
@@ -883,10 +869,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">money back</h4>
+                                            <h4 class="info-box-heading green">@if(session()->get('language') == 'english') money back @else 返金保証 @endif</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">30 Days Money Back Guarantee</h6>
+                                    <h6 class="text">@if(session()->get('language') == 'english') 30 Days Money Back Guarantee @else 30日間の返金保証 @endif</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -895,10 +881,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">free shipping</h4>
+                                            <h4 class="info-box-heading green">@if(session()->get('language') == 'english') free shipping @else 送料無料 @endif</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Shipping on orders over $99</h6>
+                                    <h6 class="text">@if(session()->get('language') == 'english') Shipping on orders over ¥10,000 @else 10,000円以上購入で送料無料 @endif</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -907,10 +893,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">Special Sale</h4>
+                                            <h4 class="info-box-heading green">@if(session()->get('language') == 'english') Special Sale @else 特売 @endif</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Extra $5 off on all items </h6>
+                                    <h6 class="text">@if(session()->get('language') == 'english') Extra ¥500 off on all items @else すべての商品がさらに500円OFF @endif </h6>
                                 </div>
                             </div>
                             <!-- .col -->
