@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,3 +117,8 @@ Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user
 Route::post('/user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
 Route::get('/user/change/password', [IndexController::class, 'userChangePassword'])->name('change.password');
 Route::post('/user/password/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');
+
+// Frontend All Routes
+// Multi Language All Routes
+Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
+Route::get('/language/japanese', [LanguageController::class, 'japanese'])->name('japanese.language');
