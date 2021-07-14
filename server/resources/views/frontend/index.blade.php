@@ -1,5 +1,9 @@
 @extends('frontend.main_master')
 
+@section('title')
+Home Easy Online Shop
+@endsection
+
 @section('content')
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
     <div class="container">
@@ -953,7 +957,11 @@
                                                 <!-- /.product-image -->
 
                                                 <div class="product-info text-left">
-                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
+                                                    @if(session()->get('language') == 'japanese')
+                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">{{ $product->product_name_ja }}</a></h3>
+                                                    @else
+                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
+                                                    @endif
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
 
