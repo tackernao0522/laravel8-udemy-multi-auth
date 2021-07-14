@@ -938,7 +938,11 @@ Home Easy Online Shop
                                         <div class="products">
                                             <div class="product">
                                                 <div class="product-image">
-                                                    <div class="image"> <a href="detail.html"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @if(session()->get('language') == 'japanese')
+                                                    <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @else
+                                                    <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @endif
                                                     <!-- /.image -->
 
                                                     @php
@@ -1016,7 +1020,11 @@ Home Easy Online Shop
                                         <div class="products">
                                             <div class="product">
                                                 <div class="product-image">
-                                                    <div class="image"> <a href="detail.html"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @if(session()->get('language') == 'japanese')
+                                                    <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @else
+                                                    <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
+                                                    @endif
                                                     <!-- /.image -->
 
                                                     @php
@@ -1035,7 +1043,11 @@ Home Easy Online Shop
                                                 <!-- /.product-image -->
 
                                                 <div class="product-info text-left">
-                                                    <h3 class="name"><a href="detail.html">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
+                                                    @if(session()->get('language') == 'japanese')
+                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">@if(session()->get('language') == 'english') {{ $product->product_name_ja }} @else {{ $product->product_name_ja }} @endif</a></h3>
+                                                    @else
+                                                    <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</a></h3>
+                                                    @endif
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
 
