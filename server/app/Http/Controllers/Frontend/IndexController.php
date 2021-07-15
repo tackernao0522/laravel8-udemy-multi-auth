@@ -25,6 +25,7 @@ class IndexController extends Controller
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $spacial_offer = Product::where('spacial_offer', 1)->orderBy('id', 'DESC')->limit(6)->get();
 
         return view('frontend.index', compact(
             'categories',
@@ -32,6 +33,7 @@ class IndexController extends Controller
             'products',
             'featured',
             'hot_deals',
+            'spacial_offer',
         ));
     }
 
