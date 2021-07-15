@@ -27,6 +27,13 @@ class IndexController extends Controller
         $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $spacial_offer = Product::where('spacial_offer', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $skip_category_0 = Category::skip(0)->first();
+        $skip_product_0 = Product::where('status', 1)
+            ->where('category_id', $skip_category_0->id)
+            ->orderBy('id', 'DESC')->get();
+
+        // return $skip_category->id;
+        // die();
 
         return view('frontend.index', compact(
             'categories',
@@ -36,6 +43,8 @@ class IndexController extends Controller
             'hot_deals',
             'spacial_offer',
             'special_deals',
+            'skip_category_0',
+            'skip_product_0',
         ));
     }
 
