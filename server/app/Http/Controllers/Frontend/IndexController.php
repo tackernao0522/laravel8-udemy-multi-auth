@@ -152,6 +152,16 @@ class IndexController extends Controller
         return view('frontend.product.product_details', compact('product', 'multiImage'));
     }
 
+    public function tagWiseProduct($tag)
+    {
+        $products = Product::where('status', 1)
+            ->where('product_tags_ja', $tag)
+            ->where('product_tags_en', $tag)
+            ->orderBy('id', 'DESC')->get();
+
+        return view('frontend.tags.tags_view', compact('products'));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
