@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
+use App\Models\Brand;
 
 class IndexController extends Controller
 {
@@ -31,6 +32,14 @@ class IndexController extends Controller
         $skip_product_0 = Product::where('status', 1)
             ->where('category_id', $skip_category_0->id)
             ->orderBy('id', 'DESC')->get();
+        $skip_category_1 = Category::skip(1)->first();
+        $skip_product_1 = Product::where('status', 1)
+            ->where('category_id', $skip_category_1->id)
+            ->orderBy('id', 'DESC')->get();
+        $skip_brand_9 = Brand::skip(9)->first();
+        $skip_brand_product_9 = Product::where('status', 1)
+            ->where('brand_id', $skip_brand_9->id)
+            ->orderBy('id', 'DESC')->get();
 
         // return $skip_category->id;
         // die();
@@ -45,6 +54,10 @@ class IndexController extends Controller
             'special_deals',
             'skip_category_0',
             'skip_product_0',
+            'skip_category_1',
+            'skip_product_1',
+            'skip_brand_9',
+            'skip_brand_product_9',
         ));
     }
 
