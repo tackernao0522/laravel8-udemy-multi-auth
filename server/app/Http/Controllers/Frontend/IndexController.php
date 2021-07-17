@@ -155,9 +155,9 @@ class IndexController extends Controller
     public function tagWiseProduct($tag)
     {
         if (session()->get('language') == 'english') {
-            $products = Product::where('status', 1)->where('product_tags_en', $tag)->orderBy('id', 'DESC')->get();
+            $products = Product::where('status', 1)->where('product_tags_en', $tag)->orderBy('id', 'DESC')->paginate(3);
         } else {
-            $products = Product::where('status', 1)->where('product_tags_ja', $tag)->orderBy('id', 'DESC')->get();
+            $products = Product::where('status', 1)->where('product_tags_ja', $tag)->orderBy('id', 'DESC')->paginate(3);
         }
 
         $categories = Category::orderBy('category_name_ja', 'ASC')->get();
