@@ -125,3 +125,6 @@ Route::get('/language/japanese', [LanguageController::class, 'japanese'])->name(
 
 // Frontend Product Details Page url
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
+
+// Frontend Product Tags Page
+Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
