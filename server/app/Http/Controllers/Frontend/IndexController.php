@@ -25,7 +25,7 @@ class IndexController extends Controller
         $categories = Category::orderBy('category_name_ja', 'ASC')->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
-        $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $hot_deals = Product::where('hot_deals', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(3)->get();
         $spacial_offer = Product::where('spacial_offer', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $skip_category_0 = Category::skip(0)->first();
