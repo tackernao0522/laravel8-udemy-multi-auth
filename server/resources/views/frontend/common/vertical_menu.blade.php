@@ -2,7 +2,7 @@
 $categories = App\Models\Category::orderBy('category_name_ja', 'ASC')->get();
 @endphp
 <div class="side-menu animate-dropdown outer-bottom-xs">
-    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> @if(session()->get('language') == 'english') Categories @else カテゴリー @endif</div>
+    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>@if(session()->get('language') == 'english') Categories @else カテゴリー @endif</div>
     <nav class="yamm megamenu-horizontal">
         <ul class="nav">
             @foreach($categories as $category)
