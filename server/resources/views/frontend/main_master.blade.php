@@ -95,7 +95,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@if(session()->get('language') == 'english') Product Name: @else 商品名: @endif</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -104,28 +104,23 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
+                                <img src="" class="card-img-top" alt="..." style="height: 200px; width: 200px">
                             </div>
                         </div> <!-- end col md -->
 
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Price: @else 商品価格: @endif</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Code: @else 商品番号: @endif</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Category: @else カテゴリー: @endif</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Brand: @else ブランド: @endif</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Stock: @else 在庫: @endif</li>
                             </ul>
                         </div> <!-- end col md -->
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Example select</label>
+                                <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif</label>
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option>1</option>
                                     <option>2</option>
@@ -133,7 +128,24 @@
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                            </div>
+                            </div> <!-- end form group -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div> <!-- end form group -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">@if(session()->get('language') == 'english') Quantity @else 数量 @endif</label>
+                                <input type="number" class="form-control" id="exampleFormControlInput1" value="1" min="1">
+                            </div> <!-- end form group -->
+                            <button type="submit" class="btn btn-primary mb-2">@if(session()->get('language') == 'english') Add to Cart @else カートに入れる @endif</button>
                         </div> <!-- end col md -->
                     </div> <!-- end row -->
                 </div> <!-- end modal Body -->
