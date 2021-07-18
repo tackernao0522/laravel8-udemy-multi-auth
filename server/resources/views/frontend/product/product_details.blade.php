@@ -386,6 +386,45 @@
                                     </div><!-- /.row -->
                                 </div><!-- /.price-container -->
 
+                                <!-- Add Product Color And Size -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="info-title control-label">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif <span></span></label>
+                                            <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                <option selected="" disabled="">--@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif--</option>
+                                                @if(session()->get('language') == 'japanese')
+                                                @foreach($product_color_ja as $color)
+                                                <option value="{{ $color }}">{{ $color }}</option>
+                                                @endforeach
+                                                @else
+                                                @foreach($product_color_en as $color)
+                                                <option value="{{ $color }}">{{ $color }}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                        </div> <!-- end form group -->
+                                    </div> <!-- end col 6 -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="info-title control-label">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif <span></span></label>
+                                            <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                <option selected="" disabled="">--@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif--</option>
+                                                @if(session()->get('language') == 'japanese')
+                                                @foreach($product_size_ja as $size)
+                                                <option value="{{ $size }}">{{ $size }}</option>
+                                                @endforeach
+                                                @else
+                                                @foreach($product_size_en as $size)
+                                                <option value="{{ $size }}">{{ $size }}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                        </div> <!-- end form group -->
+                                    </div> <!-- end col 6 -->
+                                </div><!-- /.row -->
+                                <!-- End Add Product Color And Size -->
+
                                 <div class="quantity-container info-container">
                                     <div class="row">
 
@@ -412,12 +451,6 @@
 
                                     </div><!-- /.row -->
                                 </div><!-- /.quantity-container -->
-
-
-
-
-
-
                             </div><!-- /.product-info -->
                         </div><!-- /.col-sm-7 -->
                     </div><!-- /.row -->
@@ -458,8 +491,6 @@
 
                                             </div><!-- /.reviews -->
                                         </div><!-- /.product-reviews -->
-
-
 
                                         <div class="product-add-review">
                                             <h4 class="title">Write your own review</h4>
