@@ -131,3 +131,6 @@ Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
 
 // Frontend SubCategory Wise Data
 Route::get('/subCategory/product/{subCat_id}/{slug}', [IndexController::class, 'subCatWiseProduct']);
+
+// Frontend SubSubCategory Wise Data
+Route::get('/subSubCategory/product/{subSubCat_id}/{slug}', [IndexController::class, 'subSubCatWiseProduct']);
