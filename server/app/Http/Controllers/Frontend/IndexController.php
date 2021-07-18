@@ -167,11 +167,20 @@ class IndexController extends Controller
 
     public function subCatWiseProduct($subCat_id, $slug)
     {
-        $products = Product::where('status', 1)->where('subCategory_id', $subCat_id)->orderBy('id', 'DESC')->paginate(3);
+        $products = Product::where('status', 1)->where('subCategory_id', $subCat_id)->orderBy('id', 'DESC')->paginate(6);
 
         $categories = Category::orderBy('category_name_ja', 'ASC')->get();
 
         return view('frontend.product.subCategory_view', compact('products', 'categories'));
+    }
+
+    public function subSubCatWiseProduct($subSubCat_id, $slug)
+    {
+        $products = Product::where('status', 1)->where('subSubCategory_id', $subSubCat_id)->orderBy('id', 'DESC')->paginate(6);
+
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+
+        return view('frontend.product.sub_subCategory_view', compact('products', 'categories'));
     }
 
     private function saveImage(UploadedFile $file): string
