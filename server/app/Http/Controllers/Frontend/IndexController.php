@@ -165,6 +165,15 @@ class IndexController extends Controller
         return view('frontend.tags.tags_view', compact('products', 'categories'));
     }
 
+    public function subCatWiseProduct($subCat_id, $slug)
+    {
+        $products = Product::where('status', 1)->where('subCategory_id', $subCat_id)->orderBy('id', 'DESC')->paginate(3);
+
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+
+        return view('frontend.product.subCategory_view', compact('products', 'categories'));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();

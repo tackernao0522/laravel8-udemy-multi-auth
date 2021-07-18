@@ -1,7 +1,7 @@
 @extends('frontend.main_master')
 
 @section('title')
-@if(session()->get('language') == 'english') Tag Wise Product @else タグページ @endif
+@if(session()->get('language') == 'english') SubCategory Product @else 子カテゴリー商品 @endif
 @endsection
 
 @section('content')
@@ -46,7 +46,11 @@
                                                 @endphp
                                                 @foreach($subCategories as $subCategory)
                                                 <ul>
-                                                    <li><a href="#">@if(session()->get('language') == 'english') {{ $subCategory->subCategory_name_en }} @else {{ $subCategory->subCategory_name_ja }} @endif</a></li>
+                                                    @if(session()->get('language') == 'english')
+                                                    <li><a href="{{ url('subCategory/product/'.$subCategory->id.'/'.$subCategory->subCategory_slug_en ) }}">{{ $subCategory->subCategory_name_en }}</a></li>
+                                                    @else
+                                                    <li><a href="{{ url('subCategory/product/'.$subCategory->id.'/'.$subCategory->subCategory_slug_ja ) }}">{{ $subCategory->subCategory_name_ja }}</a></li>
+                                                    @endif
                                                 </ul>
                                                 @endforeach
                                             </div>

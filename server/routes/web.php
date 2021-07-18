@@ -128,3 +128,6 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDeta
 
 // Frontend Product Tags Page
 Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
+
+// Frontend SubCategory Wise Data
+Route::get('/subCategory/product/{subCat_id}/{slug}', [IndexController::class, 'subCatWiseProduct']);
