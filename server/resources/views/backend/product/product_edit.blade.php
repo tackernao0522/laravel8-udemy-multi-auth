@@ -205,9 +205,9 @@
                                         <!-- start 5th row  -->
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <h5>カラー <span class="text-danger">*</span></h5>
+                                                <h5>カラー <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_ja" class="form-control" value="{{ old('product_color_ja', $product->product_color_ja) }}" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_color_ja" class="form-control" value="{{ old('product_color_ja', $product->product_color_ja) }}" data-role="tagsinput">
                                                     @error('product_color_ja')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -217,9 +217,9 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <h5>Product Color En <span class="text-danger">*</span></h5>
+                                                <h5>Product Color En <span class="text-danger"></span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="product_color_en" class="form-control" value="{{ old('product_color_en', $product->product_color_en) }}" data-role="tagsinput" required="">
+                                                    <input type="text" name="product_color_en" class="form-control" value="{{ old('product_color_en', $product->product_color_en) }}" data-role="tagsinput">
                                                     @error('product_color_en')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
