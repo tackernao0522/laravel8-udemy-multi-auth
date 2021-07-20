@@ -31,6 +31,8 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             // 'brand_name_ja' => 'required|unique:brands',
             // 'brand_name_en' => 'required|unique:brands',
+            'product_color_ja' => 'nullable',
+            'product_color_en' => 'nullable',
             'product_thambnail' => 'required|mimes:jpg,jpeg,png',
         ], [
             // 'brand_name_en.required' => 'Input Brand English Name',
@@ -128,6 +130,19 @@ class ProductController extends Controller
 
     public function productDataUpdate(Request $request)
     {
+        $validatedData = $request->validate([
+            // 'brand_name_ja' => 'required|unique:brands',
+            // 'brand_name_en' => 'required|unique:brands',
+            'product_color_ja' => 'nullable',
+            'product_color_en' => 'nullable',
+            'product_thambnail' => 'mimes:jpg,jpeg,png',
+        ], [
+            // 'brand_name_en.required' => 'Input Brand English Name',
+            // 'brand_name_en.unique' => 'The brand name ja has already been taken.',
+            // 'product_thambnail.required' => 'メインサムネイルは必須です。(Input Brand Image.)',
+            'product_thambnail.mimes' => 'メインサムネイルにはjpg, jpeg, pngのうちいずれかの形式のファイルを指定してください。(The Product thambnail must be a file of type: jpg, jpeg, png.)',
+        ]);
+
         $product_id = $request->id;
 
         Product::findOrFail($product_id)->update([

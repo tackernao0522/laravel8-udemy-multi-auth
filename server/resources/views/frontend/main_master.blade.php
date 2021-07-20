@@ -120,25 +120,17 @@
                         </div> <!-- end col md -->
 
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group" id="sizeColor">
                                 <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select class="form-control" id="exampleFormControlSelect1" name="color">
+
                                 </select>
                             </div> <!-- end form group -->
 
-                            <div class="form-group">
+                            <div class="form-group" id="sizeArea">
                                 <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select class="form-control" id="exampleFormControlSelect1" name="size">
+
                                 </select>
                             </div> <!-- end form group -->
 
@@ -175,6 +167,28 @@
                     $('#pcategory').text(data.product.category.category_name_ja);
                     $('#pbrand').text(data.product.brand.brand_name_ja);
                     $('#pimage').attr('src', 'https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/' + data.product.product_thambnail);
+
+                    // Color
+                    $('select[name="color"]').empty();
+                    $.each(data.color, function(key, value) {
+                        $('select[name="color"]').append('<option value=" ' + value + ' ">' + value + ' </option>')
+                        if (data.color == "") {
+                            $('#sizeColor').hide();
+                        } else {
+                            $('#sizeColor').show();
+                        }
+                    }) // end color
+
+                    // Size
+                    $('select[name="size"]').empty();
+                    $.each(data.size, function(key, value) {
+                        $('select[name="size"]').append('<option value=" ' + value + ' ">' + value + ' </option>')
+                        if (data.size == "") {
+                            $('#sizeArea').hide();
+                        } else {
+                            $('#sizeArea').show();
+                        }
+                    })
                 }
             })
         }
