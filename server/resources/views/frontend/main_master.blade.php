@@ -96,7 +96,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@if(session()->get('language') == 'english') Product Name: @else 商品名: @endif</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><span id="pname"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -105,16 +105,16 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
-                                <img src="" class="card-img-top" alt="..." style="height: 200px; width: 200px">
+                                <img src=" " class="card-img-top" alt="..." style="height: 200px; width: 180px" id="pimage">
                             </div>
                         </div> <!-- end col md -->
 
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Price: @else 商品価格: @endif</li>
-                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Code: @else 商品番号: @endif</li>
-                                <li class="list-group-item">@if(session()->get('language') == 'english') Category: @else カテゴリー: @endif</li>
-                                <li class="list-group-item">@if(session()->get('language') == 'english') Brand: @else ブランド: @endif</li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Price: @else 商品価格: ¥ @endif <strong id="price"></strong></li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Product Code: @else 商品番号: @endif <strong id="pcode"></strong></li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Category: @else カテゴリー: @endif <strong id="pcategory"></strong></li>
+                                <li class="list-group-item">@if(session()->get('language') == 'english') Brand: @else ブランド: @endif <strong id="pbrand"></strong></li>
                                 <li class="list-group-item">@if(session()->get('language') == 'english') Stock: @else 在庫: @endif</li>
                             </ul>
                         </div> <!-- end col md -->
@@ -169,7 +169,12 @@
                 url: '/product/view/modal/' + id,
                 dataType: 'json',
                 success: function(data) {
-                    
+                    $('#pname').text(data.product.product_name_ja);
+                    $('#price').text(data.product.selling_price);
+                    $('#pcode').text(data.product.product_code);
+                    $('#pcategory').text(data.product.category.category_name_ja);
+                    $('#pbrand').text(data.product.brand.brand_name_ja);
+                    $('#pimage').attr('src', 'https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/' + data.product.product_thambnail);
                 }
             })
         }
