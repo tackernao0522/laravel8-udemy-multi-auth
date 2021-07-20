@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------

@@ -125,24 +125,25 @@
 
                         <div class="col-md-4">
                             <div class="form-group" id="sizeColor">
-                                <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="color">
+                                <label for="color">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif</label>
+                                <select class="form-control" id="color" name="color">
 
                                 </select>
                             </div> <!-- end form group -->
 
                             <div class="form-group" id="sizeArea">
-                                <label for="exampleFormControlSelect1">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="size">
+                                <label for="size">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif</label>
+                                <select class="form-control" id="size" name="size">
 
                                 </select>
                             </div> <!-- end form group -->
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">@if(session()->get('language') == 'english') Quantity @else 数量 @endif</label>
-                                <input type="number" class="form-control" id="exampleFormControlInput1" value="1" min="1">
-                            </div> <!-- end form group -->
-                            <button type="submit" class="btn btn-primary mb-2">@if(session()->get('language') == 'english') Add to Cart @else カートに入れる @endif</button>
+                                <label for="qty">@if(session()->get('language') == 'english') Quantity @else 数量 @endif</label>
+                                <input type="number" class="form-control" id="qty" value="1" min="1">
+                            </div> <!-- end form group composer require bumbummen99/shoppingcart "after" php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config" -->
+                            <input type="hidden" id="product_id">
+                            <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">@if(session()->get('language') == 'english') Add to Cart @else カートに入れる @endif</button>
                         </div> <!-- end col md -->
                     </div> <!-- end row -->
                 </div> <!-- end modal Body -->
@@ -171,6 +172,9 @@
                     $('#pcategory').text(data.product.category.category_name_ja);
                     $('#pbrand').text(data.product.brand.brand_name_ja);
                     $('#pimage').attr('src', 'https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/' + data.product.product_thambnail);
+
+                    $('#product_id').val(id);
+                    $('#qty').val(1);
 
                     // Product Price
                     if (data.product.discount_price == null) {
@@ -217,6 +221,31 @@
                 }
             })
         }
+        // End Product View with Modal
+
+        // Start Add To Cart Product
+        function addToCart() {
+            var product_name = $('#pname').text();
+            var id = $('#product_id').val();
+            var color = $('#color option:selected').text();
+            var size = $('#size option:selected').text();
+            var quantity = $('#qty').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    color: color,
+                    size: size,
+                    quantity: quantity,
+                    product_name: product_name
+                },
+                url: "/cart/data/store/" + id,
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+        // End Add to Cart Product
     </script>
 </body>
 
