@@ -207,6 +207,23 @@ class IndexController extends Controller
         return view('frontend.product.sub_subCategory_view', compact('products', 'categories'));
     }
 
+    public function productViewAjax($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $color = $product->product_color_ja;
+        $product_color = explode(',', $color);
+
+        $size = $product->product_size_ja;
+        $product_size = explode(',', $size);
+
+        return response()->json(array(
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $product_size,
+        ));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
