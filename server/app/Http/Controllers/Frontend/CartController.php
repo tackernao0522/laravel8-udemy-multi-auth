@@ -65,4 +65,9 @@ class CartController extends Controller
 
         return response()->json(['success' => 'カート商品を削除しました。']);
     }
+
+    public function addToWishlist(Request $request, $product_id)
+    {
+
+    }
 }
