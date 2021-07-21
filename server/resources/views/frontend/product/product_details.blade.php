@@ -110,7 +110,7 @@
                         </div><!-- /.gallery-holder -->
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
-                                <h1 class="name">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</h1>
+                                <h1 class="name" id="pname">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</h1>
 
                                 <div class="rating-reviews m-t-20">
                                     <div class="row">
@@ -178,7 +178,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="info-title control-label">@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif <span></span></label>
-                                            <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                            <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color">
                                                 <option selected="" disabled="">--@if(session()->get('language') == 'english') Choose Color @else カラー選択 @endif--</option>
                                                 @if(session()->get('language') == 'japanese')
                                                 @foreach($product_color_ja as $color)
@@ -194,8 +194,11 @@
                                     </div> <!-- end col 6 -->
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            @if($product->product_size_ja == null && $product->product_size_en == null)
+
+                                            @else
                                             <label class="info-title control-label">@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif <span></span></label>
-                                            <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                            <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
                                                 <option selected="" disabled="">--@if(session()->get('language') == 'english') Choose Size @else サイズ選択 @endif--</option>
                                                 @if(session()->get('language') == 'japanese')
                                                 @foreach($product_size_ja as $size)
@@ -207,6 +210,7 @@
                                                 @endforeach
                                                 @endif
                                             </select>
+                                            @endif
                                         </div> <!-- end form group -->
                                     </div> <!-- end col 6 -->
                                 </div><!-- /.row -->
@@ -216,7 +220,7 @@
                                     <div class="row">
 
                                         <div class="col-sm-2">
-                                            <span class="label">Qty :</span>
+                                            <span class="label">@if(session()->get('language') == 'english') Qty : @else 数量 : @endif</span>
                                         </div>
 
                                         <div class="col-sm-2">
@@ -226,13 +230,15 @@
                                                         <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                         <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" id="qty" value="1" min="1">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+
                                         <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i>@if(session()->get('language') == 'english') ADD TO CART @else カートに入れる @endif</a>
+                                            <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i>@if(session()->get('language') == 'english') ADD TO CART @else カートに入れる @endif</button>
                                         </div>
 
 
