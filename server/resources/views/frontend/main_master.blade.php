@@ -243,6 +243,7 @@
                 },
                 url: "/cart/data/store/" + id,
                 success: function(data) {
+                    miniCart()
                     $('#closeModal').click();
                     // console.log(data);
 
@@ -278,17 +279,19 @@
                 url: '/product/mini/cart',
                 dataType: 'json',
                 success: function(response) {
+                    $('span[id="cartSubTotal"]').text(response.cartTotal + '(税込)');
+                    $('#cartQty').text(response.cartQty);
                     var miniCart = "";
 
                     $.each(response.carts, function(key, value) {
                         miniCart += `<div class="cart-item product-summary">
                   <div class="row">
                     <div class="col-xs-4">
-                      <div class="image"> <a href="detail.html"><img src="{{ asset('frontend/assets/images/cart.jpg') }}" alt=""></a> </div>
+                      <div class="image"> <a href="detail.html"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.options.image}" alt=""></a> </div>
                     </div>
                     <div class="col-xs-7">
-                      <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                      <div class="price">¥600.00</div>
+                      <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                      <div class="price"> ${'¥' + value.price} * ${value.qty} </div>
                     </div>
                     <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
                   </div>
