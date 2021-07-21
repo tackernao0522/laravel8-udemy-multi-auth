@@ -375,7 +375,7 @@
             })
         }
     </script>
-    // End Add Wishlist Page
+    <!--  End Add Wishlist Page -->
 </body>
 
 </html>
