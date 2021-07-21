@@ -154,3 +154,5 @@ Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'addToWishl
 
 // Wishlist Page
 Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
+
+Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
