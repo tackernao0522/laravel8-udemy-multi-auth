@@ -58,4 +58,11 @@ class CartController extends Controller
             'cartTotal' => $cartTotal,
         ));
     }
+
+    public function removeMiniCart($rowId)
+    {
+        Cart::remove($rowId);
+
+        return response()->json(['success' => 'カート商品を削除しました。']);
+    }
 }
