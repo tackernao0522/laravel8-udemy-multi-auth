@@ -291,7 +291,7 @@
                     </div>
                     <div class="col-xs-7">
                       <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                      <div class="price"> ${'¥' + value.price} * ${value.qty} </div>
+                      <div class="price"> ${'¥' + value.price} x ${value.qty} </div>
                     </div>
                     <div class="col-xs-1 action"> <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>
                   </div>
@@ -376,6 +376,46 @@
         }
     </script>
     <!--  End Add Wishlist Page -->
+
+    <!-- Load Wishlist Data -->
+    <script type="text/javascript">
+        function wishlist() {
+            $.ajax({
+                type: 'GET',
+                url: '/get-wishlist-product',
+                dataType: 'json',
+                success: function(response) {
+                    var rows = "";
+
+                    $.each(response, function(key, value) {
+                        rows += `<tr>
+                                    <td class="col-md-2"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.product.product_thambnail}"></td>
+                                    <td class="col-md-7">
+                                        <div class="product-name"><a href="#">@if(session()->get('language') == 'english') ${value.product.product_name_en} @else ${value.product.product_name_ja} @endif</a></div>
+                                        <div class="price">
+                                        ${value.product.discount_price == null
+                                            ? `${'¥' + value.product.selling_price}`
+                                        :
+                                        `${'¥' + value.product.discount_price} <span>${'¥' + value.product.selling_price}</span>`
+                                        }
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="${value.product_id}" onclick="productView(this.id)">@if(session()->get('language') == 'english') Add to cart @else カートに入れる @endif</button>
+                                    </td>
+                                    <td class="col-md-1 close-btn">
+                                        <a href="#" class=""><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>`
+                    });
+
+                    $('#wishlist').html(rows);
+                }
+            })
+        }
+        wishlist();
+    </script>
+    <!-- End Load Wishlist Data -->
 </body>
 
 </html>
