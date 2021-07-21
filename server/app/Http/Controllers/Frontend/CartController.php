@@ -74,14 +74,20 @@ class CartController extends Controller
         if (Auth::check()) {
             $exists = Wishlist::where('user_id', Auth::id())->where('product_id', $product_id)->first();
 
-            Wishlist::insert([
-                'user_id' => Auth::id(),
-                'product_id' => $product_id,
-                'created_at' => Carbon::now(),
-            ]);
+            if (!$exists) {
+                Wishlist::insert([
+                    'user_id' => Auth::id(),
+                    'product_id' => $product_id,
+                    'created_at' => Carbon::now(),
+                ]);
 
-            return response()->json(['success' => 'ウイッシュリストに追加しました。']);
+                return response()->json(['success' => 'ウイッシュリストに追加しました。']);
+            } else {
+
+                return response()->json(['error' => 'この商品は既にウイッシュリストに入っています。']);
+            }
         } else {
+
             return response()->json(['error' => 'ログインしてください。']);
         }
     }
