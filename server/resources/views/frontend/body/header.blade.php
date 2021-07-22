@@ -95,7 +95,7 @@
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                                 <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
                                 <div class="total-price-basket"> <span class="lbl">@if(session()->get('language') == 'english') cart @else カート @endif -</span>
-                                    <span class="total-price"> <span class="sign">¥</span>
+                                    <span class="total-price"> <span class="sign"></span>
                                         <span class="value" id="cartSubTotal"> </span> </span>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 </div>
                                 <!-- End Mini Cart Start with Ajax -->
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">@if(session()->get('language') == 'english') Sub Total @else 小計 @endif :</span>
+                                    <div class="pull-right"> <span class="text">@if(session()->get('language') == 'english') Grand Total : @else 合計 : @endif</span>
                                         <span class='price' id="cartSubTotal"> </span>
                                     </div>
                                     <div class="clearfix"></div>
