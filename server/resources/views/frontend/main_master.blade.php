@@ -291,7 +291,7 @@
                     </div>
                     <div class="col-xs-7">
                       <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                      <div class="price"> ${'¥' + value.price} x ${value.qty} </div>
+                      <div class="price"> ${'¥' + value.price.toLocaleString()} x ${value.qty} </div>
                     </div>
                     <div class="col-xs-1 action"> <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>
                   </div>
@@ -460,21 +460,41 @@
                 url: '/user/get-cart-product',
                 dataType: 'json',
                 success: function(response) {
-                    var rows = "";
-
+                    var rows = ""
                     $.each(response.carts, function(key, value) {
                         rows += `<tr>
-                                    <td class="col-md-2"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.options.image}"></td>
-                                    <td class="col-md-7">
-                                        <div class="product-name">${value.name}</a></div>
-                                        <div class="price">
-                                        ${'¥' + value.price}
-                                        </div>
-                                    </td>
-                                    <td class="col-md-1 close-btn">
-                                        <button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>
-                                    </td>
-                                </tr>`
+        <td class="col-md-2"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.options.image}" alt="imga" style="width:60px; height:60px;"></td>
+
+        <td class="col-md-2">
+            <div class="product-name"><a href="#">${value.name}</a></div>
+
+            <div class="price">
+                            ¥${value.price.toLocaleString()}
+                        </div>
+                    </td>
+          <td class="col-md-2">
+            <strong>${value.options.color} </strong>
+            </td>
+         <td class="col-md-2">
+          ${value.options.size == null
+            ? `<span> .... </span>`
+            :
+          `<strong>${value.options.size} </strong>`
+          }
+            </td>
+           <td class="col-md-2">
+            <button type="submit" class="btn btn-success btn-sm">+</button>
+        <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >
+        <button type="submit" class="btn btn-danger btn-sm">-</button>
+            </td>
+             <td class="col-md-2">
+            <strong>¥${value.subtotal.toLocaleString()} </strong>
+            </td>
+
+        <td class="col-md-1 close-btn">
+            <button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>
+        </td>
+                </tr>`
                     });
 
                     $('#cartPage').html(rows);
