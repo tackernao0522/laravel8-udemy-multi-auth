@@ -8,7 +8,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'english') My Account @else マイアカウント @endif</a></li>
                         <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>@if(session()->get('language') == 'english') Wishlist @else ウイッシュリスト @endif</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
+                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'english') Checkout @else チェックアウト @endif</a></li>
                         @auth
                         <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'english') User Profile @else ユーザープロフィール @endif</a></li>

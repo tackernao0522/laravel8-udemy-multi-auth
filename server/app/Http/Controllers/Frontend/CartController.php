@@ -32,6 +32,7 @@ class CartController extends Controller
 
             return response()->json(['success' => 'カートに追加しました。']);
         } else {
+
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
