@@ -285,16 +285,16 @@
 
                     $.each(response.carts, function(key, value) {
                         miniCart += `<div class="cart-item product-summary">
-                  <div class="row">
+                    <div class="row">
                     <div class="col-xs-4">
-                      <div class="image"> <a href="detail.html"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.options.image}" alt=""></a> </div>
+                        <div class="image"> <a href="detail.html"><img src="https://melpit-user-s3.s3.ap-northeast-1.amazonaws.com/products/thambnail/${value.options.image}" alt=""></a> </div>
                     </div>
                     <div class="col-xs-7">
-                      <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                      <div class="price"> ${'¥' + value.price.toLocaleString()} x ${value.qty} </div>
+                        <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                        <div class="price"> ${'¥' + value.price.toLocaleString()} x ${value.qty} </div>
                     </div>
                     <div class="col-xs-1 action"> <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>
-                  </div>
+                    </div>
                 </div>
                 <!-- /.cart-item -->
                 <div class="clearfix"></div>
@@ -473,29 +473,29 @@
                             ¥${value.price.toLocaleString()}
                         </div>
                     </td>
-          <td class="col-md-2">
-            <strong>${value.options.color} </strong>
+            <td class="col-md-2">
+                <strong>${value.options.color} </strong>
+                </td>
+                <td class="col-md-2">
+                ${value.options.size == null
+                ? `<span> .... </span>`
+                :
+                `<strong>${value.options.size} </strong>`
+                }
             </td>
-         <td class="col-md-2">
-          ${value.options.size == null
-            ? `<span> .... </span>`
-            :
-          `<strong>${value.options.size} </strong>`
-          }
+            <td class="col-md-2">
+                <button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>
+                <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >
+                <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>
             </td>
-           <td class="col-md-2">
-            <button type="submit" class="btn btn-success btn-sm">+</button>
-        <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >
-        <button type="submit" class="btn btn-danger btn-sm">-</button>
-            </td>
-             <td class="col-md-2">
-            <strong>¥${value.subtotal.toLocaleString()} </strong>
+            <td class="col-md-2">
+                <strong>¥${value.subtotal.toLocaleString()} </strong>
             </td>
 
-        <td class="col-md-1 close-btn">
-            <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
-        </td>
-                </tr>`
+            <td class="col-md-1 close-btn">
+                <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
+            </td>
+            </tr>`
                     });
 
                     $('#cartPage').html(rows);
@@ -539,6 +539,20 @@
             });
         }
         // end MyCart remove
+
+        // Cart Increment
+        function cartIncrement(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: "/cart-increment/" + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    cart();
+                    miniCart();
+                }
+            });
+        }
+        // End Cart Increment
     </script>
     <!-- End Load MyCart Data -->
 </body>
