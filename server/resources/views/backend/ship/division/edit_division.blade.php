@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">配送エリア編集</h3>
+                        <h3 class="box-title">都道府県編集</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -19,7 +19,7 @@
                             <form method="POST" action="{{ route('division.update', $division->id) }}">
                                 @csrf
                                 <div class="form-group">
-                                    <h5>配送エリア名 <span class="text-danger">*</span></h5>
+                                    <h5>都道府県名 <span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" name="division_name" class="form-control" value="{{ old('division_name', $division->division_name) }}">
                                         @error('division_name')

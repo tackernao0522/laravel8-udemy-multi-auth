@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\ShipDivision;
+use App\Models\ShipDistrict;
 
 class ShippingAreaController extends Controller
 {
@@ -21,8 +22,8 @@ class ShippingAreaController extends Controller
         $validatedData = $request->validate([
             'division_name' => 'required|unique:ship_divisions',
         ], [
-            'division_name.required' => '配送エリア名は必須です。',
-            'division_name.unique' => 'このエリア名は既に登録されています。',
+            'division_name.required' => '都道府県名は必須です。',
+            'division_name.unique' => 'この都道府県名は既に登録されています。',
         ]);
 
         ShipDivision::insert([
@@ -31,7 +32,7 @@ class ShippingAreaController extends Controller
         ]);
 
         $notification = array(
-            'message' => '配送エリアを作成しました。(Division Inserted Successfully)',
+            'message' => '都道府県名を作成しました。(Division Inserted Successfully)',
             'alert-type' => 'success',
         );
 
@@ -52,7 +53,7 @@ class ShippingAreaController extends Controller
         $validatedData = $request->validate([
             'division_name' => 'required',
         ], [
-            'division_name.required' => '配送エリア名は必須です。',
+            'division_name.required' => '都道府県名は必須です。',
         ]);
 
         $division->division_name = $request->division_name;
@@ -60,7 +61,7 @@ class ShippingAreaController extends Controller
         $division->save();
 
         $notification = array(
-            'message' => '配送エリアID：' . $division->id . 'を更新しました(Division Updated Successfully)。',
+            'message' => '都道府県名ID：' . $division->id . 'を更新しました(Division Updated Successfully)。',
             'alert-type' => 'info',
         );
 
@@ -74,11 +75,19 @@ class ShippingAreaController extends Controller
         $division->delete();
 
         $notification = array(
-            'message' => '配送エリア：' . $division->division_name . 'を削除しました。',
+            'message' => '都道府県名：' . $division->division_name . 'を削除しました。',
             'alert-type' => 'error',
         );
 
         return redirect()->back()
             ->with($notification);
+    }
+
+    public function districtView()
+    {
+        $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $districts = ShipDistrict::orderBy('id', 'DESC')->get();
+
+        return view('backend.ship.district.view_district', compact('divisions', 'districts'));
     }
 }
