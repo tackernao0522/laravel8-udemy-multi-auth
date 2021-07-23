@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
@@ -114,6 +115,15 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
         Route::post('/update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update');
         Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');
+    });
+
+    // Admin Shipping All Routes
+    Route::prefix('shipping')->group(function () {
+        Route::get('/division/view', [ShippingAreaController::class, 'divisionView'])->name('manage-division');
+        Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store');
+        // Route::get('/edit/{id}', [ShippingAreaController::class, 'couponEdit'])->name('coupon.edit');
+        // Route::post('/update/{id}', [ShippingAreaController::class, 'couponUpdate'])->name('coupon.update');
+        // Route::get('/delete/{id}', [ShippingAreaController::class, 'couponDelete'])->name('coupon.delete');
     });
 });
 
