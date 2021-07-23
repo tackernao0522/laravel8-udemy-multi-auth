@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
@@ -104,6 +105,17 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{id}', [SliderController::class, 'sliderDelete'])->name('slider.delete');
         Route::get('/inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
         Route::get('/active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
+    });
+
+    // Admin Coupon All Routes
+    Route::prefix('coupons')->group(function () {
+        Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon');
+        // Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store');
+        // Route::get('/edit/{id}', [SliderController::class, 'sliderEdit'])->name('slider.edit');
+        // Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update');
+        // Route::get('/delete/{id}', [SliderController::class, 'sliderDelete'])->name('slider.delete');
+        // Route::get('/inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
+        // Route::get('/active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
     });
 });
 
