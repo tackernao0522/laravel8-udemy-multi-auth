@@ -26,11 +26,11 @@
                                 <tbody>
                                     @foreach($districts as $item)
                                     <tr>
-                                        <td>{{ $item->division_id }}</td>
+                                        <td>{{ $item->division->division_name }}</td>
                                         <td>{{ $item->district_name }}</td>
                                         <td width="40%">
-                                            <a href="{{ route('division.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('division.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('district.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('district.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -53,18 +53,18 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('division.store') }}">
+                            <form method="POST" action="{{ route('district.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>都道府県 <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <select name="divistion_id" class="form-control">
+                                        <select name="division_id" class="form-control">
                                             <option value="" selected="" disabled="">都道府県 選択</option>
                                             @foreach($divisions as $division)
-                                            <option value="{{ $division->id }}" {{ old('divistion_id') == $division->id ? 'selected': '' }}>{{ $division->division_name }}</option>
+                                            <option value="{{ $division->id }}" {{ old('division_id') == $division->id ? 'selected': '' }}>{{ $division->division_name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('divistion_id')
+                                        @error('division_id')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

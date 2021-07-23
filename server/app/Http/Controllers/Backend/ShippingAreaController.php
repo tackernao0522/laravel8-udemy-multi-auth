@@ -86,8 +86,80 @@ class ShippingAreaController extends Controller
     public function districtView()
     {
         $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
-        $districts = ShipDistrict::orderBy('id', 'DESC')->get();
+        $districts = ShipDistrict::with('division')->orderBy('id', 'DESC')->get();
 
         return view('backend.ship.district.view_district', compact('divisions', 'districts'));
+    }
+
+    public function districtStore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'division_id' => 'required',
+            'district_name' => 'required',
+        ], [
+            'division_id.required' => '都道府県名は必須です。',
+            'district_name.required' => '区市町村名は必須です。',
+        ]);
+
+        ShipDistrict::insert([
+            'division_id' => $request->division_id,
+            'district_name' => $request->district_name,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => '区市町村名を作成しました。(District Inserted Successfully)',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+    public function districtEdit($id)
+    {
+        $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $district = ShipDistrict::findOrFail($id);
+
+        return view('backend.ship.district.edit_district', compact('divisions', 'district'));
+    }
+
+    public function districtUpdate(Request $request, $id)
+    {
+        $district = ShipDistrict::findOrFail($id);
+        $validatedData = $request->validate([
+            'division_id' => 'required',
+            'district_name' => 'required',
+        ], [
+            'division_id.required' => '都道府県名は必須です。',
+            'district_name.required' => '区市町村名は必須です。',
+        ]);
+
+        $district->division_id = $request->division_id;
+        $district->district_name = $request->district_name;
+        $district->updated_at = Carbon::now();
+        $district->save();
+
+        $notification = array(
+            'message' => '区市町村ID：' . $district->id . 'を更新しました(District Updated Successfully)。',
+            'alert-type' => 'info',
+        );
+
+        return redirect()->route('manage-district')
+            ->with($notification);
+    }
+
+    public function districtDelete($id)
+    {
+        $district = ShipDistrict::findOrFail($id);
+        $district->delete();
+
+        $notification = array(
+            'message' => '区市町村名：' . $district->district_name . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
     }
 }
