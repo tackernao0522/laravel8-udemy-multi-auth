@@ -128,10 +128,10 @@ Route::middleware(['auth:admin'])->group(function () {
 
         // Ship Destrict
         Route::get('/district/view', [ShippingAreaController::class, 'districtView'])->name('manage-district');
-        // Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store');
-        // Route::get('/division/edit/{id}', [ShippingAreaController::class, 'divisionEdit'])->name('division.edit');
-        // Route::post('/division/update/{id}', [ShippingAreaController::class, 'divisionUpdate'])->name('division.update');
-        // Route::get('/division/delete/{id}', [ShippingAreaController::class, 'divisionDelete'])->name('division.delete');
+        Route::post('/district/store', [ShippingAreaController::class, 'districtStore'])->name('district.store');
+        Route::get('/district/edit/{id}', [ShippingAreaController::class, 'districtEdit'])->name('district.edit');
+        Route::post('/district/update/{id}', [ShippingAreaController::class, 'districtUpdate'])->name('district.update');
+        Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
     });
 });
 
