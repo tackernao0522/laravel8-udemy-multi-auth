@@ -119,11 +119,19 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // Admin Shipping All Routes
     Route::prefix('shipping')->group(function () {
+        // Ship Division
         Route::get('/division/view', [ShippingAreaController::class, 'divisionView'])->name('manage-division');
         Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store');
         Route::get('/division/edit/{id}', [ShippingAreaController::class, 'divisionEdit'])->name('division.edit');
         Route::post('/division/update/{id}', [ShippingAreaController::class, 'divisionUpdate'])->name('division.update');
         Route::get('/division/delete/{id}', [ShippingAreaController::class, 'divisionDelete'])->name('division.delete');
+
+        // Ship Destrict
+        Route::get('/district/view', [ShippingAreaController::class, 'districtView'])->name('manage-district');
+        // Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store');
+        // Route::get('/division/edit/{id}', [ShippingAreaController::class, 'divisionEdit'])->name('division.edit');
+        // Route::post('/division/update/{id}', [ShippingAreaController::class, 'divisionUpdate'])->name('division.update');
+        // Route::get('/division/delete/{id}', [ShippingAreaController::class, 'divisionDelete'])->name('division.delete');
     });
 });
 
