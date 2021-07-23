@@ -107,6 +107,7 @@ $route = Route::current()->getName();
                 <ul class="treeview-menu">
                     <li class="{{ ($route == 'manage-division') ? 'active' : '' }}"><a href="{{ route('manage-division') }}"><i class="ti-more"></i>都道府県</a></li>
                     <li class="{{ ($route == 'manage-district') ? 'active' : '' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>区・市・町・村</a></li>
+                    <li class="{{ ($route == 'manage-town') ? 'active' : '' }}"><a href="{{ route('manage-town') }}"><i class="ti-more"></i>町名</a></li>
                 </ul>
             </li>
 
