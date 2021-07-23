@@ -111,11 +111,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::prefix('coupons')->group(function () {
         Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon');
         Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store');
-        // Route::get('/edit/{id}', [SliderController::class, 'sliderEdit'])->name('slider.edit');
-        // Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update');
-        // Route::get('/delete/{id}', [SliderController::class, 'sliderDelete'])->name('slider.delete');
-        // Route::get('/inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
-        // Route::get('/active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
+        Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
+        Route::post('/update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update');
+        Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');
     });
 });
 
