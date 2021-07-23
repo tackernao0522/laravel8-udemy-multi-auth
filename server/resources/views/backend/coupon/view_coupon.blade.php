@@ -30,12 +30,14 @@
                                     <tr>
                                         <td>{{ $item->coupon_name }}</td>
                                         <td>{{ $item->coupon_discount }}%</td>
-                                        <td>{{ $item->coupon_validity }}</td>
                                         <td>
-                                            @if($item->status == 1)
-                                            <span class="badge badge-pill badge-success">適用</span>
+                                            {{ Carbon\Carbon::parse($item->coupon_validity)->format('Y年m月d日') }}
+                                        </td>
+                                        <td>
+                                            @if($item->coupon_validity >= Carbon\Carbon::now()->format('Y-m-d'))
+                                            <span class="badge badge-pill badge-success">適用期間中</span>
                                             @else
-                                            <span class="badge badge-pill badge-danger">適用停止</span>
+                                            <span class="badge badge-pill badge-danger">期限切れ</span>
                                             @endif
                                         </td>
                                         <td width="30%">
@@ -63,7 +65,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('categoy.store') }}">
+                            <form method="POST" action="{{ route('coupon.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>クーポン名 <span class="text-danger">*</span></h5>
@@ -88,7 +90,7 @@
                                 <div class="form-group">
                                     <h5>クーポン有効期限日<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="date" name="coupon_validity" class="form-control" value="{{ old('coupon_validity') }}">
+                                        <input type="date" name="coupon_validity" class="form-control" value="{{ old('coupon_validity') }}" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
                                         @error('coupon_validity')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
