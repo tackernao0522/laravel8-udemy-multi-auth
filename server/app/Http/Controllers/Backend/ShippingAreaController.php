@@ -21,8 +21,8 @@ class ShippingAreaController extends Controller
         $validatedData = $request->validate([
             'division_name' => 'required|unique:ship_divisions',
         ], [
-            'division_name.required' => '配送区分名は必須です。',
-            'division_name.unique' => 'このエリアは既に登録されています。',
+            'division_name.required' => '配送エリア名は必須です。',
+            'division_name.unique' => 'このエリア名は既に登録されています。',
         ]);
 
         ShipDivision::insert([
@@ -33,6 +33,49 @@ class ShippingAreaController extends Controller
         $notification = array(
             'message' => '配送エリアを作成しました。(Division Inserted Successfully)',
             'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+    public function divisionEdit($id)
+    {
+        $division = ShipDivision::findOrFail($id);
+
+        return view('backend.ship.division.edit_division', compact('division'));
+    }
+
+    public function divisionUpdate(Request $request, $id)
+    {
+        $division = ShipDivision::findOrFail($id);
+        $validatedData = $request->validate([
+            'division_name' => 'required',
+        ], [
+            'division_name.required' => '配送エリア名は必須です。',
+        ]);
+
+        $division->division_name = $request->division_name;
+        $division->updated_at = Carbon::now();
+        $division->save();
+
+        $notification = array(
+            'message' => '配送エリアID：' . $division->id . 'を更新しました(Division Updated Successfully)。',
+            'alert-type' => 'info',
+        );
+
+        return redirect()->route('manage-division')
+            ->with($notification);
+    }
+
+    public function divisionDelete($id)
+    {
+        $division = ShipDivision::findOrFail($id);
+        $division->delete();
+
+        $notification = array(
+            'message' => '配送エリア：' . $division->division_name . 'を削除しました。',
+            'alert-type' => 'error',
         );
 
         return redirect()->back()
