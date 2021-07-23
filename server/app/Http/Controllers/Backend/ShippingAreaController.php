@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\ShipDivision;
 use App\Models\ShipDistrict;
+use App\Models\ShipTown;
 
 class ShippingAreaController extends Controller
 {
@@ -161,5 +162,14 @@ class ShippingAreaController extends Controller
 
         return redirect()->back()
             ->with($notification);
+    }
+
+    public function townView()
+    {
+        $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $districts = ShipDistrict::orderBy('district_name', 'ASC')->get();
+        $towns = ShipTown::orderBy('id', 'DESC')->get();
+
+        return view('backend.ship.town.view_town', compact('divisions', 'districts', 'towns'));
     }
 }

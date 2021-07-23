@@ -132,6 +132,13 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/district/edit/{id}', [ShippingAreaController::class, 'districtEdit'])->name('district.edit');
         Route::post('/district/update/{id}', [ShippingAreaController::class, 'districtUpdate'])->name('district.update');
         Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
+
+        // Ship Town
+        Route::get('/town/view', [ShippingAreaController::class, 'townView'])->name('manage-town');
+    //     Route::post('/district/store', [ShippingAreaController::class, 'districtStore'])->name('district.store');
+    //     Route::get('/district/edit/{id}', [ShippingAreaController::class, 'districtEdit'])->name('district.edit');
+    //     Route::post('/district/update/{id}', [ShippingAreaController::class, 'districtUpdate'])->name('district.update');
+    //     Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
     });
 });
 
