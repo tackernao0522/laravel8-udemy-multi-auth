@@ -237,4 +237,18 @@ class ShippingAreaController extends Controller
         return redirect()->route('manage-town')
             ->with($notification);
     }
+
+    public function townDelete($id)
+    {
+        $town = ShipTown::findOrFail($id);
+        $town->delete();
+
+        $notification = array(
+            'message' => '町名：' . $town->town_name . 'を削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
 }
