@@ -580,9 +580,7 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                data: {
-                    coupon_name: coupon_name
-                },
+                data: {coupon_name: coupon_name},
                 url: "{{ url('/coupon-apply') }}",
                 success: function(data) {
                     // Start Message
@@ -606,6 +604,17 @@
                         })
                     }
                     // End Message
+                }
+            })
+        }
+
+        function couponCalculation() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/coupon-calculation') }}",
+                dataType: 'json',
+                success: function(data) {
+
                 }
             })
         }
