@@ -98,22 +98,44 @@ class CartController extends Controller
     public function couponApply(Request $request)
     {
         $coupon = Coupon::where('coupon_name', $request->coupon_name)
-            ->where('coupon_validity', '>=', Carbon::now()->format('Y年m月d日'))
+            ->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))
             ->first();
 
         if ($coupon) {
+            $couponDiscount = intval($coupon->coupon_discount);
+            $cartTotal = intval(Cart::total());
+
             Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount' => Cart::total() * $coupon->coupon_discount / 100,
-                'total_amount' => Cart::total() -  $coupon->coupon_discount / 100,
+                'coupon_discount' => $couponDiscount,
+                'discount_amount' => $cartTotal * $couponDiscount / 100,
+                'total_amount' => $cartTotal - $couponDiscount / 100,
             ]);
 
-            return responst()->json(array(
+            return response()->json(array(
                 'success' => 'クーポンが適用されました。',
             ));
         } else {
             return response()->json(['error' => '無効なクーポンです。']);
+        }
+    }
+
+    public function couponCalculation()
+    {
+        if (Session::has('coupon')) {
+
+            return response()->json(array(
+                'subtotal' => Cart::total(),
+                'coupon_name' => session()->get('coupon')['coupon_name'],
+                'coupon_discount' => session()->get('coupon')['coupon_discount'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        } else {
+
+            return response()->jsoan(array(
+                'total' => Cart::total(),
+            ));
         }
     }
 }
