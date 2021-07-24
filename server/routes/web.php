@@ -207,3 +207,6 @@ Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'removeCartP
 Route::get('/cart-increment/{rowId}', [CartPageController::class, 'cartIncrement']);
 
 Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'cartDecrement']);
+
+// Frontend Coupon Option
+Route::post('/coupon-apply', [CartController::class, 'couponApply']);
