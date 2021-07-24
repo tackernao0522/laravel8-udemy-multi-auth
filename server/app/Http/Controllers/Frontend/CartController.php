@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Models\Coupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -95,6 +97,23 @@ class CartController extends Controller
 
     public function couponApply(Request $request)
     {
-        
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)
+            ->where('coupon_validity', '>=', Carbon::now()->format('Y年m月d日'))
+            ->first();
+
+        if ($coupon) {
+            Session::put('coupon', [
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => Cart::total() * $coupon->coupon_discount / 100,
+                'total_amount' => Cart::total() -  $coupon->coupon_discount / 100,
+            ]);
+
+            return responst()->json(array(
+                'success' => 'クーポンが適用されました。',
+            ));
+        } else {
+            return response()->json(['error' => '無効なクーポンです。']);
+        }
     }
 }
