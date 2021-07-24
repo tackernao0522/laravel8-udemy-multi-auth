@@ -138,7 +138,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/town/store', [ShippingAreaController::class, 'townStore'])->name('town.store');
         Route::get('/town/edit/{id}', [ShippingAreaController::class, 'townEdit'])->name('town.edit');
         Route::post('/town/update/{id}', [ShippingAreaController::class, 'townUpdate'])->name('town.update');
-    //     Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
+        Route::get('/town/delete/{id}', [ShippingAreaController::class, 'townDelete'])->name('town.delete');
     });
 });
 
