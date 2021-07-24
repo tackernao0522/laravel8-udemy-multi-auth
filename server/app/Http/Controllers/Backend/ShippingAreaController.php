@@ -168,8 +168,73 @@ class ShippingAreaController extends Controller
     {
         $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
         $districts = ShipDistrict::orderBy('district_name', 'ASC')->get();
-        $towns = ShipTown::orderBy('id', 'DESC')->get();
+        $towns = ShipTown::with('division', 'district')->orderBy('id', 'DESC')->get();
 
         return view('backend.ship.town.view_town', compact('divisions', 'districts', 'towns'));
+    }
+
+    public function townStore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'town_name' => 'required',
+        ], [
+            'division_id.required' => '都道府県名は必須です。',
+            'district_id.required' => '区市町村名は必須です。',
+            'town_name.required' => '町名は必須です。',
+        ]);
+
+        ShipTown::insert([
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'town_name' => $request->town_name,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => '町名を作成しました。(Town Name Inserted Successfully)',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
+    public function townEdit($id)
+    {
+        $divisions = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $districts = ShipDistrict::orderBy('district_name', 'ASC')->get();
+        $town = ShipTown::findOrFail($id);
+
+        return view('backend.ship.town.edit_town', compact('divisions', 'districts', 'town'));
+    }
+
+    public function townUpdate(Request $request, $id)
+    {
+        $town = ShipTown::findOrFail($id);
+        $validatedData = $request->validate([
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'town_name' => 'required',
+        ], [
+            'division_id.required' => '都道府県名は必須です。',
+            'district_id.required' => '区市町村名は必須です。',
+            'town_name.required' => '町名は必須です。',
+        ]);
+
+        $town->division_id = $request->division_id;
+        $town->district_id = $request->district_id;
+        $town->town_name = $request->town_name;
+        $town->updated_at = Carbon::now();
+        $town->save();
+
+        $notification = array(
+            'message' => '町名ID：' . $town->id . 'を更新しました(Town Updated Successfully)。',
+            'alert-type' => 'info',
+        );
+
+        return redirect()->route('manage-town')
+            ->with($notification);
     }
 }
