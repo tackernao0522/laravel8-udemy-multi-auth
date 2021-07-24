@@ -41,6 +41,62 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="col-md-4 col-sm-12 estimate-ship-tax">
+
+                </div>
+
+                <div class="col-md-4 col-sm-12 estimate-ship-tax">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="estimate-title">@if(session()->get('language') == 'english')Discount Code @else クーポンコード @endif</span>
+                                    <p>@if(session()->get('language') == 'english')Enter your coupon code if you have one.. @else クーポンコードをお持ちの場合は入力してください。 @endif</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control unicase-form-control text-input" placeholder="You Coupon.." id="coupon_name">
+                                    </div>
+                                    <div class="clearfix pull-right">
+                                        <button type="submit" class="btn-upper btn btn-primary" onclick="applyCoupon()">@if(session()->get('language') == 'english') APPLY COUPON @else クーポンを適用 @endif</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody><!-- /tbody -->
+                    </table><!-- /table -->
+                </div><!-- /.estimate-ship-tax -->
+
+                <div class="col-md-4 col-sm-12 cart-shopping-total">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        @if(session()->get('language') == 'english')Subtotal @else 小計 @endif<span class="inner-left-md">$600.00</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        @if(session()->get('language') == 'english')Grand Total @else 合計 @endif<span class="inner-left-md">$600.00</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead><!-- /thead -->
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="cart-checkout-btn pull-right">
+                                        <button type="submit" class="btn btn-primary checkout-btn">@if(session()->get('language') == 'english') PROCCED TO CHEKOUT @else チェックアウトに進む @endif</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody><!-- /tbody -->
+                    </table><!-- /table -->
+                </div><!-- /.cart-shopping-total -->
+
             </div><!-- /.row -->
         </div><!-- /.sigin-in-->
         <br>

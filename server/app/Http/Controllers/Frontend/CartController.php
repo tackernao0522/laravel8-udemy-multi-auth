@@ -92,4 +92,9 @@ class CartController extends Controller
             return response()->json(['error' => 'ログインしてください。']);
         }
     }
+
+    public function couponApply(Request $request)
+    {
+        
+    }
 }
