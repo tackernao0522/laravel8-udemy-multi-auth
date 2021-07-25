@@ -534,6 +534,8 @@
                             title: data.success
                         })
                     } else {
+                        $('#couponField').show();
+                        $('#coupon_name').val('');
                         Toast.fire({
                             type: 'error',
                             icon: 'error',
