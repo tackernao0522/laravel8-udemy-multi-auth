@@ -83,7 +83,7 @@
                             <tr>
                                 <td>
                                     <div class="cart-checkout-btn pull-right">
-                                        <button type="submit" class="btn btn-primary checkout-btn">@if(session()->get('language') == 'english') PROCCED TO CHEKOUT @else チェックアウトに進む @endif</button>
+                                        <a href="{{ route('checkout') }}" type="submit" class="btn btn-primary checkout-btn">@if(session()->get('language') == 'english') PROCCED TO CHEKOUT @else チェックアウトに進む @endif</a>
                                     </div>
                                 </td>
                             </tr>
