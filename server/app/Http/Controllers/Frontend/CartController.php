@@ -102,14 +102,11 @@ class CartController extends Controller
             ->first();
 
         if ($coupon) {
-            $couponDiscount = intval($coupon->coupon_discount);
-            $cartTotal = intval(Cart::total());
-
             Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $couponDiscount,
-                'discount_amount' => $cartTotal * $couponDiscount / 100,
-                'total_amount' => $cartTotal - $couponDiscount / 100,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => floor((int) Cart::total() * (int) $coupon->coupon_discount / 100),
+                'total_amount' => ceil((int) Cart::total() - (int) Cart::total() * (int) $coupon->coupon_discount / 100),
             ]);
 
             return response()->json(array(

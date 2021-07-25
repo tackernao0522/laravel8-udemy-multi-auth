@@ -291,7 +291,7 @@
                     </div>
                     <div class="col-xs-7">
                         <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                        <div class="price"> ${'¥' + value.price.toLocaleString()} x ${value.qty} </div>
+                        <div class="price"> ${'¥' + value.price} x ${value.qty} </div>
                     </div>
                     <div class="col-xs-1 action"> <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>
                     </div>
@@ -470,7 +470,7 @@
             <div class="product-name"><a href="#">${value.name}</a></div>
 
             <div class="price">
-                            ¥${value.price.toLocaleString()}
+                            ¥${value.price}
                         </div>
                     </td>
             <td class="col-md-2">
@@ -492,7 +492,7 @@
                 <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>
             </td>
             <td class="col-md-2">
-                <strong>¥${value.subtotal.toLocaleString()} </strong>
+                <strong>¥${value.subtotal} </strong>
             </td>
 
             <td class="col-md-1 close-btn">
@@ -614,10 +614,47 @@
                 url: "{{ url('/coupon-calculation') }}",
                 dataType: 'json',
                 success: function(data) {
+                    if (data.total) {
+                        $('#couponCalField').html(
+                            `<tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        @if(session()->get('language') == 'english')Subtotal @else 小計 @endif<span class="inner-left-md">¥ ${data.total}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        @if(session()->get('language') == 'english')Grand Total @else 合計 @endif<span class="inner-left-md">¥ ${data.total}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+                        )
+                    } else {
+                        $('#couponCalField').html(
+                            `<tr>
+                                <th>
+                                    <div class="cart-sub-total" style="text-align: left">
+                                        @if(session()->get('language') == 'english')Subtotal @else 小計 @endif<span class="inner-left-md" style="margin-left: 10px">¥ ${data.subtotal}(税込)</span>
+                                    </div>
 
+                                    <div class="cart-sub-total" style="text-align: left">
+                                        @if(session()->get('language') == 'english')Coupon @else クーポン @endif<span class="inner-left-md" style="margin-left: -50px"> ${data.coupon_name}</span>
+                                        <button type="submit"><i class="fa fa-times"></i></button>
+                                    </div>
+
+                                    <div class="cart-sub-total" style="text-align: left">
+                                        @if(session()->get('language') == 'english')Discount Amount @else 割引価格 @endif<span class="inner-left-md" style="margin-left: -18px">¥ ${data.discount_amount}</span>
+                                    </div>
+
+                                    <div class="cart-grand-total" style="text-align: left">
+                                        @if(session()->get('language') == 'english')Grand Total @else 合計 @endif<span class="inner-left-md" style="margin-left: 10px">¥ ${data.total_amount}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+                        )
+                    }
                 }
-            })
+            });
         }
+        couponCalculation();
     </script>
     <!-- End Coupon Apply Start -->
 </body>
