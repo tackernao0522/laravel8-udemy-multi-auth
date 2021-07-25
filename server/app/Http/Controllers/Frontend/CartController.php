@@ -130,9 +130,16 @@ class CartController extends Controller
             ));
         } else {
 
-            return response()->jsoan(array(
+            return response()->json(array(
                 'total' => Cart::total(),
             ));
         }
+    }
+
+    public function couponRemove()
+    {
+        Session::forget('coupon');
+
+        return response()->json(['error' => 'クーポンを削除しました。']);
     }
 }
