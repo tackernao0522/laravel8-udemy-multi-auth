@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
@@ -43,41 +45,78 @@
                                             <form class="register-form" role="form">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">お名前 <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1"><b>お名前</b> <span>*</span></label>
                                                     <input type="text" name="shipping_name" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="フルネーム" value="{{ Auth::user()->name }}" required="">
                                                 </div> <!-- end form group -->
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">メールアドレス <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1"><b>メールアドレス</b> <span>*</span></label>
                                                     <input type="email" name="shipping_email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="メールアドレス" value="{{ Auth::user()->email }}" required="">
                                                 </div> <!-- end form group -->
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">電話番号 <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1"><b>電話番号</b> <span>*</span></label>
                                                     <input type="text" name="shipping_phone" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="半角数字ハイフンなし" value="{{ Auth::user()->phone }}" required="">
                                                 </div> <!-- end form group -->
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">郵便番号 <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1"><b>郵便番号</b> <span>*</span></label>
                                                     <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="半角数字ハイフンなし" value="{{ old('post_code') }}" required="">
                                                 </div> <!-- end form group -->
-                                            </form>
                                         </div>
                                         <!-- already-registered-login -->
                                         <div class="col-md-6 col-sm-6 already-registered-login">
-                                            <h4 class="checkout-subtitle">Already registered?</h4>
-                                            <p class="text title-tag-line">Please log in below:</p>
-                                            <form class="register-form" role="form">
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-                                                    <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="">
+                                            <div class="form-group">
+                                                <h5><b>都道府県</b> <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="division_id" class="form-control" required="">
+                                                        <option value="" selected="" disabled="">都道府県 選択</option>
+                                                        @foreach($divisions as $item)
+                                                        <option value="{{ $item->id }}" {{ old('division_id') == $item->id ? 'selected': '' }}>{{ $item->division_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('division_id')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
-                                                    <input type="password" class="form-control unicase-form-control text-input" id="exampleInputPassword1" placeholder="">
-                                                    <a href="#" class="forgot-password">Forgot your Password?</a>
+                                            </div> <!-- end form group -->
+
+                                            <div class="form-group">
+                                                <h5><b>区・市・町・村</b> <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="district_id" class="form-control" required="">
+                                                        <option value="" selected="" disabled="">区・市・町・村 選択</option>
+
+                                                    </select>
+                                                    @error('district_id')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
-                                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <h5><b>町名</b> <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="town_id" class="form-control" required="">
+                                                        <option value="" selected="" disabled="">町名 選択</option>
+
+                                                    </select>
+                                                    @error('town_id')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div> <!-- end form group -->
+
+                                            <div class="form-group">
+                                                <label class="info-title" for="exampleInputEmail1">丁目・番地・マンション名等 <span class="text-danger">*</span></label>
+                                                <textarea class="form-control" name="notes" cols="30" rows="5" placeholder="丁目・番地・マンション名等">{{ old('notes') }}</textarea>
+                                                @error('notes')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <!-- end form group -->
+
+                                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                                             </form>
                                         </div>
                                         <!-- already-registered-login -->
