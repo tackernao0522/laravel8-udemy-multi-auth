@@ -77,16 +77,7 @@
                 <div class="col-md-4 col-sm-12 cart-shopping-total">
                     <table class="table">
                         <thead id="couponCalField">
-                            <tr>
-                                <th>
-                                    <div class="cart-sub-total">
-                                        @if(session()->get('language') == 'english')Subtotal @else 小計 @endif<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                    <div class="cart-grand-total">
-                                        @if(session()->get('language') == 'english')Grand Total @else 合計 @endif<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                </th>
-                            </tr>
+
                         </thead><!-- /thead -->
                         <tbody>
                             <tr>

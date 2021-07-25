@@ -149,10 +149,10 @@
                                         <div class="col-sm-6">
                                             <div class="price-box">
                                                 @if ($product->discount_price == NULL)
-                                                <span class="price">¥ {{ number_format($product->selling_price) }}</span>
+                                                <span class="price">¥ {{ $product->selling_price }}</span>
                                                 @else
-                                                <span class="price">¥ {{ number_format($product->discount_price) }}</span>
-                                                <span class="price-strike">¥ {{ number_format($product->selling_price) }}</span>
+                                                <span class="price">¥ {{ $product->discount_price }}</span>
+                                                <span class="price-strike">¥ {{ $product->selling_price }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -433,13 +433,13 @@
                                         @if ($product->discount_price == NULL)
                                         <div class="product-price">
                                             <span class="price">
-                                                ¥ {{ number_format($product->selling_price) }} </span>
+                                                ¥ {{ $product->selling_price }} </span>
                                         </div><!-- /.product-price -->
                                         @else
                                         <div class="product-price">
                                             <span class="price">
-                                                ¥ {{ number_format($product->discount_price) }} </span>
-                                            <span class="price-before-discount">¥ {{ number_format($product->selling_price) }}</span>
+                                                ¥ {{ $product->discount_price }} </span>
+                                            <span class="price-before-discount">¥ {{ $product->selling_price }}</span>
                                         </div><!-- /.product-price -->
                                         @endif
                                     </div><!-- /.product-info -->

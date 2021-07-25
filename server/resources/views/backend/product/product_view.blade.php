@@ -33,10 +33,7 @@
                                         <td width="15%"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$item->product_thambnail}") }}" style="height:50px; width:60px"></td>
                                         <td>{{ $item->product_name_ja }}</td>
                                         <td width="11%">
-                                            @php
-                                            $selling = (int) $item->selling_price;
-                                            @endphp
-                                            ¥ {{ number_format($selling) }}
+                                            ¥ {{ $item->selling_price  }}
                                         </td>
                                         <td width="11%">{{ $item->product_qty }} Pic</td>
                                         <td width="11%">
@@ -44,10 +41,8 @@
                                             <span class="badge badge-pill badge-danger">割引なし</span>
                                             @else
                                             @php
-                                            $selling = (int) $item->selling_price;
-                                            $discount = (int) $item->discount_price;
-                                            $amount = $selling - $discount;
-                                            $discount = ($amount / $selling) * 100;
+                                            $amount = $item->selling_price - $item->discount_price;
+                                            $discount = ($amount/$item->selling_price) * 100;
                                             @endphp
                                             <span class="badge badge-pill badge-danger">{{ round($discount) }} %</span>
                                             @endif
