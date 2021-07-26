@@ -218,3 +218,4 @@ Route::get('/coupon-remove', [CartController::class, 'couponRemove']);
 Route::get('/checkout', [CartController::class, 'checkoutCreate'])->name('checkout');
 Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'districtGetAjax']);
 Route::get('/town-get/ajax/{district_id}', [CheckoutController::class, 'townGetAjax']);
+Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
