@@ -42,7 +42,7 @@
                                         <!-- guest-login -->
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <h4 class="checkout-subtitle"><b>配送先住所</b></h4>
-                                            <form class="register-form" role="form">
+                                            <form class="register-form" action="{{ route('checkout.store') }}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>お名前</b> <span>*</span></label>
@@ -115,9 +115,6 @@
                                                 @enderror
                                             </div>
                                             <!-- end form group -->
-
-                                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
-                                            </form>
                                         </div>
                                         <!-- already-registered-login -->
 
@@ -180,6 +177,42 @@
                     </div>
                     <!-- checkout-progress-sidebar -->
                 </div>
+
+                <div class="col-md-4">
+                    <!-- checkout-progress-sidebar -->
+                    <div class="checkout-progress-sidebar ">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="unicase-checkout-title">お支払い方法</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Stripe</label>
+                                        <img src="{{ asset('frontend/assets/images/payments/4.png') }}" alt="">
+                                        <input type="radio" name="payment_method" value="stripe">
+                                    </div> <!-- end col-md-4 -->
+
+                                    <div class="col-md-4">
+                                        <label for="">カード</label>
+                                        <img src="{{ asset('frontend/assets/images/payments/3.png') }}" alt="">
+                                        <input type="radio" name="payment_method" value="card">
+                                    </div> <!-- end col-md-4 -->
+
+                                    <div class="col-md-4">
+                                        <label for="">キャッシュ</label>
+                                        <img src="{{ asset('frontend/assets/images/payments/2.png') }}" alt="">
+                                        <input type="radio" name="payment_method" value="cash">
+                                    </div> <!-- end col-md-4 -->
+                                </div> <!-- end row -->
+                                <hr>
+                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">決済へ進む</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- checkout-progress-sidebar -->
+                </div>
+                </form>
             </div><!-- /.row -->
         </div><!-- /.checkout-box -->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->

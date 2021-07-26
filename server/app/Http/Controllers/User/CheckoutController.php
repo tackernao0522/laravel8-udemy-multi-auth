@@ -27,4 +27,9 @@ class CheckoutController extends Controller
 
         return json_encode($ships);
     }
+
+    public function checkoutStore(Request $reqeust)
+    {
+        
+    }
 }
