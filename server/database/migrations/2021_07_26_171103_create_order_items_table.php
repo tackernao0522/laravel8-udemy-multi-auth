@@ -21,8 +21,8 @@ class CreateOrderItemsTable extends Migration
                 ->on('orders')
                 ->onDelete('cascade');
             $table->bigInteger('product_id')->unsigned();
-            $table->string('color');
-            $table->string('size');
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('qty');
             $table->integer('price');
             $table->timestamps();
