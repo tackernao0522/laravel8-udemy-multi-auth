@@ -187,4 +187,47 @@
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
     </div><!-- /.container -->
 </div><!-- /.body-content -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="division_id"]').on('change', function() {
+            var division_id = $(this).val();
+            if (division_id) {
+                $.ajax({
+                    url: "{{ url('/district-get/ajax') }}/" + division_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="town_id"]').empty();
+                        var d = $('select[name="district_id"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="district_id"]').append('<option value="' + value.id + '">' + value.district_name + '</option>');
+                        });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+
+        $('select[name="district_id"]').on('change', function() {
+            var district_id = $(this).val();
+            if (district_id) {
+                $.ajax({
+                    url: "{{ url('/town-get/ajax') }}/" + district_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="town_id"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="town_id"]').append('<option value="' + value.id + '">' + value.town_name + '</option>');
+                        });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
+</script>
 @endsection
