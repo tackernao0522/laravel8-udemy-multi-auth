@@ -157,7 +157,7 @@ Stipeによる決済
     };
     // Create an instance of the card Element.
     var card = elements.create('card', {
-        style: style
+        style: style, hidePostalCode: true
     });
     // Add an instance of the card Element into the `card-element` <div>.
     card.mount('#card-element');
