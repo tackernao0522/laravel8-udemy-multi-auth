@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\OrderItem;
@@ -59,6 +61,18 @@ class StripController extends Controller
             'status' => '保留中',
             'created_at' => Carbon::now(),
         ]);
+
+        // Start Send Email
+        $invoice = Order::findOrFail($order_id);
+        $data = [
+            'invoice_no' => $invoice->invoice_no,
+            'amount' => $total_amount,
+            'name' => $invoice->name,
+            'email' => $invoice->email,
+        ];
+
+        Mail::to($request->email)->send(new OrderMail($data));
+        // End Send Email(php artisan make:mail OrderMail)
 
         $carts = Cart::content();
         foreach($carts as $cart) {
