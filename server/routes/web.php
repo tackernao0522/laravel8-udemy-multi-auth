@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripController;
+use App\Http\Controllers\User\AllUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,6 +200,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 
     Route::post('/strip/order', [StripController::class, 'stripeOrder'])->name('stripe.order');
+
+    Route::get('/my/orders', [AllUserController::class, 'myOrders'])->name('my.orders');
 });
 
 // My Cart Page All Routes

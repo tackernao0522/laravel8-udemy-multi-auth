@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Mail\OrderMail;
 use App\Models\Order;
-use App\Models\Coupon;
 use App\Models\OrderItem;
 
 class StripController extends Controller
