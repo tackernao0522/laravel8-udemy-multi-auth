@@ -54,10 +54,10 @@ class StripController extends Controller
             'amount' => $total_amount,
             'order_number' => $charge->metadata->order_id,
             'invoice_no' => 'FUN' . mt_rand(10000000, 99999999),
-            'order_date' => Carbon::now()->format('Y m d'),
-            'order_mouth' => Carbon::now()->format('M'),
-            'order_year' => Carbon::now()->format('Y'),
-            'status' => '保留中',
+            'order_date' => Carbon::now()->format('Y年n月j日'),
+            'order_mouth' => Carbon::now()->format('n月'),
+            'order_year' => Carbon::now()->format('Y年'),
+            'status' => '未発送',
             'created_at' => Carbon::now(),
         ]);
 
