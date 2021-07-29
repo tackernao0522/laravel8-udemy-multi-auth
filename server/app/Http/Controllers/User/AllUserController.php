@@ -12,6 +12,7 @@ use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use PDF;
 
 class AllUserController extends Controller
 {
@@ -50,10 +51,17 @@ class AllUserController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        return view('frontend.user.order.order_invoice', compact(
+        $pdf = PDF::loadView('frontend.user.order.order_invoice',  compact(
             'order',
             'orderItems',
-        ));
+        ))->setPaper('a4');
+
+        return $pdf->download('invoice.pdf');
+
+        // return view('frontend.user.order.order_invoice', compact(
+        //     'order',
+        //     'orderItems',
+        // ));
         // composer require barryvdh/laravel-dompdf
     }
 }
