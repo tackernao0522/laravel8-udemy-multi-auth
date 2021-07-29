@@ -202,6 +202,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/strip/order', [StripController::class, 'stripeOrder'])->name('stripe.order');
 
     Route::get('/my/orders', [AllUserController::class, 'myOrders'])->name('my.orders');
+
+    Route::get('/order_details/{order_id}', [AllUserController::class, 'orderDetails']);
 });
 
 // My Cart Page All Routes
