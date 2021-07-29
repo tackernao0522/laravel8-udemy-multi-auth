@@ -39,4 +39,21 @@ class AllUserController extends Controller
             'orderItems',
         ));
     }
+
+    public function invoiceDownload($order_id)
+    {
+        $order = Order::with('division', 'district', 'town', 'user')->where('id', $order_id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        $orderItems = OrderItem::with('product')->where('order_id', $order_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('frontend.user.order.order_invoice', compact(
+            'order',
+            'orderItems',
+        ));
+        // composer require barryvdh/laravel-dompdf
+    }
 }
