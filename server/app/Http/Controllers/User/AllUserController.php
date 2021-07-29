@@ -30,13 +30,13 @@ class AllUserController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        $orderItem = OrderItem::where('order_id', $order_id)
+        $orderItems = OrderItem::with('product')->where('order_id', $order_id)
             ->orderBy('id', 'DESC')
             ->get();
 
         return view('frontend.user.order.order_details', compact(
             'order',
-            'orderItem'
+            'orderItems',
         ));
     }
 }
