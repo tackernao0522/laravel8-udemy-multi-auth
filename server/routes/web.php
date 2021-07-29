@@ -207,6 +207,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/my/orders', [AllUserController::class, 'myOrders'])->name('my.orders');
 
     Route::get('/order_details/{order_id}', [AllUserController::class, 'orderDetails']);
+
+    Route::get('/invoice_download/{order_id}', [AllUserController::class, 'invoiceDownload']);
 });
 
 // My Cart Page All Routes
