@@ -26,10 +26,10 @@ class CreateOrdersTable extends Migration
             $table->text('notes');
             $table->string('payment_type');
             $table->string('payment_method')->nullable();
-            $table->string('transaction_id');
+            $table->string('transaction_id')->nullable();
             $table->string('currency');
             $table->integer('amount');
-            $table->string('order_number');
+            $table->string('order_number')->nullable();
             $table->string('invoice_no');
             $table->string('order_date');
             $table->string('order_mouth');
