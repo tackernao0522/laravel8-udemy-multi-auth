@@ -66,7 +66,7 @@
                                 <td class="col-md-1">
                                     <div style="display: flex">
                                         <a href="{{ url('user/order_details/' . $order->id) }}" class="btn btn-sm btn-primary" style="margin-right: 5px"><i class="fa fa-eye"></i>詳細</a>
-                                        <a href="{{ url('user/invoice_download/' . $order->id) }}" class="btn btn-sm btn-danger" style="color: white"><i class="fa fa-download"></i>領収書</a>
+                                        <a target="_blank" href="{{ url('user/invoice_download/' . $order->id) }}" class="btn btn-sm btn-danger" style="color: white"><i class="fa fa-download"></i>領収書</a>
                                     </div>
                                 </td>
                             </tr>
