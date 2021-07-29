@@ -26,7 +26,7 @@ class AllUserController extends Controller
 
     public function orderDetails($order_id)
     {
-        $order = Order::where('id', $order_id)
+        $order = Order::with('division', 'district', 'town', 'user')->where('id', $order_id)
             ->where('user_id', Auth::id())
             ->first();
 
