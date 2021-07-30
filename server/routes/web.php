@@ -161,6 +161,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/processing/picked/{order_id}', [OrderController::class, 'processingToPicked'])->name('processing.picked');
         Route::get('/picked/shipped/{order_id}', [OrderController::class, 'pickedToShipped'])->name('picked.shippied');
         Route::get('/shipped/deliverd/{order_id}', [OrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
+        Route::get('/invoice/download/{order_id}', [OrderController::class, 'adminInvoiceDownload'])->name('invoice.download');
     });
 });
 
