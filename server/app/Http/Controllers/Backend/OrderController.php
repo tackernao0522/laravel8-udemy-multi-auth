@@ -89,4 +89,20 @@ class OrderController extends Controller
 
         return view('backend.orders.cancel_orders', compact('orders'));
     }
+
+    public function pendingToConfirm($order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'status' => '確認済',
+            'confirmed_date' => Carbon::now()->format('Y年n月j日'),
+        ]);
+
+        $notification = array(
+            'message' => '確認済にしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('pending-orders')
+            ->with($notification);
+    }
 }

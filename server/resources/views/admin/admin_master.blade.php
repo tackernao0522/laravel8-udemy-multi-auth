@@ -95,32 +95,7 @@
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        $(function() {
-            $(document).on('click', '#delete', function(e) {
-                e.preventDefault();
-                var link = $(this).attr("href");
-
-                Swal.fire({
-                    title: '削除してよろしいですか？',
-                    text: "削除すると元に戻せなくなります。",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '削除する'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'Deleted!',
-                            '削除しました。',
-                            'success'
-                        )
-                    }
-                })
-            });
-        });
-    </script>
+    <script src="{{ asset('backend/js/code.js') }}"></script>
 </body>
 
 </html>

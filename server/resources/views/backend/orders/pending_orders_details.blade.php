@@ -115,6 +115,15 @@
                             <th>ステータス : </th>
                             <th><span class="badge badge-pill badge-warning" style="background: #418D89">{{ $order->status }}</span></th>
                         </tr>
+
+                        <tr>
+                            <th></th>
+                            <th>
+                                @if($order->status == '保留中')
+                                <a href="{{ route('pending-confirm', $order->id) }}" class="btn btn-block btn-success" id="confirm">確認済にする</a>
+                                @endif
+                            </th>
+                        </tr>
                     </table>
                 </div>
             </div>
