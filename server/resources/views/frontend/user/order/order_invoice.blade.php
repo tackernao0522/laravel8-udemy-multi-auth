@@ -61,10 +61,10 @@
             </td>
             <td align="right">
                 <pre class="font">
-                    EasyShop Head Office
-                    Email:support@easylearningbd.com <br>
-                    Mob: 1245454545 <br>
-                    Dhaka 1207,Dhanmondi:#4 <br>
+                    ファンクラブ事務局
+                    Email:support@example.com <br>
+                    TEL: 03-111-1111 <br>
+                    〒182-0024 東京都調布市布田2-18-2 メゾン調布103 <br>
             </pre>
             </td>
         </tr>

@@ -184,6 +184,13 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($order->status !== "delivered")
+                @else
+                <div class="form-group" align="left">
+                    <label for="">返品理由:</label>
+                    <textarea name="return_reason" id="" class="form-control" cols="30" rows="05" placeholder="返品理由入力"></textarea>
+                </div>
+                @endif
             </div> <!-- end col-md-12 -->
             <!-- </div> END ORDER ITEM ROW -->
         </div> <!-- end row -->
