@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function pendingOrders()
     {
-        $orders = Order::where('status', '未発送')
+        $orders = Order::where('status', '保留中')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -34,5 +34,59 @@ class OrderController extends Controller
             'order',
             'orderItems',
         ));
+    }
+
+    public function confirmedOrders()
+    {
+        $orders = Order::where('status', '確認済')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.confirmed_orders', compact('orders'));
+    }
+
+    public function processingOrders()
+    {
+        $orders = Order::where('status', '対応中')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.processing_orders', compact('orders'));
+    }
+
+    public function pickedOrders()
+    {
+        $orders = Order::where('status', '確保済')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.picked_orders', compact('orders'));
+    }
+
+    public function shippedOrders()
+    {
+        $orders = Order::where('status', '発送済')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.shipped_orders', compact('orders'));
+    }
+
+    public function deliveredOrders()
+    {
+        $orders = Order::where('status', '配達済')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.delivered_orders', compact('orders'));
+    }
+
+    public function cancelOrders()
+    {
+        $orders = Order::where('status', 'キャンセル')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.cancel_orders', compact('orders'));
     }
 }

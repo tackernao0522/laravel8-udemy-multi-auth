@@ -108,7 +108,7 @@
                             </tr>
 
                             <tr>
-                                <th>配送状況 : </th>
+                                <th>ステータス : </th>
                                 <th><span class="badge badge-pill badge-warning" style="background: #418D89">{{ $order->status }}</span></th>
                             </tr>
                         </table>
