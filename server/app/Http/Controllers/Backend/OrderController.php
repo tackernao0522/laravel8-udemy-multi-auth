@@ -56,7 +56,7 @@ class OrderController extends Controller
 
     public function pickedOrders()
     {
-        $orders = Order::where('status', '確保済')
+        $orders = Order::where('status', '発送可能')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -74,7 +74,7 @@ class OrderController extends Controller
 
     public function deliveredOrders()
     {
-        $orders = Order::where('status', '配達済')
+        $orders = Order::where('status', '配達完了')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -103,6 +103,70 @@ class OrderController extends Controller
         );
 
         return redirect()->route('pending-orders')
+            ->with($notification);
+    }
+
+    public function confirmToProcessing($order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'status' => '対応中',
+            'processing_date' => Carbon::now()->format('Y年n月j日'),
+        ]);
+
+        $notification = array(
+            'message' => '対応中にしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('confirmed-orders')
+            ->with($notification);
+    }
+
+    public function processingToPicked($order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'status' => '発送可能',
+            'picked_date' => Carbon::now()->format('Y年n月j日'),
+        ]);
+
+        $notification = array(
+            'message' => '発送可能にしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('processing-orders')
+            ->with($notification);
+    }
+
+    public function pickedToShipped($order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'status' => '発送済',
+            'shipped_date' => Carbon::now()->format('Y年n月j日'),
+        ]);
+
+        $notification = array(
+            'message' => '発送済にしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('picked-orders')
+            ->with($notification);
+    }
+
+    public function shippedToDelivered($order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'status' => '配達完了',
+            'delivered_date' => Carbon::now()->format('Y年n月j日'),
+        ]);
+
+        $notification = array(
+            'message' => '配達完了にしました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('shipped-orders')
             ->with($notification);
     }
 }

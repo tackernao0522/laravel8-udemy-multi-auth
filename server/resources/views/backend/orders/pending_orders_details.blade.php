@@ -121,6 +121,14 @@
                             <th>
                                 @if($order->status == '保留中')
                                 <a href="{{ route('pending-confirm', $order->id) }}" class="btn btn-block btn-success" id="confirm">確認済にする</a>
+                                @elseif($order->status == '確認済')
+                                <a href="{{ route('confirm.processing', $order->id) }}" class="btn btn-block btn-success" id="processing">対応中にする</a>
+                                @elseif($order->status == '対応中')
+                                <a href="{{ route('processing.picked', $order->id) }}" class="btn btn-block btn-success" id="picked">発送可能にする</a>
+                                @elseif($order->status == '発送可能')
+                                <a href="{{ route('picked.shippied', $order->id) }}" class="btn btn-block btn-success" id="shipped">発送済にする</a>
+                                @elseif($order->status == '発送済')
+                                <a href="{{ route('shipped.delivered', $order->id) }}" class="btn btn-block btn-success" id="delivered">配達完了にする</a>
                                 @endif
                             </th>
                         </tr>

@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">配達済オーダーリスト</h3>
+                        <h3 class="box-title">配達完了リスト</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
