@@ -156,6 +156,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/shipped/orders', [OrderController::class, 'shippedOrders'])->name('shipped-orders');
         Route::get('/delivered/orders', [OrderController::class, 'deliveredOrders'])->name('delivered-orders');
         Route::get('/cancel/orders', [OrderController::class, 'cancelOrders'])->name('cancel-orders');
+        Route::get('/pending/confirm/{order_id}', [OrderController::class, 'pendingToConfirm'])->name('pending-confirm');
     });
 });
 
