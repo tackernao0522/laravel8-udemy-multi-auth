@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">オーダー商品確保済リスト</h3>
+                        <h3 class="box-title">発送可能リスト</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">発送済オーダーリスト</h3>
+                        <h3 class="box-title">発送済リスト</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
