@@ -6,12 +6,12 @@
     <div class="content-header">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
-                <h3 class="page-title">オーダー商品詳細</h3>
+                <h3 class="page-title">保留中オーダー詳細</h3>
                 <div class="d-inline-block align-items-center">
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-                            <li class="breadcrumb-item" aria-current="page">オーダー商品詳細</li>
+                            <li class="breadcrumb-item" aria-current="page">保留中オーダー詳細</li>
                         </ol>
                     </nav>
                 </div>
@@ -112,7 +112,7 @@
                         </tr>
 
                         <tr>
-                            <th>配送状況 : </th>
+                            <th>ステータス : </th>
                             <th><span class="badge badge-pill badge-warning" style="background: #418D89">{{ $order->status }}</span></th>
                         </tr>
                     </table>
