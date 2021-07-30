@@ -23,7 +23,7 @@
                                         <th>合計金額</th>
                                         <th>支払い方法</th>
                                         <th>ステータス</th>
-                                        <th>編集／削除</th>
+                                        <th>詳細／削除</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +35,7 @@
                                         <td>{{ $item->payment_method }}</td>
                                         <td><span class="badge badge-pill badge-primary">{{ $item->status }}</span></td>
                                         <td width="30%">
-                                            <a href="{{ route('coupon.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('pending.order.details', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('coupon.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>

@@ -19,4 +19,20 @@ class OrderController extends Controller
 
         return view('backend.orders.pending_orders', compact('orders'));
     }
+
+    public function pendingOrdersDetails($order_id)
+    {
+        $order = Order::with('division', 'district', 'town', 'user')
+            ->where('id', $order_id)
+            ->first();
+
+        $orderItems = OrderItem::with('product')->where('order_id', $order_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('backend.orders.pending_orders_details', compact(
+            'order',
+            'orderItems',
+        ));
+    }
 }

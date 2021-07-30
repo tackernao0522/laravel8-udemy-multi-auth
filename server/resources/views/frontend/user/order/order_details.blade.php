@@ -13,14 +13,14 @@
             <div class="col-md-5" style="margin-top: 20px">
                 <div class="card">
                     <div class="card-header">
-                        <h4>配送先詳細</h4>
+                        <h4>お届け先詳細</h4>
                     </div>
                     <hr>
                     <div class="cart-body" style="background: #E9EBEC">
                         <table class="table" style="display: block; overflow-x: scroll; white-space: nowrap; -webkit-overflow-scrolling: touch">
                             <tr>
                                 <th>お名前 : </th>
-                                <th>{{ $order->name }}</th>
+                                <th>{{ $order->name }} 様</th>
                             </tr>
 
                             <tr>
@@ -54,7 +54,7 @@
                             </tr>
 
                             <tr>
-                                <th>町名 : </th>
+                                <th>丁目・番地等 : </th>
                                 <th>{{ $order->notes }}</th>
                             </tr>
 
@@ -80,7 +80,7 @@
                         <table class="table" style="display: block; overflow-x: scroll; white-space: nowrap; -webkit-overflow-scrolling: touch">
                             <tr>
                                 <th>購入者お名前 : </th>
-                                <th>{{ $order->user->name }}</th>
+                                <th>{{ $order->user->name }} 様</th>
                             </tr>
 
                             <tr>
@@ -88,7 +88,7 @@
                                 <th>{{ $order->user->phone }}</th>
                             </tr>
                             <tr>
-                                <th>お支払い形式 : </th>
+                                <th>お支払い方法 : </th>
                                 <th>{{ $order->payment_method }}</th>
                             </tr>
 
