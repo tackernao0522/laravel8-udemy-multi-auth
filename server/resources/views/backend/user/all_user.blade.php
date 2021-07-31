@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">会員リスト</h3>
+                        <h3 class="box-title">会員登録数 <span class="badge badge-pill badge-danger">{{ count($users) }}人</span></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
