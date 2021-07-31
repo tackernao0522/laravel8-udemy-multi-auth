@@ -184,12 +184,18 @@
                         </tbody>
                     </table>
                 </div>
-                @if ($order->status !== "delivered")
+                @if ($order->status !== "配達完了")
                 @else
-                <div class="form-group" align="left">
-                    <label for="">返品理由:</label>
-                    <textarea name="return_reason" id="" class="form-control" cols="30" rows="05" placeholder="返品理由入力"></textarea>
-                </div>
+                <form action="{{ route('return.order', $order->id) }}" method="POST">
+                    @csrf
+                    <div class="form-group" align="left">
+                        <label for="">返品理由:</label>
+                        <textarea name="return_reason" id="" class="form-control" cols="30" rows="05" placeholder="返品理由入力"></textarea>
+                    </div>
+                    <div align="left" style="margin-bottom: 10px">
+                        <button type="submit" class="btn btn-danger">返品手続き</button>
+                    </div>
+                </form>
                 @endif
             </div> <!-- end col-md-12 -->
             <!-- </div> END ORDER ITEM ROW -->
