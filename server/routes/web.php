@@ -230,6 +230,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/invoice_download/{order_id}', [AllUserController::class, 'invoiceDownload']);
 
     Route::post('/return/order/{order_id}', [AllUserController::class, 'returnOrder'])->name('return.order');
+
+    Route::get('/return/order/list', [AllUserController::class, 'returnOrderList'])->name('return.order.list');
 });
 
 // My Cart Page All Routes

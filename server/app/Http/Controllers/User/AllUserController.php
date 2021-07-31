@@ -80,4 +80,14 @@ class AllUserController extends Controller
         return redirect()->route('my.orders')
             ->with($notification);
     }
+
+    public function returnOrderList()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->where('return_reason', '!=', NULL)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('frontend.user.order.return_order_view', compact('orders'));
+    }
 }
