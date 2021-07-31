@@ -64,4 +64,20 @@ class AllUserController extends Controller
         // ));
         // composer require barryvdh/laravel-dompdf
     }
+
+    public function returnOrder(Request $request, $order_id)
+    {
+        Order::findOrFail($order_id)->update([
+            'return_date' => Carbon::now()->format('Y年n月j日'),
+            'return_reason' => $request->return_reason,
+        ]);
+
+        $notification = array(
+            'message' => '返品手続きが完了しました。',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('my.orders')
+            ->with($notification);
+    }
 }
