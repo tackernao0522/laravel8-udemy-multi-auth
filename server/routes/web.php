@@ -172,6 +172,11 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/search/by/month', [ReportController::class, 'reportByMonth'])->name('search-by-month');
         Route::post('/search/by/year', [ReportController::class, 'reportByYear'])->name('search-by-year');
     });
+
+    // Admin Get All User Routes
+    Route::prefix('alluser')->group(function () {
+        Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all-users');
+    });
 });
 
 // User All Routes

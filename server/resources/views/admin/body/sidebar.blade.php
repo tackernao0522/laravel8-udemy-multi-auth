@@ -144,6 +144,19 @@ $route = Route::current()->getName();
                     <li class="{{ ($route == 'all-reports') ? 'active' : '' }}"><a href="{{ route('all-reports') }}"><i class="ti-more"></i>レポート一覧</a></li>
                 </ul>
             </li>
+
+            <li class="treeview {{ ($prefix == '/alluser') ? 'active' : '' }}">
+                <a href="{{ url('admin/dashboard') }}">
+                    <i data-feather="file"></i>
+                    <span>会員リスト</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'all-users') ? 'active' : '' }}"><a href="{{ route('all-users') }}"><i class="ti-more"></i>会員リスト</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
 

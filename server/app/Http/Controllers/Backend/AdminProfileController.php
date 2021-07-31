@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\User;
 
 class AdminProfileController extends Controller
 {
@@ -75,6 +76,13 @@ class AdminProfileController extends Controller
             return redirect()->back()
                 ->with('error', '現在のパスワードが一致しません。');
         }
+    }
+
+    public function allUsers()
+    {
+        $users = User::latest()->get();
+
+        return view('backend.user.all_user', compact('users'));
     }
 
     private function saveImage(UploadedFile $file): string
