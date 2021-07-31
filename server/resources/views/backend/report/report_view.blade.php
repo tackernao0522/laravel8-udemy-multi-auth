@@ -16,7 +16,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('brand.store') }}">
+                            <form method="POST" action="{{ route('search-by-date') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>年月日選択 <span class="text-danger">*</span></h5>
@@ -47,7 +47,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('brand.store') }}">
+                            <form method="POST" action="{{ route('search-by-month') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>年選択 <span class="text-danger">*</span></h5>
@@ -116,7 +116,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('brand.store') }}">
+                            <form method="POST" action="{{ route('search-by-year') }}">
                                 @csrf
                                 <div class="form-group">
                                     <h5>年別検索 <span class="text-danger">*</span></h5>
