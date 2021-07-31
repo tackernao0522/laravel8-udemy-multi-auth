@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
@@ -162,6 +163,11 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/picked/shipped/{order_id}', [OrderController::class, 'pickedToShipped'])->name('picked.shippied');
         Route::get('/shipped/deliverd/{order_id}', [OrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
         Route::get('/invoice/download/{order_id}', [OrderController::class, 'adminInvoiceDownload'])->name('invoice.download');
+    });
+
+    // Admin Reports Routes
+    Route::prefix('reports')->group(function () {
+        Route::get('/view', [ReportController::class, 'reportView'])->name('all-reports');
     });
 });
 

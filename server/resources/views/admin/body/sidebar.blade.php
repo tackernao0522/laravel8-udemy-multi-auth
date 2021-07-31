@@ -132,18 +132,16 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview">
-                <a href="#">
-                    <i data-feather="credit-card"></i>
-                    <span>Cards</span>
+            <li class="treeview {{ ($prefix == '/reports') ? 'active' : '' }}">
+                <a href="{{ url('admin/dashboard') }}">
+                    <i data-feather="file"></i>
+                    <span>レポート</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="card_advanced.html"><i class="ti-more"></i>Advanced Cards</a></li>
-                    <li><a href="card_basic.html"><i class="ti-more"></i>Basic Cards</a></li>
-                    <li><a href="card_color.html"><i class="ti-more"></i>Cards Color</a></li>
+                    <li class="{{ ($route == 'all-reports') ? 'active' : '' }}"><a href="{{ route('all-reports') }}"><i class="ti-more"></i>レポート一覧</a></li>
                 </ul>
             </li>
         </ul>
