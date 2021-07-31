@@ -7,7 +7,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">カテゴリーリスト <span class="badge badge-pill badge-danger">{{ count($categories) }}</span></h3>
@@ -47,7 +47,7 @@
             <!-- /.col -->
 
             <!-- Add Categoy Page -->
-            <div class="col-4">
+            <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">カテゴリー作成</h3>
