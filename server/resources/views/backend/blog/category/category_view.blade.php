@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">ブランドリスト <span class="badge badge-pill badge-danger">{{ count($brands) }}</h3>
+                        <h3 class="box-title">ブログカテゴリーリスト <span class="badge badge-pill badge-danger">{{ count($blogCategories) }}</span></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -18,21 +18,19 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ブランド名 (日本語)</th>
-                                        <th>Brand (English)</th>
-                                        <th>画像</th>
+                                        <th>ブログカテゴリー名 (日本語)</th>
+                                        <th>Blog Category (English)</th>
                                         <th>編集／削除</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($brands as $item)
+                                    @foreach($blogCategories as $item)
                                     <tr>
-                                        <td>{{ $item->brand_name_ja }}</td>
-                                        <td>{{ $item->brand_name_en }}</td>
-                                        <td><img src="{{ Storage::disk('s3')->url("brands/{$item->brand_image}") }}" style="height:40px; width:70px"></td>
-                                        <td>
-                                            <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('brand.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                        <td>{{ $item->blog_category_name_ja }}</td>
+                                        <td>{{ $item->blog_category_name_en }}</td>
+                                        <td width="30%">
+                                            <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('category.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -46,40 +44,31 @@
             </div>
             <!-- /.col -->
 
-            <!-- Add Brand Page -->
+            <!-- Add Blog Categoy Page -->
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">ブランド作成</h3>
+                        <h3 class="box-title">ブログカテゴリー作成</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <form method="POST" action="{{ route('brand.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('categoy.store') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <h5>ブランド名 <span class="text-danger">*</span></h5>
+                                    <h5>ブログカテゴリー名 <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="brand_name_ja" class="form-control" value="{{ old('brand_name_ja') }}">
-                                        @error('brand_name_ja')
+                                        <input type="text" name="blog_category_name_ja" class="form-control" value="{{ old('blog_category_name_ja') }}">
+                                        @error('blog_category_name_ja')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>Brand Name (English) <span class="text-danger">*</span></h5>
+                                    <h5>Blog Category Name (English) <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="brand_name_en" class="form-control" value="{{ old('brand_name_en') }}">
-                                        @error('brand_name_en')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <h5>ブランド画像(Image) <span class="text-danger">*</span></h5>
-                                    <div class="controls">
-                                        <input type="file" name="brand_image" class="form-control">
-                                        @error('brand_image')
+                                        <input type="text" name="blog_category_name_en" class="form-control" value="{{ old('blog_category_name_en') }}">
+                                        @error('blog_category_name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
