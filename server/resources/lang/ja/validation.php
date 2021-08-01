@@ -130,6 +130,8 @@ return [
         'subCategory_id' => 'サブカテゴリー名',
         'subSubCategory_name_ja' => '孫カテゴリー',
         'blog_category_name_ja' => 'ブログカテゴリー',
+        'post_title_ja' => 'ブログタイトル',
+        'post_details_ja' => '投稿内容',
     ],
 
 ];

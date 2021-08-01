@@ -187,7 +187,9 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/category/update/{id}', [BlogController::class, 'blogCategoryUpdate'])->name('blogCategory.update');
 
         // Admin View Blog Post Routes
-        Route::get('/view/post', [BlogController::class, 'viewBlogPost'])->name('view.post');
+        Route::get('/list/post', [BlogController::class, 'listBlogPost'])->name('list.post');
+        Route::get('/add/post', [BlogController::class, 'addBlogPost'])->name('add.post');
+        Route::post('/post/store', [BlogController::class, 'blogPostStore'])->name('post-store');
     });
 });
 
