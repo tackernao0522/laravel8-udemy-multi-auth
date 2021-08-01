@@ -182,6 +182,9 @@ Route::middleware(['auth:admin'])->group(function () {
     // Admin All Blog Routes
     Route::prefix('blog')->group(function () {
         Route::get('/category', [BlogController::class, 'blogCategory'])->name('blog.category');
+        Route::post('/store', [BlogController::class, 'blogCategoryStore'])->name('blogCategoy.store');
+        Route::get('/category/edit/{id}', [BlogController::class, 'blogCategoryEdit'])->name('blog.category.edit');
+        Route::post('/category/update/{id}', [BlogController::class, 'blogCategoryUpdate'])->name('blogCategory.update');
     });
 });
 
