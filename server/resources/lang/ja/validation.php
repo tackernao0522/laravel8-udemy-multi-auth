@@ -129,6 +129,7 @@ return [
         'category_id' => 'メインカテゴリー',
         'subCategory_id' => 'サブカテゴリー名',
         'subSubCategory_name_ja' => '孫カテゴリー',
+        'blog_category_name_ja' => 'ブログカテゴリー',
     ],
 
 ];
