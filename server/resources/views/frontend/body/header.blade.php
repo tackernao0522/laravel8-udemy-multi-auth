@@ -206,6 +206,7 @@
                                 @endforeach
                                 <!-- end Category Foreach -->
                                 <li class="dropdown  navbar-right special-menu"> <a href="#">@if(session()->get('language') == 'english') Todays offer @else 今日の特別セール @endif</a> </li>
+                                <li class="dropdown  navbar-right special-menu"> <a href="{{ route('home.blog') }}">@if(session()->get('language') == 'english') Blog @else ブログ @endif</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>
