@@ -83,7 +83,7 @@ class BlogController extends Controller
 
     public function listBlogPost()
     {
-        $blogPosts = BlogPost::latest()->get();
+        $blogPosts = BlogPost::with('category')->latest()->get();
 
         return view('backend.blog.post.post_list', compact('blogPosts'));
     }

@@ -31,7 +31,7 @@
                                 <tbody>
                                     @foreach($blogPosts as $item)
                                     <tr>
-                                        <td>{{ $item->category_id }}</td>
+                                        <td>{{ $item->category->blog_category_name_ja }}</td>
                                         <td><img src="{{ Storage::disk('s3')->url("blogs/{$item->post_image}") }}" alt="" style="width: 60px; height: 60px"></td>
                                         <td>{!! nl2br(e(Str::limit($item->post_title_ja, 45))) !!}</td>
                                         <td>{!! nl2br(e(Str::limit($item->post_title_en, 45))) !!}</td>

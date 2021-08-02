@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
@@ -285,3 +286,7 @@ Route::get('/checkout', [CartController::class, 'checkoutCreate'])->name('checko
 Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'districtGetAjax']);
 Route::get('/town-get/ajax/{district_id}', [CheckoutController::class, 'townGetAjax']);
 Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
+
+// Frontend Blog Show Routes
+Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
+
