@@ -16,4 +16,12 @@ class HomeBlogController extends Controller
 
         return view('frontend.blog.blog_list', compact('blogCategories', 'blogPosts'));
     }
+
+    public function detailsBlogPost($id)
+    {
+        $blogCategories = BlogPostCategory::latest()->get();
+        $blogPost = BlogPost::findOrFail($id);
+
+        return view('frontend.blog.blog_details', compact('blogPost', 'blogCategories'));
+    }
 }

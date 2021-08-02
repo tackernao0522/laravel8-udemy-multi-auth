@@ -25,11 +25,12 @@
                     <div class="blog-post  wow fadeInUp">
                         <a href="blog-details.html"><img class="img-responsive" src="{{ Storage::disk('s3')->url("blogs/{$blog->post_image}") }}" alt="blog_image"></a>
                         <h1><a href="blog-details.html">@if(session()->get('language') == 'english') {{ $blog->post_title_en }} @else {{ $blog->post_title_ja }} @endif</a></h1>
-                        <span class="date-time">{{ Carbon\Carbon::parse($blog->created_at)->diffForHumans()  }}</span>
+                        <span class="date-time">{{ Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}</span>
                         <p>
                             @if(session()->get('language') == 'english') {!! Str::limit($blog->post_details_en, 200) !!} @else {!! Str::limit($blog->post_details_ja, 200) !!} @endif
                         </p>
-                        <a href="#" class="btn btn-upper btn-primary read-more">read more</a>
+
+                        <a href="{{ route('post.details', $blog->id) }}" class="btn btn-upper btn-primary read-more">read more</a>
                     </div>
                     @endforeach
 

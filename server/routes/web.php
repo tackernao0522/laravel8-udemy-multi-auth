@@ -289,4 +289,5 @@ Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->na
 
 // Frontend Blog Show Routes
 Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
+Route::get('/post/details/{id}', [HomeBlogController::class, 'detailsBlogPost'])->name('post.details');
 
