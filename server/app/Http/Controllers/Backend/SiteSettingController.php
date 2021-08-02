@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\SiteSetting;
+use App\Models\Seo;
 
 class SiteSettingController extends Controller
 {
@@ -63,6 +64,13 @@ class SiteSettingController extends Controller
 
         return redirect()->back()
             ->with($notification);
+    }
+
+    public function seoSetting()
+    {
+        $seo = Seo::find(1);
+
+        return view('backend.setting.seo_update', compact('seo'));
     }
 
     private function saveImage(UploadedFile $file): string
