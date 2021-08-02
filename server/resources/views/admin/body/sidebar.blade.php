@@ -126,6 +126,19 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == '/setting') ? 'active' : '' }}">
+                <a href="{{ url('admin/dashboard') }}">
+                    <i data-feather="file"></i>
+                    <span>セッティング</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'site.setting') ? 'active' : '' }}"><a href="{{ route('site.setting') }}"><i class="ti-more"></i>サイトセッティング</a></li>
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview {{ ($prefix == '/orders') ? 'active' : '' }}">
