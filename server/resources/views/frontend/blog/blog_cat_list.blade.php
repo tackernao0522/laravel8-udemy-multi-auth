@@ -1,7 +1,7 @@
 @extends('frontend.main_master')
 
 @section('title')
-@if(session()->get('language') == 'english') Blog Page @else ブログページ @endif
+@if(session()->get('language') == 'english') Blog Category @else ブログカテゴリー @endif
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="#">Home</a></li>
-                <li class='active'>@if(session()->get('language') == 'english') Blog @else ブログ @endif</li>
+                <li class='active'>@if(session()->get('language') == 'english') Blog Category Page @else ブログカテゴリー @endif</li>
             </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->

@@ -16,6 +16,8 @@ use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
 use App\Models\Brand;
+use App\Models\Blog\BlogPostCategory;
+use App\Models\BlogPost;
 
 class IndexController extends Controller
 {
@@ -50,6 +52,7 @@ class IndexController extends Controller
         $skip_brand_product_9 = Product::where('status', 1)
             ->where('brand_id', $skip_brand_9->id)
             ->orderBy('id', 'DESC')->get();
+        $blogPosts = BlogPost::latest()->get();
 
         // return $skip_category->id;
         // die();
@@ -68,6 +71,7 @@ class IndexController extends Controller
             'skip_product_1',
             'skip_brand_9',
             'skip_brand_product_9',
+            'blogPosts',
         ));
     }
 
