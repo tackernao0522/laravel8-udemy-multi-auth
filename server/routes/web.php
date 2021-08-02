@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
@@ -192,6 +193,11 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/add/post', [BlogController::class, 'addBlogPost'])->name('add.post');
         Route::post('/post/store', [BlogController::class, 'blogPostStore'])->name('post-store');
     });
+
+    // Admin Site Setting Routes
+    Route::prefix('setting')->group(function () {
+        Route::get('/site', [SiteSettingController::class, 'siteSetting'])->name('site.setting');
+    });
 });
 
 // User All Routes
@@ -291,4 +297,3 @@ Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->na
 Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
 Route::get('/post/details/{id}', [HomeBlogController::class, 'detailsBlogPost'])->name('post.details');
 Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'homeBlogCatPost']);
-
