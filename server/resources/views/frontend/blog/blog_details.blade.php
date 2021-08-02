@@ -103,7 +103,9 @@
                                     <div class="accordion-group">
                                         @foreach($blogCategories as $category)
                                         <ul class="list-group">
-                                            <li class="list-group-item">@if(session()->get('language') == 'english') {{ $category->blog_category_name_en }} @else {{ $category->blog_category_name_ja }} @endif</li>
+                                            <a href="{{ url('blog/category/post/' . $category->id) }}">
+                                                <li class="list-group-item">@if(session()->get('language') == 'english') {{ $category->blog_category_name_en }} @else {{ $category->blog_category_name_ja }} @endif</li>
+                                            </a>
                                         </ul>
                                         @endforeach
                                     </div><!-- /.accordion-group -->
