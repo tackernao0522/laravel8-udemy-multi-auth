@@ -22,7 +22,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col">
-                        <form method="POST" action="{{-- route('update.seoSetting', $seo->id) --}}">
+                        <form method="POST" action="{{ route('update.seoSetting', $seo->id) }}">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
