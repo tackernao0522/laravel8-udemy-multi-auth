@@ -197,6 +197,7 @@ Route::middleware(['auth:admin'])->group(function () {
     // Admin Site Setting Routes
     Route::prefix('setting')->group(function () {
         Route::get('/site', [SiteSettingController::class, 'siteSetting'])->name('site.setting');
+        Route::post('/site/update', [SiteSettingController::class, 'siteSettingUpdate'])->name('update.siteSetting');
     });
 });
 
