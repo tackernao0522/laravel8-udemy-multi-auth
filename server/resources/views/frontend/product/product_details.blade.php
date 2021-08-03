@@ -254,7 +254,7 @@
                         <div class="col-sm-3">
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                 <li class="active"><a data-toggle="tab" href="#description">@if(session()->get('language') == 'english') DESCRIPTION @else 詳細説明 @endif</a></li>
-                                <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                <li><a data-toggle="tab" href="#review">@if(session()->get('language') == 'english') REVIEW @else レビュー @endif</a></li>
                                 <li><a data-toggle="tab" href="#tags">TAGS</a></li>
                             </ul><!-- /.nav-tabs #product-tabs -->
                         </div>
@@ -274,7 +274,7 @@
                                     <div class="product-tab">
 
                                         <div class="product-reviews">
-                                            <h4 class="title">Customer Reviews</h4>
+                                            <h4 class="title">@if(session()->get('language') == 'english') Customer Reviews @else お客様レビュー @endif</h4>
 
                                             <div class="reviews">
                                                 <div class="review">
@@ -286,80 +286,42 @@
                                         </div><!-- /.product-reviews -->
 
                                         <div class="product-add-review">
-                                            <h4 class="title">Write your own review</h4>
+                                            <h4 class="title">@if(session()->get('language') == 'english') Write your own review @else レビューを投稿する @endif</h4>
                                             <div class="review-table">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="cell-label">&nbsp;</th>
-                                                                <th>1 star</th>
-                                                                <th>2 stars</th>
-                                                                <th>3 stars</th>
-                                                                <th>4 stars</th>
-                                                                <th>5 stars</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="cell-label">Quality</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Price</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Value</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table><!-- /.table .table-bordered -->
-                                                </div><!-- /.table-responsive -->
+
                                             </div><!-- /.review-table -->
 
                                             <div class="review-form">
+                                                @guest
+                                                <p><b>@if(session()->get('language') == 'english') For Add Product Review You Need login First @else 製品レビューを投稿するには、ログインする必要があります。 @endif <a href="{{ route('login') }}">@if(session()->get('language') == 'english') Login Here @else ログインはこちら @endif </a></b></p>
+                                                @else
                                                 <div class="form-container">
                                                     <form role="form" class="cnt-form">
-
+                                                        @csrf
                                                         <div class="row">
                                                             <div class="col-sm-6">
+
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputName">Your Name <span class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-                                                                </div><!-- /.form-group -->
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
+                                                                    <label for="exampleInputSummary">@if(session()->get('language') == 'english') Summary @else 概要 @endif <span class="astk">*</span></label>
                                                                     <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
                                                                 </div><!-- /.form-group -->
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputReview">Review <span class="astk">*</span></label>
+                                                                    <label for="exampleInputReview">@if(session()->get('language') == 'english') Review @else レビュー @endif <span class="astk">*</span></label>
                                                                     <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
                                                                 </div><!-- /.form-group -->
                                                             </div>
                                                         </div><!-- /.row -->
 
                                                         <div class="action text-right">
-                                                            <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+                                                            <button class="btn btn-primary btn-upper">@if(session()->get('language') == 'english') SUBMIT REVIEW @else レビューを投稿 @endif</button>
                                                         </div><!-- /.action -->
 
                                                     </form><!-- /.cnt-form -->
                                                 </div><!-- /.form-container -->
+                                                @endguest
                                             </div><!-- /.review-form -->
 
                                         </div><!-- /.product-add-review -->
