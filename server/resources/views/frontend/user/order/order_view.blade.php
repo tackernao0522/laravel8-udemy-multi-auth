@@ -71,6 +71,11 @@
                                         <span class="badge badge-pill badge-warning" style="background: #808080">発送済</span>
                                         @elseif($order->status == 'delivered')
                                         <span class="badge badge-pill badge-warning" style="background: #008000">配達完了</span>
+
+                                        @if($order->return_order == 1)
+                                        <span class="badge badge-pill badge-warning" style="background: red">返品依頼済</span>
+                                        @endif
+
                                         @else
                                         <span class="badge badge-pill badge-warning" style="background: #FF0000">キャンセル</span>
                                         @endif
