@@ -31,12 +31,12 @@
                                     <label for="">請求番号</label>
                                 </td>
 
-                                <td class="col-md-2">
-                                    <label for="">ステータス</label>
+                                <td class="col-md-1">
+                                    <label for="">オーダー番号</label>
                                 </td>
 
-                                <td class="col-md-1">
-                                    <label for="">詳細／領収書</label>
+                                <td class="col-md-2">
+                                    <label for="">オーダーステータス</label>
                                 </td>
 
                                 @foreach($orders as $order)
@@ -58,29 +58,20 @@
                                 </td>
 
                                 <td class="col-md-2">
-                                    <label for="">
-                                    @if($order->status == 'pending')
-                                        <span class="badge badge-pill badge-warning" style="background: #800080">保留中</span>
-                                        @elseif($order->status == 'confirm')
-                                        <span class="badge badge-pill badge-warning" style="background: #0000FF">確認済</span>
-                                        @elseif($order->status == 'processing')
-                                        <span class="badge badge-pill badge-warning" style="background: #FFA500">対応中</span>
-                                        @elseif($order->status == 'picked')
-                                        <span class="badge badge-pill badge-warning" style="background: #808000">発送可能</span>
-                                        @elseif($order->status == 'shipped')
-                                        <span class="badge badge-pill badge-warning" style="background: #808080">発送済</span>
-                                        @elseif($order->status == 'delivered')
-                                        <span class="badge badge-pill badge-warning" style="background: #008000">配達完了</span>
-                                        @endif
-                                        <span class="badge badge-pill badge-warning" style="background: red">返品依頼済</span>
-                                    </label>
+                                    <label for="">{{ $order->order_number }}</label>
                                 </td>
 
-                                <td class="col-md-1">
-                                    <div style="display: flex">
-                                        <a href="{{ url('user/order_details/' . $order->id) }}" class="btn btn-sm btn-primary" style="margin-right: 5px"><i class="fa fa-eye"></i>詳細</a>
-                                        <a target="_blank" href="{{ url('user/invoice_download/' . $order->id) }}" class="btn btn-sm btn-danger" style="color: white"><i class="fa fa-download"></i>領収書</a>
-                                    </div>
+                                <td class="col-md-2">
+                                    <label for="">
+                                        @if($order->return_order == 0)
+                                        <span class="badge badge-pill badge-warning" style="background: #418DB9">返品依頼商品はありません。</span>
+                                        @elseif($order->return_order == 1)
+                                        <span class="badge badge-pill badge-warning" style="background: #800000">保留中</span>
+                                        <span class="badge badge-pill badge-warning" style="background: red">返品依頼済</span>
+                                        @elseif($order->return_order == 2)
+                                        <span class="badge badge-pill badge-warning" style="background: #008000">完了</span>
+                                        @endif
+                                    </label>
                                 </td>
                             </tr>
                             @endforeach
