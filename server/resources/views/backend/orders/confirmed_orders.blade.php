@@ -33,7 +33,9 @@
                                         <td>{{ $item->invoice_no }}</td>
                                         <td>¥ {{ number_format($item->amount) }}(税込)</td>
                                         <td>{{ $item->payment_method }}</td>
-                                        <td><span class="badge badge-pill badge-primary">{{ $item->status }}</span></td>
+                                        @if($item->status == 'confirm')
+                                        <td><span class="badge badge-pill badge-primary">確認済</span></td>
+                                        @endif
                                         <td width="30%">
                                             <a href="{{ route('pending.order.details', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i></a>
                                             <a target="_blank" href="{{ route('invoice.download', $item->id) }}" class="btn btn-danger" title="Invoice Download"><i class="fa fa-download"></i></a>

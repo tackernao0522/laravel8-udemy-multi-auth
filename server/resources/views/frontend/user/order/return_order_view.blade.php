@@ -59,7 +59,19 @@
 
                                 <td class="col-md-2">
                                     <label for="">
-                                        <span class="badge badge-pill badge-warning" style="background: #418D89">{{ $order->status }}</span>
+                                    @if($order->status == 'pending')
+                                        <span class="badge badge-pill badge-warning" style="background: #800080">保留中</span>
+                                        @elseif($order->status == 'confirm')
+                                        <span class="badge badge-pill badge-warning" style="background: #0000FF">確認済</span>
+                                        @elseif($order->status == 'processing')
+                                        <span class="badge badge-pill badge-warning" style="background: #FFA500">対応中</span>
+                                        @elseif($order->status == 'picked')
+                                        <span class="badge badge-pill badge-warning" style="background: #808000">発送可能</span>
+                                        @elseif($order->status == 'shipped')
+                                        <span class="badge badge-pill badge-warning" style="background: #808080">発送済</span>
+                                        @elseif($order->status == 'delivered')
+                                        <span class="badge badge-pill badge-warning" style="background: #008000">配達完了</span>
+                                        @endif
                                         <span class="badge badge-pill badge-warning" style="background: red">返品依頼済</span>
                                     </label>
                                 </td>

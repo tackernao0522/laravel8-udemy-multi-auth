@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     public function pendingOrders()
     {
-        $orders = Order::where('status', '保留中')
+        $orders = Order::where('status', 'pending')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -39,7 +39,7 @@ class OrderController extends Controller
 
     public function confirmedOrders()
     {
-        $orders = Order::where('status', '確認済')
+        $orders = Order::where('status', 'confirm')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -48,7 +48,7 @@ class OrderController extends Controller
 
     public function processingOrders()
     {
-        $orders = Order::where('status', '対応中')
+        $orders = Order::where('status', 'processing')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -57,7 +57,7 @@ class OrderController extends Controller
 
     public function pickedOrders()
     {
-        $orders = Order::where('status', '発送可能')
+        $orders = Order::where('status', 'picked')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -66,7 +66,7 @@ class OrderController extends Controller
 
     public function shippedOrders()
     {
-        $orders = Order::where('status', '発送済')
+        $orders = Order::where('status', 'shipped')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -75,7 +75,7 @@ class OrderController extends Controller
 
     public function deliveredOrders()
     {
-        $orders = Order::where('status', '配達完了')
+        $orders = Order::where('status', 'delivered')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -84,7 +84,7 @@ class OrderController extends Controller
 
     public function cancelOrders()
     {
-        $orders = Order::where('status', 'キャンセル')
+        $orders = Order::where('status', 'cancel')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -94,7 +94,7 @@ class OrderController extends Controller
     public function pendingToConfirm($order_id)
     {
         Order::findOrFail($order_id)->update([
-            'status' => '確認済',
+            'status' => 'confirm',
             'confirmed_date' => Carbon::now()->format('Y年n月j日'),
         ]);
 
@@ -110,7 +110,7 @@ class OrderController extends Controller
     public function confirmToProcessing($order_id)
     {
         Order::findOrFail($order_id)->update([
-            'status' => '対応中',
+            'status' => 'processing',
             'processing_date' => Carbon::now()->format('Y年n月j日'),
         ]);
 
@@ -126,7 +126,7 @@ class OrderController extends Controller
     public function processingToPicked($order_id)
     {
         Order::findOrFail($order_id)->update([
-            'status' => '発送可能',
+            'status' => 'picked',
             'picked_date' => Carbon::now()->format('Y年n月j日'),
         ]);
 
@@ -142,7 +142,7 @@ class OrderController extends Controller
     public function pickedToShipped($order_id)
     {
         Order::findOrFail($order_id)->update([
-            'status' => '発送済',
+            'status' => 'shipped',
             'shipped_date' => Carbon::now()->format('Y年n月j日'),
         ]);
 
@@ -158,7 +158,7 @@ class OrderController extends Controller
     public function shippedToDelivered($order_id)
     {
         Order::findOrFail($order_id)->update([
-            'status' => '配達完了',
+            'status' => 'delivered',
             'delivered_date' => Carbon::now()->format('Y年n月j日'),
         ]);
 
