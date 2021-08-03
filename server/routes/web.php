@@ -206,6 +206,8 @@ Route::middleware(['auth:admin'])->group(function () {
     // Admin Return Order Routes
     Route::prefix('return')->group(function () {
         Route::get('/admin/request', [ReturnController::class, 'returnRequest'])->name('return.request');
+        Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'returnRequestApprove'])->name('return.approve');
+        Route::get('/admin/all/request', [ReturnController::class, 'returnAllRequest'])->name('all.request');
     });
 });
 

@@ -66,10 +66,10 @@
                                         @if($order->return_order == 0)
                                         <span class="badge badge-pill badge-warning" style="background: #418DB9">返品依頼商品はありません。</span>
                                         @elseif($order->return_order == 1)
-                                        <span class="badge badge-pill badge-warning" style="background: #800000">保留中</span>
+                                        <span class="badge badge-pill badge-warning" style="background: #800000">精査中</span>
                                         <span class="badge badge-pill badge-warning" style="background: red">返品依頼済</span>
                                         @elseif($order->return_order == 2)
-                                        <span class="badge badge-pill badge-warning" style="background: #008000">完了</span>
+                                        <span class="badge badge-pill badge-warning" style="background: #008000">返品対応完了</span>
                                         @endif
                                     </label>
                                 </td>

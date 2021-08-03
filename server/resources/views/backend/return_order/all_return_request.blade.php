@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">返品未対応リスト</h3>
+                        <h3 class="box-title">返品承認済リスト</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -22,8 +22,8 @@
                                         <th>オーダー番号</th>
                                         <th>合計金額</th>
                                         <th>支払い方法</th>
-                                        <th>ステータス</th>
                                         <th>承認の可否</th>
+                                        <th>ステータス</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,11 +37,11 @@
                                             @if($item->return_order == 1)
                                             <span class="badge badge-pill badge-primary">未対応</span>
                                             @elseif($item->return_order == 2)
-                                            <span class="badge badge-pill badge-success">対応済</span>
+                                            <span class="badge badge-pill badge-success">承認済</span>
                                             @endif
                                         </td>
                                         <td width="30%">
-                                            <a href="{{ route('return.approve', $item->id) }}" class="btn btn-danger">承認する</a>
+                                            <span class="badge badge-success">返品対応完了</span>
                                         </td>
                                     </tr>
                                     @endforeach
