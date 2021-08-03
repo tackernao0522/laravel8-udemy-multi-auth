@@ -296,27 +296,33 @@
                                                 <p><b>@if(session()->get('language') == 'english') For Add Product Review You Need login First @else 製品レビューを投稿するには、ログインする必要があります。 @endif <a href="{{ route('login') }}">@if(session()->get('language') == 'english') Login Here @else ログインはこちら @endif </a></b></p>
                                                 @else
                                                 <div class="form-container">
-                                                    <form role="form" class="cnt-form">
+                                                    <form role="form" class="cnt-form" method="POST" action="{{ route('review.store', $product->id) }}">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-sm-6">
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputSummary">@if(session()->get('language') == 'english') Summary @else 概要 @endif <span class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
+                                                                    <input type="text" name="summary" class="form-control txt" id="exampleInputSummary" placeholder="" value="{{ old('summary') }}">
+                                                                    @error('summary')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
                                                                 </div><!-- /.form-group -->
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputReview">@if(session()->get('language') == 'english') Review @else レビュー @endif <span class="astk">*</span></label>
-                                                                    <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
+                                                                    <textarea class="form-control txt txt-review" name="comment" id="exampleInputReview" rows="4" placeholder="">{{ old('comment') }}</textarea>
+                                                                    @error('comment')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
                                                                 </div><!-- /.form-group -->
                                                             </div>
                                                         </div><!-- /.row -->
 
                                                         <div class="action text-right">
-                                                            <button class="btn btn-primary btn-upper">@if(session()->get('language') == 'english') SUBMIT REVIEW @else レビューを投稿 @endif</button>
+                                                            <button type="submit" class="btn btn-primary btn-upper">@if(session()->get('language') == 'english') SUBMIT REVIEW @else レビューを投稿 @endif</button>
                                                         </div><!-- /.action -->
 
                                                     </form><!-- /.cnt-form -->

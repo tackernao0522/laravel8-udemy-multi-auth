@@ -309,3 +309,6 @@ Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->na
 Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
 Route::get('/post/details/{id}', [HomeBlogController::class, 'detailsBlogPost'])->name('post.details');
 Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'homeBlogCatPost']);
+
+// Frontend Product Review Routes
+Route::post('/review/store/{id}', [ReviewController::class, 'reviewStore'])->name('review.store');
