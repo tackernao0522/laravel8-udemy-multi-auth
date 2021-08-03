@@ -132,6 +132,8 @@ return [
         'blog_category_name_ja' => 'ブログカテゴリー',
         'post_title_ja' => 'ブログタイトル',
         'post_details_ja' => '投稿内容',
+        'summary' => '概要',
+        'comment' => 'レビュー',
     ],
 
 ];
