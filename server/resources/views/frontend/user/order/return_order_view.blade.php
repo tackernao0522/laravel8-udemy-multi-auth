@@ -32,7 +32,7 @@
                                 </td>
 
                                 <td class="col-md-1">
-                                    <label for="">オーダー番号</label>
+                                    <label for="">返品理由</label>
                                 </td>
 
                                 <td class="col-md-2">
@@ -58,7 +58,7 @@
                                 </td>
 
                                 <td class="col-md-2">
-                                    <label for="">{{ $order->order_number }}</label>
+                                    <label for="">{{ $order->return_reason }}</label>
                                 </td>
 
                                 <td class="col-md-2">

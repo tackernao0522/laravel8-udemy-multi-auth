@@ -140,6 +140,20 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == '/return') ? 'active' : '' }}">
+                <a href="{{ url('admin/dashboard') }}">
+                    <i data-feather="file"></i>
+                    <span>返品依頼商品</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'return.request') ? 'active' : '' }}"><a href="{{ route('return.request') }}"><i class="ti-more"></i>返品未対応リスト</a></li>
+                    <li class="{{ ($route == 'seo.setting') ? 'active' : '' }}"><a href="{{ route('seo.setting') }}"><i class="ti-more"></i>返品依頼商品リスト</a></li>
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview {{ ($prefix == '/orders') ? 'active' : '' }}">
