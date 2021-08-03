@@ -41,7 +41,7 @@ class CashController extends Controller
             'order_date' => Carbon::now()->format('Y年n月j日'),
             'order_mouth' => Carbon::now()->format('n月'),
             'order_year' => Carbon::now()->format('Y年'),
-            'status' => '保留中',
+            'status' => 'pending',
             'created_at' => Carbon::now(),
         ]);
 

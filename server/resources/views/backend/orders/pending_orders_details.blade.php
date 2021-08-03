@@ -6,7 +6,7 @@
     <div class="content-header">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
-                <h3 class="page-title">保留中オーダー詳細</h3>
+                <h3 class="page-title">オーダー詳細</h3>
                 <div class="d-inline-block align-items-center">
                     <nav>
                         <ol class="breadcrumb">
@@ -113,21 +113,33 @@
 
                         <tr>
                             <th>ステータス : </th>
-                            <th><span class="badge badge-pill badge-warning" style="background: #418D89">{{ $order->status }}</span></th>
+                            @if($order->status == 'pending')
+                            <th><span class="badge badge-pill badge-warning" style="background: #800080">保留中</span></th>
+                            @elseif($order->status == 'confirm')
+                            <th><span class="badge badge-pill badge-warning" style="background: #0000FF">確認済</span></th>
+                            @elseif($order->status == 'processing')
+                            <th><span class="badge badge-pill badge-warning" style="background: #FFA500">対応中</span></th>
+                            @elseif($order->status == 'picked')
+                            <th><span class="badge badge-pill badge-warning" style="background: #808000">発送可能</span></th>
+                            @elseif($order->status == 'shipped')
+                            <th><span class="badge badge-pill badge-warning" style="background: #808080">発送済</span></th>
+                            @elseif($order->status == 'delivered')
+                            <th><span class="badge badge-pill badge-warning" style="background: #008000">配達完了</span></th>
+                            @endif
                         </tr>
 
                         <tr>
                             <th></th>
                             <th>
-                                @if($order->status == '保留中')
+                                @if($order->status == 'pending')
                                 <a href="{{ route('pending-confirm', $order->id) }}" class="btn btn-block btn-success" id="confirm">確認済にする</a>
-                                @elseif($order->status == '確認済')
+                                @elseif($order->status == 'confirm')
                                 <a href="{{ route('confirm.processing', $order->id) }}" class="btn btn-block btn-success" id="processing">対応中にする</a>
-                                @elseif($order->status == '対応中')
+                                @elseif($order->status == 'processing')
                                 <a href="{{ route('processing.picked', $order->id) }}" class="btn btn-block btn-success" id="picked">発送可能にする</a>
-                                @elseif($order->status == '発送可能')
+                                @elseif($order->status == 'picked')
                                 <a href="{{ route('picked.shippied', $order->id) }}" class="btn btn-block btn-success" id="shipped">発送済にする</a>
-                                @elseif($order->status == '発送済')
+                                @elseif($order->status == 'shipped')
                                 <a href="{{ route('shipped.delivered', $order->id) }}" class="btn btn-block btn-success" id="delivered">配達完了にする</a>
                                 @endif
                             </th>
