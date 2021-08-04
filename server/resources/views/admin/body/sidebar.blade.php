@@ -164,7 +164,7 @@ $route = Route::current()->getName();
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ ($route == 'pending.review') ? 'active' : '' }}"><a href="{{ route('pending.review') }}"><i class="ti-more"></i>保留中商品レビュー</a></li>
-                    <li class="{{ ($route == 'all.request') ? 'active' : '' }}"><a href="{{ route('all.request') }}"><i class="ti-more"></i>公開中商品レビュー</a></li>
+                    <li class="{{ ($route == 'publish.review') ? 'active' : '' }}"><a href="{{ route('publish.review') }}"><i class="ti-more"></i>公開中商品レビュー</a></li>
                 </ul>
             </li>
 
