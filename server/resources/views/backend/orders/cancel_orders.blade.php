@@ -34,7 +34,7 @@
                                         <td>¥ {{ number_format($item->amount) }}(税込)</td>
                                         <td>{{ $item->payment_method }}</td>
                                         <td><span class="badge badge-pill badge-primary">{{ $item->status }}</span></td>
-                                        <td width="30%">
+                                        <td width="20%">
                                             <a href="{{ route('pending.order.details', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('coupon.delete', $item->id) }}" onclick="return confirm('削除してよろしいですか？')" class="btn btn-danger" title="Delete Data"><i class="fa fa-trash"></i></a>
                                         </td>

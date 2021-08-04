@@ -40,7 +40,7 @@
                                             <span class="badge badge-pill badge-success">対応済</span>
                                             @endif
                                         </td>
-                                        <td width="30%">
+                                        <td width="20%">
                                             <a href="{{ route('return.approve', $item->id) }}" class="btn btn-danger">承認する</a>
                                         </td>
                                     </tr>
