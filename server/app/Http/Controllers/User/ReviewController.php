@@ -36,6 +36,5 @@ class ReviewController extends Controller
 
         return redirect()->back()
             ->with($notification);
-
     }
 }
