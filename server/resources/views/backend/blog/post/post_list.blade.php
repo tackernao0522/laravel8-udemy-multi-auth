@@ -32,10 +32,10 @@
                                     @foreach($blogPosts as $item)
                                     <tr>
                                         <td>{{ $item->category->blog_category_name_ja }}</td>
-                                        <td><img src="{{ Storage::disk('s3')->url("blogs/{$item->post_image}") }}" alt="" style="width: 60px; height: 60px"></td>
-                                        <td>{!! nl2br(e(Str::limit($item->post_title_ja, 45))) !!}</td>
-                                        <td>{!! nl2br(e(Str::limit($item->post_title_en, 45))) !!}</td>
-                                        <td width="30%">
+                                        <td width="15%"><img src="{{ Storage::disk('s3')->url("blogs/{$item->post_image}") }}" alt="" style="width: 60px; height: 60px"></td>
+                                        <td>{!! nl2br(e(Str::limit($item->post_title_ja, 20))) !!}</td>
+                                        <td>{!! nl2br(e(Str::limit($item->post_title_en, 20))) !!}</td>
+                                        <td width="15%">
                                             <a href="{{ route('blog.category.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('category.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
                                         </td>

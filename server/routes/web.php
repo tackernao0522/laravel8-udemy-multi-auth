@@ -210,6 +210,12 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'returnRequestApprove'])->name('return.approve');
         Route::get('/admin/all/request', [ReturnController::class, 'returnAllRequest'])->name('all.request');
     });
+
+    // Admin Manage Review Routes
+    Route::prefix('review')->group(function () {
+        Route::get('/pending', [ReviewController::class, 'pendingReview'])->name('pending.review');
+        Route::get('/admin/approve/{id}', [ReviewController::class, 'reviewApprove'])->name('review.approve');
+    });
 });
 
 // User All Routes

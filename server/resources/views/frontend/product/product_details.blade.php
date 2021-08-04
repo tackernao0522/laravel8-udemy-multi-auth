@@ -295,7 +295,7 @@
                                                     </div> <!-- end row -->
 
                                                     <div class="review-title"><span class="summary">{{ $item->summary }}</span><span class="date"><i class="fa fa-calendar"></i><span>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span></span></div>
-                                                    <div class="text">"{{ $item->comment }}"</div>
+                                                    <div class="text">"{!! nl2br(e($item->comment)) !!}"</div>
                                                 </div>
                                                 @endif
                                                 @endforeach

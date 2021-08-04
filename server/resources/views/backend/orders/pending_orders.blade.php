@@ -36,7 +36,7 @@
                                         @if($item->status == 'pending')
                                         <td><span class="badge badge-pill badge-primary">保留中</span></td>
                                         @endif
-                                        <td width="30%">
+                                        <td width="20%">
                                             <a href="{{ route('pending.order.details', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>

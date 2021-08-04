@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">返品承認済リスト</h3>
+                        <h3 class="box-title">保留中商品レビューリスト <span class="badge badge-pill badge-danger">{{ count($reviews) }}</span></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -18,30 +18,30 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>受注日</th>
-                                        <th>オーダー番号</th>
-                                        <th>合計金額</th>
-                                        <th>支払い方法</th>
-                                        <th>承認の可否</th>
+                                        <th>概要</th>
+                                        <th>レビュー</th>
+                                        <th>ユーザー</th>
+                                        <th>商品名</th>
                                         <th>ステータス</th>
+                                        <th>承認の可否</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($orders as $item)
+                                    @foreach($reviews as $item)
                                     <tr>
-                                        <td>{{ $item->order_date }}</td>
-                                        <td>{{ $item->invoice_no }}</td>
-                                        <td>¥ {{ number_format($item->amount) }}(税込)</td>
-                                        <td>{{ $item->payment_method }}</td>
-                                        <td>
-                                            @if($item->return_order == 1)
+                                        <td>{{ $item->summary }}</td>
+                                        <td>{!! nl2br(e($item->comment)) !!}</td>
+                                        <td width="14%">{{ $item->user->name }}</td>
+                                        <td>{!! nl2br(e($item->product->product_name_ja)) !!}</td>
+                                        <td width="18%">
+                                            @if($item->status == 0)
                                             <span class="badge badge-pill badge-primary">未対応</span>
-                                            @elseif($item->return_order == 2)
-                                            <span class="badge badge-pill badge-success">承認済</span>
+                                            @elseif($item->status == 1)
+                                            <span class="badge badge-pill badge-success">公開済</span>
                                             @endif
                                         </td>
-                                        <td width="20%">
-                                            <span class="badge badge-success">返品対応完了</span>
+                                        <td width="15%">
+                                            <a href="{{ route('review.approve', $item->id) }}" class="btn btn-danger">承認する</a>
                                         </td>
                                     </tr>
                                     @endforeach
