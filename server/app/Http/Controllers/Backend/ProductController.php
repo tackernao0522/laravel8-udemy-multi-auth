@@ -309,6 +309,12 @@ class ProductController extends Controller
             ->with($notification);
     }
 
+    public function productStock()
+    {
+        $products = Product::latest()->get();
+
+        return view('backend.product.product_stock', compact('products'));
+    }
 
     private function saveImage(UploadedFile $file): string
     {
