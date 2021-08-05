@@ -10,7 +10,10 @@
             <div class="col-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">管理者リスト</h3>
+                        <h3 class="box-title">管理者リスト <span class="badge badge-pill badge-danger">{{ count($adminUsers) }}名</span></h3>
+                        <div>
+                            <a href="{{ route('add.admin') }}" class="btn btn-danger">管理者追加</a>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -28,7 +31,7 @@
                                 <tbody>
                                     @foreach($adminUsers as $item)
                                     <tr>
-                                        <td><img src="{ (!empty($item->profile_photo_path)) ? Storage::disk('s3')->url(" admin-profile/{$item->profile_photo_path}") : url('backend/images/avatar/1.jpg') }}" alt=""></td>
+                                        <td><img src="{{ (!empty($item->profile_photo_path)) ? Storage::disk('s3')->url("admin-profile/{$item->profile_photo_path}") : url('backend/images/avatar/1.jpg') }}" alt="" style="width: 50px; height: 50px"></td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td></td>
