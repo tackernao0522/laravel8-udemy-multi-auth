@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use PDF;
 
 class OrderController extends Controller
@@ -157,6 +159,12 @@ class OrderController extends Controller
 
     public function shippedToDelivered($order_id)
     {
+        $products = OrderItem::where('order_id', $order_id)->get();
+        foreach ($products as $item) {
+            Product::where('id', $item->product_id)
+                ->update(['product_qty' => DB::raw('product_qty-' . $item->qty)]);
+        }
+
         Order::findOrFail($order_id)->update([
             'status' => 'delivered',
             'delivered_date' => Carbon::now()->format('Y年n月j日'),
