@@ -228,6 +228,8 @@ Route::middleware(['auth:admin'])->group(function () {
     // Admin User Role Routes
     Route::prefix('adminuserrole')->group(function () {
         Route::get('/all', [AdminUserController::class, 'allAdminRole'])->name('all.admin.user');
+        Route::get('/add', [AdminUserController::class, 'addAdminRole'])->name('add.admin');
+        Route::post('/store', [AdminUserController::class, 'storeAdminRole'])->name('admin.user.store');
     });
 });
 
