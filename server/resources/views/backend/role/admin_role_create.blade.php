@@ -124,7 +124,7 @@
                                                 <div class="controls">
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_7" name="shipping" value="1">
-                                                        <label for="checkbox_7">配送</label>
+                                                        <label for="checkbox_7">配送エリア</label>
                                                     </fieldset>
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_8" name="blog" value="1">
@@ -163,7 +163,7 @@
                                                     </fieldset>
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_15" name="alluser" value="1">
-                                                        <label for="checkbox_15">会員</label>
+                                                        <label for="checkbox_15">会員リスト</label>
                                                     </fieldset>
                                                     <fieldset>
                                                         <input type="checkbox" id="checkbox_16" name="adminuserrole" value="1">
