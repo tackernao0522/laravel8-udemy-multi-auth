@@ -230,6 +230,8 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/all', [AdminUserController::class, 'allAdminRole'])->name('all.admin.user');
         Route::get('/add', [AdminUserController::class, 'addAdminRole'])->name('add.admin');
         Route::post('/store', [AdminUserController::class, 'storeAdminRole'])->name('admin.user.store');
+        Route::get('/edit/{id}', [AdminUserController::class, 'editAdminRole'])->name('edit.admin.user');
+        Route::post('/update/{id}', [AdminUserController::class, 'updateAdminRole'])->name('admin.user.update');
     });
 });
 

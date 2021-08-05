@@ -18,7 +18,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table id="example1" class="table table-bordered table-striped" style="display: block; overflow-x: scroll; white-space: nowrap; -webkit-overflow-scrolling: touch">
+                            <table id="example1" class="table table-bordered table-striped" style="overflow-x: scroll; white-space: nowrap; -webkit-overflow-scrolling: touch">
                                 <thead>
                                     <tr>
                                         <th>画像</th>
@@ -109,7 +109,7 @@
                                             @endif
                                         </td>
                                         <td width="20%">
-                                            <a href="{{ route('pending.order.details', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('edit.admin.user', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('invoice.download', $item->id) }}" class="btn btn-danger" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
