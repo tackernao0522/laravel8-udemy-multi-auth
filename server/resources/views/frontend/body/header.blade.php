@@ -10,6 +10,8 @@
                         <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>@if(session()->get('language') == 'english') Wishlist @else ウイッシュリスト @endif</a></li>
                         <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
                         <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'english') Checkout @else チェックアウト @endif</a></li>
+                        <li><a href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ordertracking"><i class="icon fa fa-check" style="margin-top: 5px"></i>@if(session()->get('language') == 'english') Order Tracking @else オーダー追跡 @endif</a></li>
+                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
                         @auth
                         <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'english') User Profile @else ユーザープロフィール @endif</a></li>
                         @else
@@ -229,4 +231,28 @@
     <!-- /.header-nav -->
     <!-- ============================================== NAVBAR : END ============================================== -->
 
+    <!-- Order Tracking Modal -->
+    <div class="modal fade" id="ordertracking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@if(session()->get('language') == 'english') Track Your Order @else オーダー追跡 @endif</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('order.tracking') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <label for="">@if(session()->get('language') == 'english') Invoice Code @else 請求番号 @endif</label>
+                            <input type="text" nmae="code" required="" class="form-control" placeholder="オーダー追跡したい請求番号入力">
+                        </div>
+
+                        <button type="submit" class="btn btn-danger" style="margin-left: 15px">@if(session()->get('language') == 'english') Track Now @else 追跡する @endif</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
