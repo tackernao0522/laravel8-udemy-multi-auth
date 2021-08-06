@@ -137,11 +137,26 @@ class AdminUserController extends Controller
             ->with($notification);
     }
 
+    public function deleteAdminRole($id)
+    {
+        $adminUser = Admin::findOrFail($id);
+        Storage::disk('s3')->delete('/admin-profile/' . $adminUser->profile_photo_path);
+        $adminUser->delete();
+
+        $notification = array(
+            'message' => '管理者：' . $adminUser->name . 'さんを削除しました。',
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()
+            ->with($notification);
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
 
-        Image::make($file)->fit(225, 225)->save($tempPath);
+        Image::make($file)->resize(225, 225)->save($tempPath);
 
         $filePath = Storage::disk('s3')
             ->putFile('admin-profile', new File($tempPath));
