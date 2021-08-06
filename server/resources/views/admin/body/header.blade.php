@@ -102,7 +102,8 @@
                 </li>
 
                 @php
-                $adminData = DB::table('admins')->first();
+                $id = Auth::user()->id;
+                $adminData = App\Models\Admin::find($id);
                 @endphp
 
                 <!-- User Account-->
