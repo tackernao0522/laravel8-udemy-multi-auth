@@ -246,7 +246,7 @@
                         @csrf
                         <div class="modal-body">
                             <label for="">@if(session()->get('language') == 'english') Invoice Code @else 請求番号 @endif</label>
-                            <input type="text" nmae="code" required="" class="form-control" placeholder="オーダー追跡したい請求番号入力">
+                            <input type="text" name="code" required="" class="form-control" placeholder="オーダー追跡したい請求番号入力" value="{{ old('code') }}">
                         </div>
 
                         <button type="submit" class="btn btn-danger" style="margin-left: 15px">@if(session()->get('language') == 'english') Track Now @else 追跡する @endif</button>
