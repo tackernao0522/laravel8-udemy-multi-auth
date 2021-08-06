@@ -340,3 +340,6 @@ Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'hom
 
 // Frontend Product Review Routes
 Route::post('/review/store/{id}', [ReviewController::class, 'reviewStore'])->name('review.store');
+
+// Product Search Route
+Route::post('/search', [IndexController::class, 'productSearch'])->name('product.search');
