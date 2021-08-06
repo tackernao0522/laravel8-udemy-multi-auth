@@ -169,6 +169,7 @@
                     </div>
                 </div>
 
+                <h4><b>{{ $item }}: </b><span class="badge badge-danger" style="display: inline; background: #FF0000">{{ count($products) }}</span> 件</h4>
 
                 <div class="clearfix filters-container m-t-10">
                     <div class="row">

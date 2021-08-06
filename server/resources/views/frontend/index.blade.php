@@ -233,7 +233,7 @@ Home Easy Online Shop
                     <div class="more-info-tab clearfix ">
                         <h3 class="new-product-title pull-left">@if(session()->get('language') == 'english') New Products @else 新商品(新入荷) @endif</h3>
                         <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
-                            <li class="active"><a data-transition-type="backSlide" href="#all" data-toggle="tab">All</a></li>
+                            <li class="active"><a data-transition-type="backSlide" href="#all" data-toggle="tab">@if(session()->get('language') == 'english') All @else 全て @endif</a></li>
 
                             @foreach($categories as $category)
                             <li><a data-transition-type="backSlide" href="#category{{ $category->id }}" data-toggle="tab">@if(session()->get('language') == 'english') {{ $category->category_name_en }} @else {{ $category->category_name_ja }} @endif</a></li>

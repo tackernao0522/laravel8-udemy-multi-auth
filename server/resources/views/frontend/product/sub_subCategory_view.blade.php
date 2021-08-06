@@ -1,7 +1,9 @@
 @extends('frontend.main_master')
 
 @section('title')
-@if(session()->get('language') == 'english') SubSubCategory Product @else 孫カテゴリー商品 @endif
+@foreach($breadSubSubCat as $item)
+{{ $item->category->category_name_ja }}／{{ $item->subCategory->subCategory_name_ja }}／{{ $item->subSubCategory_name_ja }}
+@endforeach
 @endsection
 
 @section('content')
@@ -9,8 +11,16 @@
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li class='active'>Handbags</li>
+                <li><a href="#">ホーム</a></li>
+                @foreach($breadSubSubCat as $item)
+                <li class='active'>{{ $item->category->category_name_ja }}</li>
+                @endforeach
+                @foreach($breadSubSubCat as $item)
+                <li class='active'>{{ $item->subCategory->subCategory_name_ja }}</li>
+                @endforeach
+                @foreach($breadSubSubCat as $item)
+                <li class='active'>{{ $item->subSubCategory_name_ja }}</li>
+                @endforeach
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -169,6 +179,17 @@
                     </div>
                 </div>
 
+                @foreach($breadSubSubCat as $item)
+                <span class="badge badge-danger" style="background: #808080">{{ $item->category->category_name_ja }}</span>
+                @endforeach
+                /
+                @foreach($breadSubSubCat as $item)
+                <span class="badge badge-danger" style="background: #808080">{{ $item->subCategory->subCategory_name_ja }}</span>
+                @endforeach
+                /
+                @foreach($breadSubSubCat as $item)
+                <span class="badge badge-danger" style="background: #FF0000">{{ $item->subSubCategory_name_ja }}</span>
+                @endforeach
 
                 <div class="clearfix filters-container m-t-10">
                     <div class="row">

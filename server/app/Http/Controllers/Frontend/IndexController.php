@@ -18,6 +18,8 @@ use App\Models\MultiImg;
 use App\Models\Brand;
 use App\Models\Blog\BlogPostCategory;
 use App\Models\BlogPost;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 
 class IndexController extends Controller
 {
@@ -199,7 +201,9 @@ class IndexController extends Controller
 
         $categories = Category::orderBy('category_name_ja', 'ASC')->get();
 
-        return view('frontend.product.subCategory_view', compact('products', 'categories'));
+        $breadSubCat = SubCategory::with(['category'])->where('id', $subCat_id)->get();
+
+        return view('frontend.product.subCategory_view', compact('products', 'categories', 'breadSubCat'));
     }
 
     public function subSubCatWiseProduct($subSubCat_id, $slug)
@@ -208,7 +212,9 @@ class IndexController extends Controller
 
         $categories = Category::orderBy('category_name_ja', 'ASC')->get();
 
-        return view('frontend.product.sub_subCategory_view', compact('products', 'categories'));
+        $breadSubSubCat = SubSubCategory::with(['category', 'subCategory'])->where('id', $subSubCat_id)->get();
+
+        return view('frontend.product.sub_subCategory_view', compact('products', 'categories', 'breadSubSubCat'));
     }
 
     public function productViewAjax($id)
