@@ -228,6 +228,16 @@ class IndexController extends Controller
         ));
     }
 
+    public function productSearch(Request $request)
+    {
+        $item = $request->search;
+        // echo "$item";
+        $categories = Category::orderBy('category_name_ja', 'ASC')->get();
+        $products = Product::where('product_name_ja', 'LIKE', "%$item%")->get();
+
+        return view('frontend.product.search', compact('products', 'item', 'categories'));
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
