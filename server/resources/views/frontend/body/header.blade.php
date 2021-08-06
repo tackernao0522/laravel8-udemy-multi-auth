@@ -11,7 +11,6 @@
                         <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
                         <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'english') Checkout @else チェックアウト @endif</a></li>
                         <li><a href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ordertracking"><i class="icon fa fa-check" style="margin-top: 5px"></i>@if(session()->get('language') == 'english') Order Tracking @else オーダー追跡 @endif</a></li>
-                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'english') My Cart @else マイカート @endif</a></li>
                         @auth
                         <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'english') User Profile @else ユーザープロフィール @endif</a></li>
                         @else

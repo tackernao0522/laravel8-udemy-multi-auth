@@ -4,12 +4,13 @@
 @if(session()->get('language') == 'english') Order Tracking Page @else 請求番号: {{ $track->invoice_no }}の追跡結果 @endif
 @endsection
 
+@section('content')
 <style type="text/css">
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    /* @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); */
 
     body {
         background-color: #eeeeee;
-        font-family: 'Open Sans', serif;
+        /* font-family: 'Open Sans', serif; */
     }
 
     /* .container {} */
@@ -160,7 +161,6 @@
     }
 </style>
 
-@section('content')
 <div class="container">
     <article class="card">
         <header class="card-header"><b>@if(session()->get('language') == 'english') My Orders @else マイオーダー @endif / @if(session()->get('language') == 'english') Tracking @else 追跡 @endif</b></header>
@@ -198,18 +198,55 @@
             </div> <!-- end row -->
 
             <div class="track">
+                @if($track->status == 'pending')
                 <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
-
-                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
-
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
                 <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
-
                 <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
-
                 <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
-
                 <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
-            </div>
+
+                @elseif($track->status == 'confirm')
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
+
+                @elseif($track->status == 'processing')
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
+
+                @elseif($track->status == 'picked')
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
+
+                @elseif($track->status == 'shipped')
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
+
+                @elseif($track->status == 'delivered')
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Pending @else 未対応 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Confirmed @else 確認済 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Processing @else 対応中 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Picked @else 発送可能 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Order Shipped @else 発送済 @endif</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check" style="margin-top: 13px"></i> </span> <span class="text">@if(session()->get('language') == 'english') Delivered @else 配達完了 @endif</span> </div>
+                @endif
+            </div> <!-- end track -->
             <hr><br><br>
         </div>
     </article>
