@@ -134,6 +134,7 @@ return [
         'post_details_ja' => '投稿内容',
         'summary' => '概要',
         'comment' => 'レビュー',
+        'code' => '請求番号',
     ],
 
 ];
