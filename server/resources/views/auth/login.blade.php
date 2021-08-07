@@ -27,9 +27,9 @@
                     <form method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
                         @csrf
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">ユーザー名 <span>*</span></label>
-                            <input type="text" id="name" name="name" class="form-control unicase-form-control text-input">
-                            @error('name')
+                            <label class="info-title" for="exampleInputEmail1">メールアドレス <span>*</span></label>
+                            <input type="text" id="email" name="email" class="form-control unicase-form-control text-input">
+                            @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -63,8 +63,8 @@
                         @csrf
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail1">ユーザー名 <span>*</span></label>
-                            <input type="text" id="name" name="regname" class="form-control unicase-form-control text-input" value="{{ old('name') }}">
-                            @error('regname')
+                            <input type="text" id="name" name="name" class="form-control unicase-form-control text-input" value="{{ old('name') }}">
+                            @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
