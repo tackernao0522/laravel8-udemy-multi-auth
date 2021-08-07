@@ -6,6 +6,11 @@
 @endsection
 
 @section('content')
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
 <!-- ===== ======== HEADER : END ============================================== -->
 <div class="breadcrumb">
     <div class="container">
@@ -290,10 +295,43 @@
                                                 @else
                                                 <div class="review">
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-6">
                                                             <img style="border-radius: 50%" src="{{ (!empty($item->user->profile_photo_path)) ? Storage::disk('s3')->url("user-profile/{$item->user->profile_photo_path}") : url('upload/no_image.jpg') }}" alt="" width="40px" height="40px"><b>{{ $item->user->name }}</b>
+
+                                                            @if ($item->rating == NULL)
+                                                            @elseif($item->rating == 1)
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($item->rating == 2)
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($item->rating == 3)
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($item->rating == 4)
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star"></span>
+                                                            @elseif($item->rating == 5)
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            <span class="fa fa-star checked"></span>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-6">
 
                                                         </div>
                                                     </div> <!-- end row -->
