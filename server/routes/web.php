@@ -343,3 +343,6 @@ Route::post('/review/store/{id}', [ReviewController::class, 'reviewStore'])->nam
 
 // Product Search Route
 Route::post('/search', [IndexController::class, 'productSearch'])->name('product.search');
+
+// Advance Search Routes
+Route::post('/search-product', [IndexController::class, 'searchProduct']);

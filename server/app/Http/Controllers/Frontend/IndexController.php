@@ -246,6 +246,11 @@ class IndexController extends Controller
         return view('frontend.product.search', compact('products', 'item', 'categories'));
     }
 
+    public function searchProduct(Request $request)
+    {
+        return $request;
+    }
+
     private function saveImage(UploadedFile $file): string
     {
         $tempPath = $this->makeTempPath();
