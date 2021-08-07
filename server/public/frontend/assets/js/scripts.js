@@ -319,7 +319,7 @@ jQuery(document).ready(function () {
 
 
     /*===================================================================================*/
-    /*  WOW 
+    /*  WOW
     /*===================================================================================*/
 
     jQuery(function () {
@@ -328,7 +328,7 @@ jQuery(document).ready(function () {
 
 
     /*===================================================================================*/
-    /*  TOOLTIP 
+    /*  TOOLTIP
     /*===================================================================================*/
     jQuery("[data-toggle='tooltip']").tooltip();
 
@@ -339,26 +339,20 @@ jQuery(document).ready(function () {
         let text = $("#search").val();
         // console.log(text);
 
-        $.ajax({
-            data: { search: text },
-            url: site_url + "search-product",
-            method: 'post',
-            beforSend: function (request) {
-                return request.setRequestHeader('X-CSRF-Token', ("meta[name='csrf-token']"))
+        if (text.length > 0) {
+            $.ajax({
+                data: { search: text },
+                url: site_url + "search-product",
+                method: 'post',
+                beforSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', ("meta[name='csrf-token']"))
+                },
+                success: function (result) {
+                    $("#searchProducts").html(result);
+                }
+            }); // end ajax
+        } // end if
 
-            },
-            success: function (result) {
-                $("#searchProducts").html(result);
-            }
-
-        }); // end ajax 
-
-
-
-
-    }); // end one 
-
-
-
-
+        if (text.length < 1) $("#searchProducts").html("");
+    }); // end one
 })

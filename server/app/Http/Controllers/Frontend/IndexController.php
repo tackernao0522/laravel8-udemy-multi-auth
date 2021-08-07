@@ -253,7 +253,7 @@ class IndexController extends Controller
         $item = $request->search;
 
         $products = Product::where('product_name_ja', 'LIKE', "%$item%")
-            ->select('product_name_ja', 'product_thambnail')
+            ->select('product_name_ja', 'product_thambnail', 'selling_price', 'id', 'product_slug_ja')
             ->limit(5)
             ->get();
 
