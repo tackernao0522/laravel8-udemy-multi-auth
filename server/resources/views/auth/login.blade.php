@@ -6,7 +6,7 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li class='active'>Login</li>
+                <li class='active'>ログイン</li>
             </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->
@@ -27,12 +27,22 @@
                     <form method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
                         @csrf
                         <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">メールアドレス <span>*</span></label>
-                            <input type="email" id="email" name="email" class="form-control unicase-form-control text-input">
+                            <label class="info-title" for="exampleInputEmail1">ユーザー名 <span>*</span></label>
+                            <input type="text" id="name" name="name" class="form-control unicase-form-control text-input">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="info-title" for="exampleInputPassword1">パスワード <span>*</span></label>
                             <input type="password" id="password" name="password" class="form-control unicase-form-control text-input">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="radio outer-xs">
                             <label>
@@ -53,8 +63,8 @@
                         @csrf
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail1">ユーザー名 <span>*</span></label>
-                            <input type="text" id="name" name="name" class="form-control unicase-form-control text-input" value="{{ old('name') }}">
-                            @error('name')
+                            <input type="text" id="name" name="regname" class="form-control unicase-form-control text-input" value="{{ old('name') }}">
+                            @error('regname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
