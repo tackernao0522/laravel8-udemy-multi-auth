@@ -113,6 +113,12 @@
 
                             </div><!-- /.single-product-gallery -->
                         </div><!-- /.gallery-holder -->
+
+                        @php
+                        $reviewCount = App\Models\Review::where('product_id', $product->id)->where('status', 1)->latest()->get();
+                        $avarage = App\Models\Review::where('product_id', $product->id)->where('status', 1)->avg('rating');
+                        @endphp
+
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
                                 <h1 class="name" id="pname">@if(session()->get('language') == 'english') {{ $product->product_name_en }} @else {{ $product->product_name_ja }} @endif</h1>
@@ -120,11 +126,43 @@
                                 <div class="rating-reviews m-t-20">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <div class="rating rateit-small"></div>
+                                            @if($avarage == 0)
+                                            評価はまだありません。
+                                            @elseif($avarage == 1 || $avarage < 2)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 2 || $avarage < 3)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 3 || $avarage < 4)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            @elseif($avarage == 4 || $avarage < 5)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                @elseif($avarage == 5 || $avarage < 5)
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            @endif
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="reviews">
-                                                <a href="#" class="lnk">(13 Reviews)</a>
+                                                <a href="#" class="lnk">(レビュー数: {{ count($reviewCount) }})</a>
                                             </div>
                                         </div>
                                     </div><!-- /.row -->
@@ -154,10 +192,10 @@
                                         <div class="col-sm-6">
                                             <div class="price-box">
                                                 @if ($product->discount_price == NULL)
-                                                <span class="price">¥ {{ $product->selling_price }}</span>
+                                                <span class="price">¥ {{ number_format($product->selling_price) }}</span><span>(税込)</span>
                                                 @else
-                                                <span class="price">¥ {{ $product->discount_price }}</span>
-                                                <span class="price-strike">¥ {{ $product->selling_price }}</span>
+                                                <span class="price">¥ {{ number_format($product->discount_price) }}</span><span style="font-size: 10px">(税込)</span>
+                                                <span class="price-strike">¥ {{ number_format($product->selling_price) }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -370,7 +408,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="cell-label">クオリティ</td>
+                                                                    <td class="cell-label">評価</td>
                                                                     <td><input type="radio" name="quality" class="radio" value="1"></td>
                                                                     <td><input type="radio" name="quality" class="radio" value="2"></td>
                                                                     <td><input type="radio" name="quality" class="radio" value="3"></td>
