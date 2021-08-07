@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->text('comment');
             $table->string('summary');
+            $table->integer('rating')->nullable();
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
