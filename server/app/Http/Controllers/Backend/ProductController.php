@@ -34,12 +34,20 @@ class ProductController extends Controller
             'product_color_ja' => 'nullable',
             'product_color_en' => 'nullable',
             'product_thambnail' => 'required|mimes:jpg,jpeg,png',
+            'file' => 'required|mimes:jpeg,png,jpg.zip,pdf|max:2048',
         ], [
             // 'brand_name_en.required' => 'Input Brand English Name',
             // 'brand_name_en.unique' => 'The brand name ja has already been taken.',
             'product_thambnail.required' => 'メインサムネイルは必須です。(Input Brand Image.)',
             'product_thambnail.mimes' => 'メインサムネイルにはjpg, jpeg, pngのうちいずれかの形式のファイルを指定してください。(The Product thambnail must be a file of type: jpg, jpeg, png.)',
         ]);
+
+        if ($files = $request->file('file')) {
+            $destinationPath = 'products/pdf';
+            $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $file_store_disk = 's3';  // local または public または s3
+            $digital_file_name = $request->file('file')->storeAs($destinationPath, $digitalItem, $file_store_disk);      // ディレクトリ, ファイル名, ディスク
+        }
 
         $fileName = $this->saveImage($request->file('product_thambnail'));
 
@@ -71,6 +79,7 @@ class ProductController extends Controller
             'featured' => $request->featured,
             'spacial_offer' => $request->spacial_offer,
             'special_deals' => $request->special_deals,
+            'digital_file' => $digitalItem,
             'status' => 1,
             'created_at' => Carbon::now(),
         ]);
@@ -292,6 +301,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         Storage::disk('s3')->delete('/products/thambnail/' . $product->product_thambnail);
+        Storage::disk('s3')->delete('/products/pdf/' . $product->digital_file);
         $product->delete();
 
         $images = MultiImg::where('product_id', $id)->get();
