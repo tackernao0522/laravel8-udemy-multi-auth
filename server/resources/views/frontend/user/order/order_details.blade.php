@@ -162,6 +162,10 @@
                                     <label for="">価格</label>
                                 </td>
 
+                                <td class="col-md-1">
+                                    <label for="">ダウンロード</label>
+                                </td>
+
                                 @foreach($orderItems as $item)
                             <tr>
                                 <td class="col-md-1">
@@ -191,6 +195,22 @@
                                 <td class="col-md-1">
                                     <label for="">¥ {{ number_format($item->price) }} (¥{{ number_format($item->price * $item->qty) }})(税込)</label>
                                 </td>
+
+                                @php
+                                $file = App\Models\Product::where('id', $item->product_id)->first();
+                                @endphp
+
+                                <td class="col-md-1">
+                                    @if($order->status == 'pending' || !($file->digital_file))
+                                    <strong>
+                                        <span class="badge badge-pill badge-success" style="background: #418DB9;"> No File</span> </strong>
+
+                                    @elseif($order->status == 'confirm')
+
+                                    <a target="_blank" href="{{ Storage::disk('s3')->url("products/pdf/{$file->digital_file}") }}">
+                                        <strong>
+                                            <span class="badge badge-pill badge-success" style="background: #FF0000;"> ダウンロードする</span> </strong> </a>
+                                    @endif
                             </tr>
                             @endforeach
                         </tbody>

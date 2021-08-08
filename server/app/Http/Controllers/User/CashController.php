@@ -39,7 +39,7 @@ class CashController extends Controller
             'amount' => $total_amount,
             'invoice_no' => 'FUN' . mt_rand(10000000, 99999999),
             'order_date' => Carbon::now()->format('Y年n月j日'),
-            'order_mouth' => Carbon::now()->format('n月'),
+            'order_month' => Carbon::now()->format('n月'),
             'order_year' => Carbon::now()->format('Y年'),
             'status' => 'pending',
             'created_at' => Carbon::now(),
