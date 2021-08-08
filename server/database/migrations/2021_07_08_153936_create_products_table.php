@@ -42,6 +42,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('featured')->nullable()->unsigned();
             $table->bigInteger('spacial_offer')->nullable()->unsigned();
             $table->bigInteger('special_deals')->nullable()->unsigned();
+            $table->string('digital_file')->nullable();
             $table->bigInteger('status')->unsigned()->default(0);
             $table->timestamps();
         });
