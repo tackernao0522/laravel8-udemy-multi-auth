@@ -1549,7 +1549,7 @@ header{background:#157ed2}
 .yamm .dropdown-menu .yamm-content .col-menu {min-width:150px}
 
 .yamm .dropdown-menu .yamm-content .links li a {
-  padding: 4px 0px;
+  /* padding: 4px 0px; */
   font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.2px;
 	font-size:13px;

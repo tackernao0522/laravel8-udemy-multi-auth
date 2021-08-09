@@ -8,19 +8,11 @@
                         <div class="image"> <img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""> </div>
                     </div>
                     <!-- /.product-image -->
-                    @php
-                    $amount = $product->selling_price - $product->discount_price;
-                    $discount = ($amount / $product->selling_price) * 100;
-                    @endphp
                 </div>
                 <!-- /.col -->
                 <div class="col col-sm-8 col-lg-8">
                     <div class="product-info">
-                        @if(session()->get('language') == 'japanese')
-                        <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">{!! nl2br(e(Str::limit($product->product_name_ja, 50))) !!}</a></h3>
-                        @else
-                        <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">{!! nl2br(e(Str::limit($product->product_name_en, 50))) !!}</a></h3>
-                        @endif
+                        <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">@if(session()->get('language') == 'english') {!! nl2br(e(Str::limit($product->product_name_en, 50))) !!} @else {!! nl2br(e(Str::limit($product->product_name_ja, 50))) !!} @endif</a></h3>
                         <div class="rating rateit-small"></div>
                         @if ($product->discount_price == NULL)
                         <div class="product-price"> <span class="price">¥ {{ $product->selling_price }}</span></div>
@@ -49,6 +41,10 @@
                     <!-- /.product-info -->
                 </div>
                 <!-- /.col -->
+                @php
+                $amount = $product->selling_price - $product->discount_price;
+                $discount = ($amount / $product->selling_price) * 100;
+                @endphp
             </div>
             <!-- /.product-list-row -->
             @if ($product->discount_price == NULL)

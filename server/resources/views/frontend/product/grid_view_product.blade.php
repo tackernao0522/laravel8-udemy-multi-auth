@@ -3,11 +3,7 @@
     <div class="products">
         <div class="product">
             <div class="product-image">
-                @if(session()->get('language') == 'japanese')
                 <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
-                @else
-                <div class="image"> <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}"><img src="{{ Storage::disk('s3')->url("products/thambnail/{$product->product_thambnail}") }}" alt=""></a> </div>
-                @endif
                 <!-- /.image -->
 
                 @php
@@ -26,11 +22,7 @@
             <!-- /.product-image -->
 
             <div class="product-info text-left">
-                @if(session()->get('language') == 'japanese')
                 <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_ja) }}">{{ $product->product_name_ja }}</a></h3>
-                @else
-                <h3 class="name"><a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                @endif
                 <div class="rating rateit-small"></div>
                 <div class="description"></div>
                 @if ($product->discount_price == NULL)
