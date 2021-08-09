@@ -57,8 +57,37 @@
                                     <!-- /.accordion -->
                                 </div>
                                 <!-- /.sidebar-widget-body -->
+                                <!-- /.sidebar-widget -->
+
+                                <!-- This is for Brand Filter -->
+                                <div class="widget-header">
+                                    <h4 class="widget-title">@if(session()->get('language') == 'english') Brand @else ブランド @endif</h4>
+                                </div>
+                                <div class="sidebar-widget-body">
+                                    <div class="accordion">
+                                        @if(!empty($_GET['brand']))
+                                        @php
+                                        $filterBrand = explode(',',$_GET['brand']);
+                                        @endphp
+                                        @endif
+                                        @foreach($brands as $brand)
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="brand[]" value="{{ $brand->brand_slug_ja }}" @if(!empty($filterBrand) && in_array($brand->brand_slug_ja, $filterBrand)) checked @endif onchange="this.form.submit()">
+                                                    @if(session()->get('language') == 'english') {{ $brand->brand_name_en }} @else {{ $brand->brand_name_ja }} @endif
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- /.accordion-group -->
+                                        @endforeach
+                                    </div>
+                                    <!-- /.accordion -->
+                                </div>
+                                <!-- /.sidebar-widget-body -->
                             </div>
                             <!-- /.sidebar-widget -->
+
                             <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
 
                             <!-- ============================================== PRICE SILDER============================================== -->
