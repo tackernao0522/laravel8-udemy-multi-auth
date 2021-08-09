@@ -171,7 +171,7 @@
                                                     @endphp
 
                                                     @foreach($subCategories as $subCategory)
-                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu" style="padding-right: 0">
                                                         @if(session()->get('language') == 'english')
                                                         <a href="{{ url('subCategory/product/' . $subCategory->id . '/' . $subCategory->subCategory_slug_en) }}">
                                                             <h2 class="title">{{ $subCategory->subCategory_name_en }}</h2>
@@ -211,6 +211,7 @@
                                 </li>
                                 @endforeach
                                 <!-- end Category Foreach -->
+                                <li> <a href="{{ route('shop.page') }}">@if(session()->get('language') == 'english') Shop @else ショップ @endif</a> </li>
                                 <li class="dropdown  navbar-right special-menu"> <a href="#">@if(session()->get('language') == 'english') Todays offer @else 今日の特別セール @endif</a> </li>
                                 <li class="dropdown  navbar-right special-menu"> <a href="{{ route('home.blog') }}">@if(session()->get('language') == 'english') Blog @else ブログ @endif</a> </li>
                             </ul>
