@@ -37,11 +37,16 @@
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <div class="accordion">
+                                        @if(!empty($_GET['category']))
+                                        @php
+                                        $filterCat = explode(',',$_GET['category']);
+                                        @endphp
+                                        @endif
                                         @foreach($categories as $category)
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->category_slug_ja }}" onchange="this.form.submit()">
+                                                    <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->category_slug_ja }}" @if(!empty($filterCat) && in_array($category->category_slug_ja, $filterCat)) checked @endif onchange="this.form.submit()">
                                                     @if(session()->get('language') == 'english') {{ $category->category_name_en }} @else {{ $category->category_name_ja }} @endif
                                                 </label>
                                             </div>
@@ -370,7 +375,7 @@
                             <!-- /.tab-pane #list-container -->
                         </div>
                         <!-- /.tab-content -->
-                        {{ $products->links('vendor.pagination.custom') }}
+                        {{ $products->appends($_GET)->links('vendor.pagination.custom') }}
                         <!-- /.filters-container -->
                     </div>
                     <!-- /.search-result-container -->

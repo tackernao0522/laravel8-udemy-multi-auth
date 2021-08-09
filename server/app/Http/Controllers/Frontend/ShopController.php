@@ -20,7 +20,7 @@ class ShopController extends Controller
                 ->whereIn('category_slug_ja', $slugs)
                 ->pluck('id')
                 ->toArray();
-            $products = Product::whereIn('category_id', $catIds)->paginate(3);
+            $products = $products->whereIn('category_id', $catIds)->paginate(3);
         } else {
             $products = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(3);
         }
@@ -32,5 +32,21 @@ class ShopController extends Controller
 
     public function shopFilter(Request $request)
     {
+        // dd($request->all());
+        $data = $request->all();
+
+        // Filter Category
+        $catUrl = "";
+        if (!empty($data['category'])) {
+            foreach ($data['category'] as $category) {
+                if (empty($catUrl)) {
+                    $catUrl .= '&category=' . $category;
+                } else {
+                    $catUrl .= ',' . $category;
+                }
+            } // end foreach condition
+        } // end if condition
+
+        return redirect()->route('shop.page', $catUrl);
     }
 }
